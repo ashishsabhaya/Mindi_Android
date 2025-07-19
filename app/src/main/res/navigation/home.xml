@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/home"
+    app:startDestination="@id/homeFragment">
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.keylogic.mindi.Ui.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_offlineConfigFragment"
+            app:destination="@id/offlineConfigFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_onlineConfigFragment"
+            app:destination="@id/onlineConfigFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_multiplayerConfigFragment"
+            app:destination="@id/multiplayerConfigFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_vipStoreFragment"
+            app:destination="@id/vipStoreFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_chipStoreFragment"
+            app:destination="@id/chipStoreFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/offlineConfigFragment"
+        android:name="com.keylogic.mindi.Ui.Offline.OfflineConfigFragment"
+        android:label="fragment_offline_config"
+        tools:layout="@layout/fragment_offline_config" >
+        <action
+            android:id="@+id/action_offlineConfigFragment_to_tableConfigFragment"
+            app:destination="@id/tableConfigFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/tableConfigFragment"
+        android:name="com.keylogic.mindi.Ui.Offline.TableConfigFragment"
+        android:label="fragment_table_config"
+        tools:layout="@layout/fragment_table_config" />
+    <fragment
+        android:id="@+id/onlineConfigFragment"
+        android:name="com.keylogic.mindi.Ui.Online.OnlineConfigFragment"
+        android:label="fragment_online_config"
+        tools:layout="@layout/fragment_online_config" />
+    <fragment
+        android:id="@+id/multiplayerConfigFragment"
+        android:name="com.keylogic.mindi.Ui.Multiplayer.MultiplayerConfigFragment"
+        android:label="fragment_multiplayer_config"
+        tools:layout="@layout/fragment_multiplayer_config" />
+
+    <fragment
+        android:id="@+id/vipStoreFragment"
+        android:name="com.keylogic.mindi.Ui.VipStoreFragment"
+        android:label="fragment_vip_store"
+        tools:layout="@layout/fragment_vip_store" />
+    <fragment
+        android:id="@+id/profileSelectionFragment"
+        android:name="com.keylogic.mindi.Ui.ProfileSelectionFragment"
+        android:label="fragment_profile_selection"
+        tools:layout="@layout/fragment_profile_selection" >
+        <action
+            android:id="@+id/action_profileSelectionFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.keylogic.mindi.Ui.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profileFragment_to_vipStoreFragment"
+            app:destination="@id/vipStoreFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.keylogic.mindi.Ui.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/chipStoreFragment"
+        android:name="com.keylogic.mindi.Ui.ChipStoreFragment"
+        android:label="fragment_chip_store"
+        tools:layout="@layout/fragment_chip_store" />
+</navigation>

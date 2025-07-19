@@ -1,0 +1,54 @@
+<resources>
+    <string name="app_name">Mindi</string>
+
+    <string name="guest">Guest</string>
+    <string name="settings">Settings</string>
+    <string name="vip_store">VIP Store</string>
+    <string name="profile_details">Profile Details</string>
+    <string name="guest_chip">5k</string>
+    <string name="create_table">Create Table</string>
+    <string name="create">Create</string>
+    <string name="join_table">Join Table</string>
+    <string name="join">Join</string>
+    <string name="find_table">Find Table</string>
+    <string name="find">Search</string>
+    <string name="select_deck">Select Deck</string>
+    <string name="deck_1">Deck 1</string>
+    <string name="deck_2">Deck 2</string>
+    <string name="deck_3">Deck 3</string>
+    <string name="deck_4">Deck 4</string>
+    <string name="select_bet_price">Select Bet Price</string>
+    <string name="mode">Mode</string>
+    <string name="select_player">Select Player</string>
+    <string name="hide_mode">Hide Mode</string>
+    <string name="cut_mode">Katte Mode</string>
+    <string name="player_4">4 Player</string>
+    <string name="player_6">6 Player</string>
+    <string name="player_8">8 Player</string>
+    <string name="bet_price">Bet Price</string>
+    <string name="enter_code">Enter code</string>
+    <string name="enter_your_code">Enter your code</string>
+    <string name="please_enter_the_code_to_play_with_a_friend">Please enter the code to play with a friend.</string>
+    <string name="submit">Submit</string>
+    <string name="enter_your_name">Enter your name</string>
+
+    <string name="player_statistics">Player Statistics</string>
+    <string name="game_win">Game Win</string>
+    <string name="game_lost">Game Lost</string>
+    <string name="total_games_played">Total Games Played</string>
+
+    <string name="tab_avatar">Avatar</string>
+    <string name="tab_cards">Cards</string>
+    <string name="tab_tables">Tables</string>
+    <string name="tab_background">Background</string>
+
+    <string name="music">Music</string>
+    <string name="sound">Sound</string>
+    <string name="vibration">Vibrate</string>
+    <string name="feedback">Feedback</string>
+    <string name="rate_us">Rate us</string>
+    <string name="how_to_play">How to play</string>
+    <string name="privacy_policy">Privacy Policy</string>
+
+
+</resources>

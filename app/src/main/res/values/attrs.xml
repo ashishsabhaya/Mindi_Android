@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="BackgroundConstraintLayout">
+        <attr name="strokeWidth" format="dimension" />
+        <attr name="cornerRadius" format="dimension" />
+        <attr name="customWidth" format="dimension" />
+        <attr name="customHeight" format="dimension" />
+        <attr name="isPositive" format="boolean" />
+        <attr name="isStrokeEnabled" format="boolean" />
+        <attr name="isBGElevationEnabled" format="boolean" />
+        <attr name="isFgColorIsSingleDarkBlue" format="boolean" />
+        <attr name="isInstagram" format="boolean" />
+        <attr name="isMessenger" format="boolean" />
+        <attr name="isWhatsapp" format="boolean" />
+        <attr name="isShare" format="boolean" />
+        <attr name="showTopTriangle" format="boolean"/>
+    </declare-styleable>
+
+    <declare-styleable name="StoreConstraintLayout">
+        <attr name="borderWidth" format="dimension" />
+        <attr name="borderRadius" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="SelectionConstraintLayout">
+        <attr name="containerRadius" format="dimension" />
+        <attr name="containerBorderWidth" format="dimension" />
+        <attr name="isSelected" format="boolean" />
+        <attr name="isBorderEnabled" format="boolean" />
+        <attr name="isElevationEnabled" format="boolean" />
+        <attr name="isCommonGradient" format="boolean" />
+        <attr name="isSingleDarkColor" format="boolean" />
+        <attr name="isSingleLightColor" format="boolean" />
+        <attr name="isSelectedColorIsBlueGradient" format="boolean" />
+        <attr name="containerHeight" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="StrokeTextView">
+        <attr name="txtStrokeEnabled" format="boolean" />
+        <attr name="txtStrokeWidth" format="dimension" />
+        <attr name="txtStrokeColor" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="RadioConstraintLayout">
+        <attr name="viewRadius" format="dimension" />
+        <attr name="viewStrokeWidth" format="dimension" />
+        <attr name="isViewStrokeEnabled" format="boolean" />
+        <attr name="viewHeight" format="dimension" />
+        <attr name="labelText" format="string" />
+        <attr name="labelTextSize" format="dimension" />
+        <attr name="iconSize" format="dimension" />
+        <attr name="isRadioChecked" format="boolean" />
+        <attr name="labelStartMargin" format="dimension" />
+        <attr name="contentPadding" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="IconTextConstraintLayout">
+        <attr name="cCornerRadius" format="dimension" />
+        <attr name="cStrokeWidth" format="dimension" />
+        <attr name="cIsViewStrokeEnabled" format="boolean" />
+        <attr name="cIsIconVisible" format="boolean" />
+        <attr name="cViewHeight" format="dimension" />
+        <attr name="cLabelText" format="string" />
+        <attr name="cLabelTextSize" format="dimension" />
+        <attr name="cIconSize" format="dimension" />
+        <attr name="cIconResource" format="reference" />
+        <attr name="cLabelStartMargin" format="dimension" />
+        <attr name="cContentPadding" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="TitleConstraintLayout">
+        <attr name="titleRadius" format="dimension" />
+        <attr name="titleStrokeWidth" format="dimension" />
+        <attr name="isTitleStrokeEnabled" format="boolean" />
+        <attr name="isAllSideStoke" format="boolean" />
+        <attr name="titleHeight" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="BorderTextView">
+        <attr name="text" format="string" />
+        <attr name="textSize" format="dimension" />
+        <attr name="textStrokeWidth" format="dimension" />
+        <attr name="isTextStrokeEnabled" format="boolean" />
+        <attr name="textColor" format="color" />
+        <attr name="strokeColor" format="color" />
+        <attr name="gravity">
+            <flag name="top" value="0x30"/>
+            <flag name="bottom" value="0x50"/>
+            <flag name="left" value="0x03"/>
+            <flag name="right" value="0x05"/>
+            <flag name="center_vertical" value="0x10"/>
+            <flag name="fill_vertical" value="0x70"/>
+            <flag name="center_horizontal" value="0x01"/>
+            <flag name="fill_horizontal" value="0x07"/>
+            <flag name="center" value="0x11"/>
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="CustomSeekBar">
+        <attr name="seekProgress" format="float" />
+        <attr name="isSeekStrokeEnabled" format="boolean" />
+        <attr name="seekStrokeWidth" format="dimension" />
+        <attr name="seekHeight" format="dimension" />
+        <attr name="seekCornerRadius" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="BetPriceIndicator">
+        <attr name="betViewContainerRadius" format="dimension" />
+        <attr name="betViewBorderWidth" format="dimension" />
+        <attr name="isBetViewBorderEnabled" format="boolean" />
+        <attr name="isBetViewSelectedColorIsBlueGradient" format="boolean" />
+        <attr name="betViewHeight" format="dimension" />
+    </declare-styleable>
+</resources>

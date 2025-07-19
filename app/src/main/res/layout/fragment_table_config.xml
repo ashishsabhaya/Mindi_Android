@@ -1,0 +1,565 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".Ui.Offline.TableConfigFragment">
+
+    <include
+        android:id="@+id/include"
+        layout="@layout/home_dark_bg_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingHorizontal="@dimen/_10sdp"
+        android:paddingVertical="@dimen/_8sdp"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/top_title_cons"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.keylogic.mindi.Custom.BackgroundConstraintLayout
+                android:id="@+id/chip_cons"
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="@dimen/_36sdp"
+                android:layout_marginHorizontal="@dimen/_8sdp"
+                android:paddingHorizontal="@dimen/_6sdp"
+                app:cornerRadius="@dimen/_6sdp"
+                app:customHeight="@dimen/_36sdp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="@+id/title_cons"
+                app:layout_constraintTop_toTopOf="@+id/title_cons"
+                app:strokeWidth="@dimen/_1sdp">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/chip_card"
+                    android:layout_width="@dimen/_18sdp"
+                    android:layout_height="@dimen/_18sdp"
+                    app:cardCornerRadius="@dimen/_18sdp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:strokeWidth="0dp">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/ic_chip" />
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <TextView
+                    android:id="@+id/chip_count_txt"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_4sdp"
+                    android:fontFamily="@font/poetsen_one_regular"
+                    android:gravity="center_vertical"
+                    android:singleLine="true"
+                    android:text="@string/guest_chip"
+                    android:textColor="@color/textColorPrimary"
+                    android:textSize="@dimen/_14ssp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/chip_add_img"
+                    app:layout_constraintStart_toEndOf="@+id/chip_card"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/chip_add_img"
+                    android:layout_width="@dimen/_16sdp"
+                    android:layout_height="@dimen/_16sdp"
+                    android:padding="@dimen/_2sdp"
+                    android:src="@drawable/ic_add"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </com.keylogic.mindi.Custom.BackgroundConstraintLayout>
+
+            <com.keylogic.mindi.Custom.BackgroundConstraintLayout
+                android:id="@+id/cancel_cons"
+                android:layout_width="@dimen/_34sdp"
+                android:layout_height="@dimen/_34sdp"
+                app:cornerRadius="@dimen/_6sdp"
+                app:customHeight="@dimen/_34sdp"
+                app:isPositive="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="@+id/title_cons"
+                app:layout_constraintTop_toTopOf="@+id/title_cons"
+                app:strokeWidth="@dimen/_1sdp">
+
+                <ImageView
+                    android:id="@+id/cancel_img"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="@dimen/_6sdp"
+                    android:src="@drawable/ic_cancel" />
+
+            </com.keylogic.mindi.Custom.BackgroundConstraintLayout>
+
+            <com.keylogic.mindi.Custom.TitleConstraintLayout
+                android:id="@+id/title_cons"
+                android:layout_width="@dimen/_300sdp"
+                android:layout_height="@dimen/_40sdp"
+                app:isTitleStrokeEnabled="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/cancel_cons"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:titleHeight="@dimen/_40sdp">
+
+                <com.keylogic.mindi.Custom.StrokeTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="@string/create_table"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_20ssp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </com.keylogic.mindi.Custom.TitleConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/create_table_cons"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:paddingTop="@dimen/_10sdp"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/top_title_cons">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toTopOf="@+id/create_cons"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <com.keylogic.mindi.Custom.StrokeTextView
+                    android:id="@+id/select_deck_txt"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/_2sdp"
+                    app:layout_constraintEnd_toStartOf="@id/guideline"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:textColor="@color/white"
+                    android:gravity="center"
+                    android:text="@string/select_deck"
+                    android:textSize="@dimen/_18ssp" />
+
+                <LinearLayout
+                    android:id="@+id/select_deck_linear"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_4sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:baselineAligned="false"
+                    android:gravity="center"
+                    app:layout_constraintEnd_toStartOf="@id/guideline"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/select_deck_txt">
+
+                    <com.keylogic.mindi.Custom.SelectionConstraintLayout
+                        android:id="@+id/deck_1_cons"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/_28sdp"
+                        android:layout_marginHorizontal="@dimen/_2sdp"
+                        android:layout_marginVertical="@dimen/_4sdp"
+                        android:layout_weight="1"
+                        app:containerBorderWidth="@dimen/_1sdp"
+                        app:containerHeight="@dimen/_28sdp"
+                        app:isBorderEnabled="true"
+                        app:isSelected="true"
+                        app:isSelectedColorIsBlueGradient="true">
+
+                        <com.keylogic.mindi.Custom.StrokeTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            app:txtStrokeEnabled="false"
+                            android:textColor="@color/white"
+                            android:gravity="center"
+                            android:text="@string/deck_1"
+                            android:textSize="@dimen/_14ssp" />
+
+                    </com.keylogic.mindi.Custom.SelectionConstraintLayout>
+
+                    <com.keylogic.mindi.Custom.SelectionConstraintLayout
+                        android:id="@+id/deck_2_cons"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/_28sdp"
+                        android:layout_marginHorizontal="@dimen/_2sdp"
+                        android:layout_marginVertical="@dimen/_4sdp"
+                        android:layout_weight="1"
+                        app:containerBorderWidth="@dimen/_1sdp"
+                        app:containerHeight="@dimen/_28sdp"
+                        app:isBorderEnabled="true"
+                        app:isSelectedColorIsBlueGradient="true">
+
+                        <com.keylogic.mindi.Custom.StrokeTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            app:txtStrokeEnabled="false"
+                            android:textColor="@color/white"
+                            android:gravity="center"
+                            android:text="@string/deck_2"
+                            android:textSize="@dimen/_14ssp" />
+
+                    </com.keylogic.mindi.Custom.SelectionConstraintLayout>
+
+                    <com.keylogic.mindi.Custom.SelectionConstraintLayout
+                        android:id="@+id/deck_3_cons"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/_28sdp"
+                        android:layout_marginHorizontal="@dimen/_2sdp"
+                        android:layout_marginVertical="@dimen/_4sdp"
+                        android:layout_weight="1"
+                        app:containerBorderWidth="@dimen/_1sdp"
+                        app:containerHeight="@dimen/_28sdp"
+                        app:isBorderEnabled="true"
+                        app:isSelectedColorIsBlueGradient="true">
+
+                        <com.keylogic.mindi.Custom.StrokeTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            app:txtStrokeEnabled="false"
+                            android:textColor="@color/white"
+                            android:gravity="center"
+                            android:text="@string/deck_3"
+                            android:textSize="@dimen/_14ssp" />
+
+                    </com.keylogic.mindi.Custom.SelectionConstraintLayout>
+
+                    <com.keylogic.mindi.Custom.SelectionConstraintLayout
+                        android:id="@+id/deck_4_cons"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/_28sdp"
+                        android:layout_marginHorizontal="@dimen/_2sdp"
+                        android:layout_marginVertical="@dimen/_4sdp"
+                        android:layout_weight="1"
+                        app:containerBorderWidth="@dimen/_1sdp"
+                        app:containerHeight="@dimen/_28sdp"
+                        app:isBorderEnabled="true"
+                        app:isSelectedColorIsBlueGradient="true">
+
+                        <com.keylogic.mindi.Custom.StrokeTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            app:txtStrokeEnabled="false"
+                            android:textColor="@color/white"
+                            android:gravity="center"
+                            android:text="@string/deck_4"
+                            android:textSize="@dimen/_14ssp" />
+
+                    </com.keylogic.mindi.Custom.SelectionConstraintLayout>
+
+                </LinearLayout>
+
+                <com.keylogic.mindi.Custom.StrokeTextView
+                    android:id="@+id/select_bet_price_txt"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_12sdp"
+                    android:padding="@dimen/_2sdp"
+                    app:layout_constraintEnd_toStartOf="@id/guideline"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/select_deck_linear"
+                    android:textColor="@color/white"
+                    android:gravity="center"
+                    android:text="@string/select_bet_price"
+                    android:textSize="@dimen/_18ssp" />
+
+                <com.keylogic.mindi.Custom.CustomSeekBar
+                    android:id="@+id/customSeekBar"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_28sdp"
+                    android:layout_marginHorizontal="@dimen/_20sdp"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    app:layout_constraintEnd_toStartOf="@id/guideline"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/select_bet_price_txt"
+                    app:seekCornerRadius="@dimen/_20sdp"
+                    app:seekHeight="@dimen/_28sdp" />
+
+                <com.keylogic.mindi.Custom.BetPriceIndicator
+                    android:id="@+id/bet_price_indicator"
+                    android:layout_width="@dimen/_80sdp"
+                    android:layout_height="@dimen/_40sdp"
+                    android:layout_marginTop="@dimen/_4sdp"
+                    app:betViewHeight="@dimen/_36sdp"
+                    app:layout_constraintEnd_toEndOf="@+id/customSeekBar"
+                    app:layout_constraintStart_toStartOf="@+id/customSeekBar"
+                    app:layout_constraintTop_toBottomOf="@id/customSeekBar">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <com.keylogic.mindi.Custom.StrokeTextView
+                            android:id="@+id/bet_price_title_txt"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/_2sdp"
+                            app:isTextStrokeEnabled="false"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:text="@string/bet_price"
+                            android:gravity="center"
+                            app:txtStrokeEnabled="false"
+                            android:textColor="@color/bet_price"
+                            android:textSize="@dimen/_10ssp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="horizontal"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/bet_price_title_txt">
+
+                            <ImageView
+                                android:layout_width="@dimen/_12sdp"
+                                android:layout_height="@dimen/_12sdp"
+                                android:layout_marginHorizontal="@dimen/_2sdp"
+                                android:src="@drawable/ic_chip" />
+
+                            <com.keylogic.mindi.Custom.StrokeTextView
+                                android:id="@+id/bet_price_count_txt"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginHorizontal="@dimen/_2sdp"
+                                android:padding="@dimen/_2sdp"
+                                app:txtStrokeEnabled="false"
+                                android:text="@string/guest_chip"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/_10ssp" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </com.keylogic.mindi.Custom.BetPriceIndicator>
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintGuide_percent="0.5"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_4sdp"
+                    android:paddingHorizontal="@dimen/_4sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/guideline"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <com.keylogic.mindi.Custom.StrokeTextView
+                        android:id="@+id/mode_txt"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:txtStrokeEnabled="false"
+                        android:gravity="center"
+                        android:textColor="@color/white"
+                        android:padding="@dimen/_2sdp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:text="@string/mode"
+                        android:textSize="@dimen/_18ssp" />
+
+                    <com.keylogic.mindi.Custom.StrokeTextView
+                        android:id="@+id/mode_txt1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/mode"
+                        android:visibility="gone"
+                        android:gravity="center"
+                        android:textSize="@dimen/_30ssp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
+
+                    <LinearLayout
+                        android:id="@+id/mode_linear"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/_4sdp"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:baselineAligned="false"
+                        android:gravity="center"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/mode_txt">
+
+                        <com.keylogic.mindi.Custom.RadioConstraintLayout
+                            android:id="@+id/hide_mode_cons"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="@dimen/_4sdp"
+                            android:paddingHorizontal="@dimen/_6sdp"
+                            android:paddingVertical="@dimen/_4sdp"
+                            app:isRadioChecked="true"
+                            app:isViewStrokeEnabled="true"
+                            app:labelText="@string/hide_mode"
+                            app:iconSize="@dimen/_18sdp"
+                            app:labelTextSize="@dimen/_12ssp"
+                            app:viewHeight="@dimen/_34sdp"
+                            app:viewStrokeWidth="@dimen/_1sdp" />
+
+                        <com.keylogic.mindi.Custom.RadioConstraintLayout
+                            android:id="@+id/cut_mode_cons"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="@dimen/_4sdp"
+                            android:paddingHorizontal="@dimen/_6sdp"
+                            android:paddingVertical="@dimen/_4sdp"
+                            app:isRadioChecked="false"
+                            app:isViewStrokeEnabled="true"
+                            app:labelText="@string/cut_mode"
+                            app:iconSize="@dimen/_18sdp"
+                            app:labelTextSize="@dimen/_12ssp"
+                            app:viewHeight="@dimen/_34sdp"
+                            app:viewStrokeWidth="@dimen/_1sdp" />
+
+                    </LinearLayout>
+
+                    <com.keylogic.mindi.Custom.StrokeTextView
+                        android:id="@+id/select_player_txt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_12sdp"
+                        android:padding="@dimen/_2sdp"
+                        android:gravity="center"
+                        android:textColor="@color/white"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/mode_linear"
+                        android:text="@string/select_player"
+                        android:textSize="@dimen/_18ssp" />
+
+                    <LinearLayout
+                        android:id="@+id/player_linear"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:baselineAligned="false"
+                        android:gravity="center"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/select_player_txt">
+
+                        <com.keylogic.mindi.Custom.RadioConstraintLayout
+                            android:id="@+id/player_4_cons"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="@dimen/_2sdp"
+                            android:paddingHorizontal="@dimen/_6sdp"
+                            android:paddingVertical="@dimen/_4sdp"
+                            app:isRadioChecked="true"
+                            app:isViewStrokeEnabled="true"
+                            app:labelText="@string/player_4"
+                            app:iconSize="@dimen/_18sdp"
+                            app:labelTextSize="@dimen/_12ssp"
+                            app:viewHeight="@dimen/_34sdp"
+                            app:viewStrokeWidth="@dimen/_1sdp" />
+
+                        <com.keylogic.mindi.Custom.RadioConstraintLayout
+                            android:id="@+id/player_6_cons"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="@dimen/_4sdp"
+                            android:paddingHorizontal="@dimen/_6sdp"
+                            android:paddingVertical="@dimen/_4sdp"
+                            app:isRadioChecked="false"
+                            app:isViewStrokeEnabled="true"
+                            app:labelText="@string/player_6"
+                            app:iconSize="@dimen/_18sdp"
+                            app:labelTextSize="@dimen/_12ssp"
+                            app:viewHeight="@dimen/_34sdp"
+                            app:viewStrokeWidth="@dimen/_1sdp" />
+
+                        <com.keylogic.mindi.Custom.RadioConstraintLayout
+                            android:id="@+id/player_8_cons"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="@dimen/_2sdp"
+                            android:paddingHorizontal="@dimen/_6sdp"
+                            android:paddingVertical="@dimen/_4sdp"
+                            app:isRadioChecked="false"
+                            app:isViewStrokeEnabled="true"
+                            app:labelText="@string/player_8"
+                            app:iconSize="@dimen/_18sdp"
+                            app:labelTextSize="@dimen/_12ssp"
+                            app:viewHeight="@dimen/_34sdp"
+                            app:viewStrokeWidth="@dimen/_1sdp" />
+
+                    </LinearLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <com.keylogic.mindi.Custom.BackgroundConstraintLayout
+                android:id="@+id/create_cons"
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="@dimen/_36sdp"
+                app:customHeight="@dimen/_36sdp"
+                app:isStrokeEnabled="false"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <com.keylogic.mindi.Custom.StrokeTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:textColor="@color/white"
+                    android:padding="@dimen/_2sdp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:text="@string/create"
+                    android:textSize="@dimen/_14ssp" />
+
+            </com.keylogic.mindi.Custom.BackgroundConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

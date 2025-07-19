@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="transparent">#00FFFFFF</color>
+    <color name="transparent_25">#4001B2DE</color>
+    <color name="transparent_50">#8001B2DE</color>
+    <color name="transparent_75">#BF01B2DE</color>
+
+    <color name="black_transparent_75">#BF000000</color>
+    <color name="setting_option_icon_bg">#012738</color>
+
+    <color name="bg_img_fg">#4D000000</color>
+
+    <color name="border_start">#02B3E0</color>
+    <color name="border_center">#002B3B</color>
+    <color name="border_end">#002B3B</color>
+
+    <color name="position_bg_start">#001924</color>
+    <color name="position_bg_center">#01B2DE</color>
+    <color name="position_bg_end">#001924</color>
+
+    <color name="position_fg_single">#012738</color>
+    <color name="position_fg_start">#02BBE9</color>
+    <color name="position_fg_end">#001924</color>
+
+    <color name="negative_bg_start">#00FF004F</color>
+    <color name="negative_bg_center">#FF004F</color>
+    <color name="negative_bg_end">#00FF004F</color>
+
+    <color name="negative_fg_start">#DD4C7E</color>
+    <color name="negative_fg_end">#AD0539</color>
+
+    <color name="blue_selected_start">#02BBE9</color>
+    <color name="blue_selected_end">#001924</color>
+
+    <color name="bet_price_start">#012738</color>
+    <color name="bet_price_end">#046F9E</color>
+
+    <color name="red_selected_start">#FF4E85</color>
+    <color name="red_selected_end">#6E092D</color>
+
+    <color name="un_selected_start">#7DA0B3</color>
+    <color name="un_selected_end">#305366</color>
+
+    <color name="title_stroke">#02BBE9</color>
+    <color name="title_start">#0002BBE9</color>
+    <color name="title_center2">#0D02BBE9</color>
+    <color name="title_center1">#3302BBE9</color>
+    <color name="title_center">#8002BBE9</color>
+    <color name="title_center11">#3302BBE9</color>
+    <color name="title_center12">#0D02BBE9</color>
+    <color name="title_end">#0002BBE9</color>
+
+    <color name="dialog_start">#02BBE9</color>
+    <color name="dialog_center1">#02536E</color>
+    <color name="dialog_center2">#012738</color>
+    <color name="dialog_center3">#02526C</color>
+    <color name="dialog_end">#02BBE9</color>
+
+    <color name="selection_dark">#012738</color>
+    <color name="selection_light">#023D57</color>
+
+    <color name="radio_selected">#02BBE9</color>
+    <color name="radio_container_fill">#012738</color>
+    <color name="icon_txt_container_fill1">#023D57</color>
+
+    <color name="instagram_bg_start">#00FF004F</color>
+    <color name="instagram_bg_center">#FF004F</color>
+    <color name="instagram_bg_end">#00FF004F</color>
+
+    <color name="messenger_bg_start">#00012738</color>
+    <color name="messenger_bg_center">#02BBE9</color>
+    <color name="messenger_bg_end">#00012738</color>
+
+    <color name="whatsapp_bg_start">#000A641E</color>
+    <color name="whatsapp_bg_center">#0A641E</color>
+    <color name="whatsapp_bg_end">#000A641E</color>
+
+    <color name="share_bg_start">#00911F17</color>
+    <color name="share_bg_center">#911F17</color>
+    <color name="share_bg_end">#00911F17</color>
+
+    <color name="instagram_fg_start">#FDAB03</color>
+    <color name="instagram_fg_center">#FF0015</color>
+    <color name="instagram_fg_end">#DF0290</color>
+
+    <color name="messenger_fg_start">#20A9F9</color>
+    <color name="messenger_fg_center">#0E82CD</color>
+    <color name="messenger_fg_end">#015DA4</color>
+
+    <color name="whatsapp_fg_start">#3BC56F</color>
+    <color name="whatsapp_fg_center">#14B243</color>
+    <color name="whatsapp_fg_end">#075315</color>
+
+    <color name="share_fg_start">#DD5E5B</color>
+    <color name="share_fg_center">#D4322D</color>
+    <color name="share_fg_end">#78170F</color>
+
+    <color name="bet_price">#FED915</color>
+
+    <color name="textColorPrimary">#FFFFFFFF</color>
+
+    <color name="selected_profile_stroke">#FED915</color>
+
+</resources>
