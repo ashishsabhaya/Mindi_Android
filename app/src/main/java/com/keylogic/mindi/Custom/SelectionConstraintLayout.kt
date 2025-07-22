@@ -46,23 +46,29 @@ class SelectionConstraintLayout @JvmOverloads constructor(
         }
         a.recycle()
 
-        updateSelection(isViewSelected)
-
-//        setPadding(
-//            paddingLeft,
-//            paddingTop,
-//            paddingRight,
-//            paddingBottom
-//        )
-
-        // Set fixed elevation
-        elevation = if (isElevationEnabled) elevationValue else 0f
+        background = buildBackgroundDrawable()
     }
 
-    private fun buildBackgroundDrawable(
-        cornerRadius: Float,
-        strokeWidth: Float
-    ): GradientDrawable {
+    private fun buildBackgroundDrawable(): GradientDrawable {
+        elevation = if (isElevationEnabled) elevationValue else 0f
+        // Dynamic radius: 10px for 53px height
+        var fgCornerRadius = customHeight * (10f / 53f)
+        if (customCornerRadius != 0f)
+            fgCornerRadius = customCornerRadius
+        val cornerRadius = fgCornerRadius + 4f
+
+        // Dynamic stroke: 1px for 53px height
+        val strokeWidth = if (isStrokeEnabled) {
+            if (!isViewSelected)
+                0f
+            else if (defaultStrokeWidth > 0f)
+                defaultStrokeWidth
+            else
+                customHeight * (1f / 53f)
+        }
+        else
+            0f
+
         val colors = if (isCommonGradient) {
             intArrayOf(
                 ContextCompat.getColor(context, R.color.position_fg_start),
@@ -111,27 +117,23 @@ class SelectionConstraintLayout @JvmOverloads constructor(
         }
     }
 
+    fun updateProgrammatically(height: Int, newSelection: Boolean, isCommonGradientColor: Boolean, isElevated: Boolean) {
+        customHeight = height.toFloat()
+        isViewSelected = newSelection
+        isStrokeEnabled = newSelection
+        isCommonGradient = isCommonGradientColor
+        isElevationEnabled = isElevated
+        background = buildBackgroundDrawable()
+    }
+
+    fun setViewHeight(height: Int) {
+        customHeight = height.toFloat()
+        background = buildBackgroundDrawable()
+    }
+
     fun updateSelection(newSelection: Boolean) {
         isViewSelected = newSelection
-        // Dynamic radius: 10px for 53px height
-        var fgCornerRadius = customHeight * (10f / 53f)
-        if (customCornerRadius != 0f)
-            fgCornerRadius = customCornerRadius
-        val bgCornerRadius = fgCornerRadius + 4f
-
-        // Dynamic stroke: 1px for 53px height
-        val strokeWidth = if (isStrokeEnabled) {
-            if (!isViewSelected)
-                0f
-            else if (defaultStrokeWidth > 0f)
-                defaultStrokeWidth
-            else
-                customHeight * (1f / 53f)
-        }
-        else
-            0f
-
-        background = buildBackgroundDrawable(bgCornerRadius, strokeWidth)
+        background = buildBackgroundDrawable()
     }
 
     private fun Float.dpToPx(context: Context): Float =

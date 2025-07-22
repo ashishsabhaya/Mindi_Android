@@ -74,6 +74,12 @@ class StrokeTextView @JvmOverloads constructor(
         text = resources.getString(resId)
     }
 
+
+    fun setIsStrokeEnabled(isEnabled: Boolean) {
+        isStrokeEnabled = isEnabled
+        invalidate()
+    }
+
     fun setViewTextSize(spSize: Int) {
         setTextSize(spSize.toFloat())
     }

@@ -41,6 +41,7 @@
             android:paddingHorizontal="@dimen/_6sdp"
             app:cIconResource="@drawable/ic_chip"
             app:cLabelText="@string/guest"
+            app:cIsElevationEnabled="false"
             app:cIsViewStrokeEnabled="true"
             app:cStrokeWidth="@dimen/_1sdp"
             android:layout_marginTop="@dimen/_4sdp"

@@ -9,12 +9,15 @@ class ProfileHelper {
 
         var totalChips = 1_500L
         var defaultProfileId = 0
-        var vipProfileId = -1
         var profileName = ""
         var profileUID = ""
         var gameWin = 0
         var gameLost = 0
         var gamePlayed = 0
+        var profileId = -1
+        var tableId = 0
+        var cardBackId = 0
+        var backgroundId = 0
     }
 
     fun getDefaultProfileResource(context: Context, position: Int): Int {
@@ -30,10 +33,10 @@ class ProfileHelper {
     }
 
     fun getProfileResource(context: Context): Int {
-        return if (vipProfileId == -1)
+        return if (profileId == -1)
             getDefaultProfileResource(context, defaultProfileId)
         else
-            getVIPProfileResource(context, vipProfileId)
+            getVIPProfileResource(context, profileId)
     }
 
     fun getRandomProfileName(): String {

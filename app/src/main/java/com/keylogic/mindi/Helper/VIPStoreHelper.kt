@@ -1,12 +1,29 @@
 package com.keylogic.mindi.Helper
 
 import android.content.Context
+import com.keylogic.mindi.Enum.VIPStore
 import com.keylogic.mindi.Models.Avatar
+import com.keylogic.mindi.Models.Background
 import com.keylogic.mindi.Models.CardBack
+import com.keylogic.mindi.Models.Tables
 
 class VIPStoreHelper {
     companion object {
         val INSTANCE = VIPStoreHelper()
+        val avatarList = ArrayList<Avatar>()
+        val cardBackList = ArrayList<CardBack>()
+        val tablesList = ArrayList<Tables>()
+        val backgroundList = ArrayList<Background>()
+    }
+
+    fun getStoreItemPrice(tabIndex: Int, itemIndex: Int): String {
+        return when(tabIndex) {
+            VIPStore.AVATAR.tabIndex -> avatarList[itemIndex].getFormatedChip()
+            VIPStore.CARDS.tabIndex -> cardBackList[itemIndex].getFormatedChip()
+            VIPStore.TABLES.tabIndex -> tablesList[itemIndex].getFormatedChip()
+            VIPStore.BACKGROUNDS.tabIndex -> backgroundList[itemIndex].getFormatedChip()
+            else -> ""
+        }
     }
 
     fun getResourceByName(context: Context, itemName: String): Int {
@@ -43,6 +60,24 @@ class VIPStoreHelper {
 
         for (i in 0..7) {
             list.add(CardBack(i,false,1_500L * (i+1),0))
+        }
+        return list
+    }
+
+    fun generateTableList(): ArrayList<Tables> {
+        val list = ArrayList<Tables>()
+
+        for (i in 0..5) {
+            list.add(Tables(i,false,2_500L * (i+1),0))
+        }
+        return list
+    }
+
+    fun generateBackgroundList(): ArrayList<Background> {
+        val list = ArrayList<Background>()
+
+        for (i in 0..5) {
+            list.add(Background(i,false,3_500L * (i+1),0))
         }
         return list
     }

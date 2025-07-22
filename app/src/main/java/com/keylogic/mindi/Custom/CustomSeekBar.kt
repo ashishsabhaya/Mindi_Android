@@ -3,17 +3,19 @@ package com.keylogic.mindi.Custom
 import android.content.Context
 import android.graphics.*
 import android.util.AttributeSet
+import android.view.MotionEvent
 import androidx.appcompat.widget.AppCompatSeekBar
 import com.keylogic.mindi.Helper.CommonHelper
 import com.keylogic.mindi.R
+import androidx.core.graphics.scale
 
 class CustomSeekBar @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = android.R.attr.seekBarStyle
 ) : AppCompatSeekBar(context, attrs, defStyleAttr) {
-    private var minProgress = 0.1f
-    private var maxProgress = 1f
+    private var minProgress = 10
+    private var maxProgress = 100
 
     private var isSeekStrokeEnabled: Boolean = true
     private var seekStrokeWidth: Float = 4f
@@ -25,6 +27,7 @@ class CustomSeekBar @JvmOverloads constructor(
     private val paint = Paint(Paint.ANTI_ALIAS_FLAG)
     private val thumbPaint = Paint(Paint.ANTI_ALIAS_FLAG)
     var thumbX = 0f
+    private var currBetPrice = 0L
 
     private val thumbBitmap: Bitmap? by lazy {
         BitmapFactory.decodeResource(resources, R.drawable.ic_thumb)
@@ -55,8 +58,9 @@ class CustomSeekBar @JvmOverloads constructor(
         val centerY = height / 2f
         val top = centerY - seekHeight / 2f + verticalMargin
         val bottom = centerY + seekHeight / 2f - verticalMargin
-        val progressRatio = (progress.coerceIn(minProgress.toInt() * 100, maxProgress.toInt() * 100)).toFloat() / max
-        val progressX = (width * progressRatio).coerceIn(width * ((minProgress * 100) / max), width - seekHeight / 2f)
+        val progressRatio = (progress.coerceIn(minProgress, maxProgress)).toFloat() / max
+        val thumbMargin = seekHeight / 2f
+        val progressX = (thumbMargin + (width - 2 * thumbMargin) * progressRatio)
 
         // Draw background
         val bgRect = RectF(0f, top, width, bottom)
@@ -100,12 +104,12 @@ class CustomSeekBar @JvmOverloads constructor(
         val thumbY = centerY - thumbSize / 2f
 
         //chip count as per progress
-        val chipCount = (progress + 1) * 500L
+        val chipCount = nearestMultipleOfFive(progress) * 100L
+        currBetPrice = chipCount
         betPriceCountTxt?.text = CommonHelper.INSTANCE.getChip(chipCount)
 
-
         thumbBitmap?.let {
-            val scaledThumb = Bitmap.createScaledBitmap(it, thumbSize.toInt(), thumbSize.toInt(), true)
+            val scaledThumb = it.scale(thumbSize.toInt(), thumbSize.toInt())
             canvas.drawBitmap(scaledThumb, thumbX, thumbY, null)
         } ?: run {
             thumbPaint.color = Color.YELLOW
@@ -119,13 +123,33 @@ class CustomSeekBar @JvmOverloads constructor(
         super.onMeasure(widthMeasureSpec, MeasureSpec.makeMeasureSpec(resolvedHeight, MeasureSpec.EXACTLY))
     }
 
-    fun setCustomProgress(min: Float, curr: Float) {
-        minProgress = min + 0.1f
-        progress = (curr.coerceIn(minProgress, maxProgress) * max).toInt()
+    fun setCustomProgress(deckCount: Int) {
+        val curr = deckCount * 5
+        minProgress = curr
+        progress = curr.coerceIn(minProgress, maxProgress)
     }
 
+    override fun onTouchEvent(event: MotionEvent): Boolean {
+        val handled = super.onTouchEvent(event)
+        if (event.action == MotionEvent.ACTION_DOWN) {
+            progress = nearestMultipleOfFive(progress).coerceIn(minProgress, maxProgress)
+        }
+        if (event.action == MotionEvent.ACTION_UP || event.action == MotionEvent.ACTION_MOVE) {
+            progress = nearestMultipleOfFive(progress).coerceIn(minProgress, maxProgress)
+        }
+        return handled
+    }
+
+    fun nearestMultipleOfFive(value: Int): Int {
+        val lower = (value / 5) * 5
+        val upper = lower + 5
+        return if (value - lower < upper - value) lower else upper
+    }
+
+    fun getBetPrice(): Long { return currBetPrice }
+
     override fun setProgress(progress: Int) {
-        val snapped = ((progress / 10) * 10).coerceIn(minProgress.toInt() * 100, maxProgress.toInt() * 100)
+        val snapped = nearestMultipleOfFive(progress).coerceIn(minProgress, maxProgress)
         super.setProgress(snapped)
     }
 

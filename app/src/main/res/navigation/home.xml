@@ -44,7 +44,13 @@
         android:id="@+id/tableConfigFragment"
         android:name="com.keylogic.mindi.Ui.Offline.TableConfigFragment"
         android:label="fragment_table_config"
-        tools:layout="@layout/fragment_table_config" />
+        tools:layout="@layout/fragment_table_config" >
+        <action
+            android:id="@+id/action_tableConfigFragment_to_playAreaFragment"
+            app:destination="@id/playAreaFragment" />
+
+        <argument android:name="deckType" app:argType="com.keylogic.mindi.Enum.DeckType" />
+    </fragment>
     <fragment
         android:id="@+id/onlineConfigFragment"
         android:name="com.keylogic.mindi.Ui.Online.OnlineConfigFragment"
@@ -89,4 +95,15 @@
         android:name="com.keylogic.mindi.Ui.ChipStoreFragment"
         android:label="fragment_chip_store"
         tools:layout="@layout/fragment_chip_store" />
+    <fragment
+        android:id="@+id/playAreaFragment"
+        android:name="com.keylogic.mindi.Ui.Offline.PlayAreaFragment"
+        android:label="fragment_play_area"
+        tools:layout="@layout/fragment_play_area">
+
+        <argument android:name="deckType" app:argType="com.keylogic.mindi.Enum.DeckType" />
+        <argument android:name="isHideMode" app:argType="boolean" />
+        <argument android:name="totalPlayers" app:argType="integer" />
+        <argument android:name="betPrice" app:argType="long" />
+    </fragment>
 </navigation>

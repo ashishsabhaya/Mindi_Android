@@ -5,23 +5,24 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.keylogic.mindi.Enum.DeckType
 import com.keylogic.mindi.Helper.CommonHelper
+import com.keylogic.mindi.Ui.ViewModel.TableConfigViewModel
 import com.keylogic.mindi.databinding.FragmentOnlineConfigBinding
 
 class OnlineConfigFragment : Fragment() {
     private var _binding: FragmentOnlineConfigBinding? = null
     val binding get() = _binding!!
-    private var isHideMode = false
-    private var deckType = DeckType.DECK1
-    private var totalPlayers = 4
+    private lateinit var viewModel: TableConfigViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentOnlineConfigBinding.inflate(inflater, container, false)
+        _binding = FragmentOnlineConfigBinding.inflate(layoutInflater, container,false)
+        viewModel = ViewModelProvider(this)[TableConfigViewModel::class.java]
 
         binding.cancelCons.setOnClickListener {
             findNavController().popBackStack()
@@ -29,124 +30,92 @@ class OnlineConfigFragment : Fragment() {
 
         binding.chipCountTxt.setText(CommonHelper.INSTANCE.getTotalChip())
 
-        binding.customSeekBar.updateIndicatorPosition(binding.betPriceIndicator,binding.betPriceCountTxt)
-
-        updateDeckType()
-        binding.deck1Cons.setOnClickListener {
-            deckType = DeckType.DECK1
-            updateDeckType()
-        }
-
-        binding.deck2Cons.setOnClickListener {
-            deckType = DeckType.DECK2
-            updateDeckType()
-        }
-
-        binding.deck3Cons.setOnClickListener {
-            deckType = DeckType.DECK3
-            updateDeckType()
-        }
-
-        binding.deck4Cons.setOnClickListener {
-            deckType = DeckType.DECK4
-            updateDeckType()
-        }
-
-        updateGameMode()
-        binding.hideModeCons.setOnClickListener {
-            isHideMode = true
-            updateGameMode()
-        }
-
-        binding.cutModeCons.setOnClickListener {
-            isHideMode = false
-            updateGameMode()
-        }
-
-        updatePlayer(true)
-        binding.player4Cons.setOnClickListener {
-            totalPlayers = 4
-            updatePlayer()
-        }
-
-        binding.player6Cons.setOnClickListener {
-            totalPlayers = 6
-            updatePlayer()
-        }
-
-        binding.player8Cons.setOnClickListener {
-            totalPlayers = 8
-            updatePlayer()
-        }
+        setupObservers()
+        setupListeners()
 
         return binding.root
     }
 
-    private fun updatePlayer(asPerDeck: Boolean = false) {
-        fun isViewEnabled(view: View, isEnabled: Boolean) {
-            view.isEnabled = isEnabled
-            if (isEnabled)
-                view.alpha = 1f
-            else
-                view.alpha = 0.6f
+    private fun setupObservers() {
+        viewModel.deckType.observe(viewLifecycleOwner) { deck ->
+            updateDeckSelection(deck)
+            updateSeekBarProgress(deck)
+            updatePlayerOptions(deck)
         }
-        binding.player4Cons.updateCheck(false)
-        binding.player6Cons.updateCheck(false)
-        binding.player8Cons.updateCheck(false)
 
-        if (asPerDeck) {
-            isViewEnabled(binding.player4Cons,true)
-            isViewEnabled(binding.player6Cons,true)
-            isViewEnabled(binding.player8Cons,true)
-            when (deckType) {
-                DeckType.DECK1 -> {
-                    totalPlayers = 4
-                    isViewEnabled(binding.player6Cons,false)
-                    isViewEnabled(binding.player8Cons,false)
-                }
-                DeckType.DECK2 -> {
-                    totalPlayers = 4
-                    isViewEnabled(binding.player8Cons,false)
-                }
-                else -> {
-                    totalPlayers = 6
-                    isViewEnabled(binding.player4Cons,false)
-                }
+        viewModel.totalPlayers.observe(viewLifecycleOwner) { players ->
+            updatePlayerCheck(players)
+        }
+
+        viewModel.isHideMode.observe(viewLifecycleOwner) { isHide ->
+            binding.hideModeCons.updateCheck(isHide)
+            binding.cutModeCons.updateCheck(!isHide)
+        }
+
+        viewModel.isCreateTable.observe(viewLifecycleOwner) { isCreate ->
+            binding.createTableCons.visibility = if (isCreate) View.VISIBLE else View.GONE
+        }
+    }
+
+    private fun setupListeners() {
+        binding.deck1Cons.setOnClickListener { viewModel.setDeckType(DeckType.DECK1) }
+        binding.deck2Cons.setOnClickListener { viewModel.setDeckType(DeckType.DECK2) }
+        binding.deck3Cons.setOnClickListener { viewModel.setDeckType(DeckType.DECK3) }
+        binding.deck4Cons.setOnClickListener { viewModel.setDeckType(DeckType.DECK4) }
+
+        binding.hideModeCons.setOnClickListener { viewModel.setGameMode(true) }
+        binding.cutModeCons.setOnClickListener { viewModel.setGameMode(false) }
+
+        binding.player4Cons.setOnClickListener { viewModel.setTotalPlayers(4) }
+        binding.player6Cons.setOnClickListener { viewModel.setTotalPlayers(6) }
+        binding.player8Cons.setOnClickListener { viewModel.setTotalPlayers(8) }
+
+        binding.customSeekBar.updateIndicatorPosition(binding.betPriceIndicator, binding.betPriceCountTxt)
+    }
+
+    private fun updateSeekBarProgress(deck: DeckType) {
+        binding.customSeekBar.setCustomProgress(deck.deckCount)
+    }
+
+    private fun updateDeckSelection(deck: DeckType) {
+        binding.deck1Cons.updateSelection(deck == DeckType.DECK1)
+        binding.deck2Cons.updateSelection(deck == DeckType.DECK2)
+        binding.deck3Cons.updateSelection(deck == DeckType.DECK3)
+        binding.deck4Cons.updateSelection(deck == DeckType.DECK4)
+    }
+
+    private fun updatePlayerOptions(deck: DeckType) {
+        fun enableView(view: View, enabled: Boolean) {
+            view.isEnabled = enabled
+            view.alpha = if (enabled) 1f else 0.6f
+        }
+
+        enableView(binding.player4Cons, true)
+        enableView(binding.player6Cons, true)
+        enableView(binding.player8Cons, true)
+
+        when (deck) {
+            DeckType.DECK1 -> {
+                enableView(binding.player6Cons, false)
+                enableView(binding.player8Cons, false)
+            }
+            DeckType.DECK2 -> {
+                enableView(binding.player8Cons, false)
+            }
+            else -> {
+                enableView(binding.player4Cons, false)
             }
         }
-
-        when(totalPlayers) {
-            4 -> binding.player4Cons.updateCheck(true)
-            6 -> binding.player6Cons.updateCheck(true)
-            8 -> binding.player8Cons.updateCheck(true)
-        }
-
     }
 
-    private fun updateGameMode() {
-        binding.hideModeCons.updateCheck(isHideMode)
-        binding.cutModeCons.updateCheck(!isHideMode)
+    private fun updatePlayerCheck(players: Int) {
+        binding.player4Cons.updateCheck(players == 4)
+        binding.player6Cons.updateCheck(players == 6)
+        binding.player8Cons.updateCheck(players == 8)
     }
 
-    private fun updateDeckType() {
-        updateSeekBarProgress()
-        binding.deck1Cons.updateSelection(false)
-        binding.deck2Cons.updateSelection(false)
-        binding.deck3Cons.updateSelection(false)
-        binding.deck4Cons.updateSelection(false)
-
-        updatePlayer(true)
-
-        when(deckType) {
-            DeckType.DECK1 -> binding.deck1Cons.updateSelection(true)
-            DeckType.DECK2 -> binding.deck2Cons.updateSelection(true)
-            DeckType.DECK3 -> binding.deck3Cons.updateSelection(true)
-            DeckType.DECK4 -> binding.deck4Cons.updateSelection(true)
-        }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
-
-    private fun updateSeekBarProgress() {
-        binding.customSeekBar.setCustomProgress(deckType.deckCount * 0.05f,deckType.deckCount * 0.05f)
-    }
-
 }

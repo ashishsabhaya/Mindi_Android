@@ -24,7 +24,11 @@ class OfflineConfigFragment : Fragment() {
         _binding = FragmentOfflineConfigBinding.inflate(inflater, container, false)
 
         val adapter = DeckSelectionAdapter(DeckType.entries.toList(), onItemClick = { mode ->
-            findNavController().navigate(R.id.action_offlineConfigFragment_to_tableConfigFragment)
+            val action = OfflineConfigFragmentDirections
+                .actionOfflineConfigFragmentToTableConfigFragment(
+                    deckType = mode
+                )
+            findNavController().navigate(action)
         })
         binding.deckTypeRecycler.adapter = adapter
         binding.deckTypeRecycler.suppressLayout(true)

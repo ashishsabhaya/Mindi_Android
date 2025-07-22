@@ -14,7 +14,7 @@ import com.keylogic.mindi.R
 
 class CardBackAdapter(
     private val context: Context,
-    private val cardBackList: ArrayList<CardBack>,
+    private val cardBackList: List<CardBack>,
     private val onItemClick: (Int) -> Unit
 ) : RecyclerView.Adapter<CardBackAdapter.CardBackViewHolder>() {
     var selectedProfileIndex = 0

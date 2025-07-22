@@ -7,6 +7,7 @@ import android.util.AttributeSet
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import com.keylogic.mindi.R
+import androidx.core.content.withStyledAttributes
 
 class BackgroundConstraintLayout @JvmOverloads constructor(
     context: Context,
@@ -20,6 +21,7 @@ class BackgroundConstraintLayout @JvmOverloads constructor(
     private var customWidth: Float? = null
     private var customHeight: Float? = null
     private var isPositive: Boolean = true
+    private var isCircular: Boolean = false
     private var isStrokeEnabled: Boolean = true
     private var isElevationEnabled: Boolean = true
     private var isFgColorIsSingleDarkBlue: Boolean = false
@@ -29,27 +31,41 @@ class BackgroundConstraintLayout @JvmOverloads constructor(
     private var isShare: Boolean = false
 
     init {
-        val a = context.obtainStyledAttributes(attrs, R.styleable.BackgroundConstraintLayout)
+        context.withStyledAttributes(attrs, R.styleable.BackgroundConstraintLayout) {
 
-        defaultStrokeWidth = a.getDimension(R.styleable.BackgroundConstraintLayout_strokeWidth, defaultStrokeWidth)
-        customCornerRadius = a.getDimension(R.styleable.BackgroundConstraintLayout_cornerRadius,0f)
-        isPositive = a.getBoolean(R.styleable.BackgroundConstraintLayout_isPositive,true)
-        isStrokeEnabled = a.getBoolean(R.styleable.BackgroundConstraintLayout_isStrokeEnabled,true)
-        isElevationEnabled = a.getBoolean(R.styleable.BackgroundConstraintLayout_isBGElevationEnabled,true)
-        isFgColorIsSingleDarkBlue = a.getBoolean(R.styleable.BackgroundConstraintLayout_isFgColorIsSingleDarkBlue,false)
-        isInstagram = a.getBoolean(R.styleable.BackgroundConstraintLayout_isInstagram,false)
-        isMessenger = a.getBoolean(R.styleable.BackgroundConstraintLayout_isMessenger,false)
-        isWhatsapp = a.getBoolean(R.styleable.BackgroundConstraintLayout_isWhatsapp,false)
-        isShare = a.getBoolean(R.styleable.BackgroundConstraintLayout_isShare,false)
+            defaultStrokeWidth =
+                getDimension(R.styleable.BackgroundConstraintLayout_strokeWidth, defaultStrokeWidth)
+            customCornerRadius = getDimension(
+                R.styleable.BackgroundConstraintLayout_cornerRadius,
+                customCornerRadius
+            )
+            isPositive = getBoolean(R.styleable.BackgroundConstraintLayout_isPositive, isPositive)
+            isStrokeEnabled =
+                getBoolean(R.styleable.BackgroundConstraintLayout_isStrokeEnabled, isStrokeEnabled)
+            isElevationEnabled = getBoolean(
+                R.styleable.BackgroundConstraintLayout_isBGElevationEnabled,
+                isElevationEnabled
+            )
+            isCircular = getBoolean(R.styleable.BackgroundConstraintLayout_isCircular, isCircular)
+            isFgColorIsSingleDarkBlue = getBoolean(
+                R.styleable.BackgroundConstraintLayout_isFgColorIsSingleDarkBlue,
+                isFgColorIsSingleDarkBlue
+            )
+            isInstagram =
+                getBoolean(R.styleable.BackgroundConstraintLayout_isInstagram, isInstagram)
+            isMessenger =
+                getBoolean(R.styleable.BackgroundConstraintLayout_isMessenger, isMessenger)
+            isWhatsapp = getBoolean(R.styleable.BackgroundConstraintLayout_isWhatsapp, isWhatsapp)
+            isShare = getBoolean(R.styleable.BackgroundConstraintLayout_isShare, isShare)
 
-        if (a.hasValue(R.styleable.BackgroundConstraintLayout_customWidth)) {
-            customWidth = a.getDimension(R.styleable.BackgroundConstraintLayout_customWidth, 0f)
+            if (hasValue(R.styleable.BackgroundConstraintLayout_customWidth)) {
+                customWidth = getDimension(R.styleable.BackgroundConstraintLayout_customWidth, 0f)
+            }
+
+            if (hasValue(R.styleable.BackgroundConstraintLayout_customHeight)) {
+                customHeight = getDimension(R.styleable.BackgroundConstraintLayout_customHeight, 0f)
+            }
         }
-
-        if (a.hasValue(R.styleable.BackgroundConstraintLayout_customHeight)) {
-            customHeight = a.getDimension(R.styleable.BackgroundConstraintLayout_customHeight, 0f)
-        }
-        a.recycle()
 
         if (isElevationEnabled)
             elevation = elevationValue
@@ -64,6 +80,8 @@ class BackgroundConstraintLayout @JvmOverloads constructor(
         var fgCornerRadius = viewHeight * (10f / 53f)
         if (customCornerRadius != 0f)
             fgCornerRadius = customCornerRadius
+        if (isCircular && customHeight != null)
+            fgCornerRadius = customHeight!!
         val bgCornerRadius = fgCornerRadius + 4f
 
         // Dynamic stroke: 1px for 53px height
@@ -74,7 +92,7 @@ class BackgroundConstraintLayout @JvmOverloads constructor(
             strokeWidth = 0f
 
         // Background bottom inset (approx. 8%)
-        val bottomMargin = viewHeight * 0.09f
+        val bottomMargin = if (isCircular) viewHeight * 0.1f else viewHeight * 0.09f
 
         setPadding(
             paddingLeft,
@@ -187,11 +205,26 @@ class BackgroundConstraintLayout @JvmOverloads constructor(
         }
 
         return LayerDrawable(arrayOf(bgDrawable, fgDrawable)).apply {
-            setLayerInset(
-                1,
-                0, 0, 0,
-                bottomMargin.toInt()
-            )
+            if (isCircular) {
+                val allSideMargin = (bottomMargin * 0.2).toInt()
+                setLayerInset(
+                    1,
+                    allSideMargin, allSideMargin, allSideMargin,
+                    bottomMargin.toInt() - allSideMargin
+                )
+                setLayerInset(
+                    0,
+                    allSideMargin, allSideMargin, allSideMargin,
+                    allSideMargin
+                )
+            }
+            else {
+                setLayerInset(
+                    1,
+                    0, 0, 0,
+                    bottomMargin.toInt()
+                )
+            }
         }
     }
 

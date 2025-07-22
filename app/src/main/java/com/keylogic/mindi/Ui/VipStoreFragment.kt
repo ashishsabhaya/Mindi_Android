@@ -14,6 +14,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.keylogic.mindi.Adapters.ViewPagerAdapter
 import com.keylogic.mindi.Custom.SelectionConstraintLayout
 import com.keylogic.mindi.Custom.StrokeTextView
+import com.keylogic.mindi.Enum.VIPStore
 import com.keylogic.mindi.Helper.CommonHelper
 import com.keylogic.mindi.R
 import com.keylogic.mindi.Ui.Store.AvatarFragment
@@ -39,10 +40,10 @@ class VipStoreFragment : Fragment() {
         binding.chipCountTxt.setText(CommonHelper.INSTANCE.getTotalChip())
 
         val adapter = ViewPagerAdapter(requireActivity())
-        adapter.addFragment(resources.getString(R.string.tab_avatar),AvatarFragment())
-        adapter.addFragment(resources.getString(R.string.tab_cards),CardsFragment())
-        adapter.addFragment(resources.getString(R.string.tab_tables),TablesFragment())
-        adapter.addFragment(resources.getString(R.string.tab_background),BackgroundsFragment())
+        adapter.addFragment(resources.getString(VIPStore.AVATAR.tabName),AvatarFragment())
+        adapter.addFragment(resources.getString(VIPStore.CARDS.tabName),CardsFragment())
+        adapter.addFragment(resources.getString(VIPStore.TABLES.tabName),TablesFragment())
+        adapter.addFragment(resources.getString(VIPStore.BACKGROUNDS.tabName),BackgroundsFragment())
 
         binding.viewPager.adapter = adapter
         binding.viewPager.isUserInputEnabled = false

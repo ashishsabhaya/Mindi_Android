@@ -17,7 +17,7 @@ import com.keylogic.mindi.R
 
 class AvatarAdapter(
     private val context: Context,
-    private val avatarList: ArrayList<Avatar>,
+    private val avatarList: List<Avatar>,
     private val onItemClick: (Int) -> Unit
 ) : RecyclerView.Adapter<AvatarAdapter.AvatarViewHolder>() {
     var selectedProfileIndex = 0

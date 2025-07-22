@@ -493,7 +493,7 @@
                         android:layout_width="@dimen/_40sdp"
                         android:layout_height="@dimen/_40sdp"
                         android:layout_marginHorizontal="@dimen/_8sdp"
-                        app:cornerRadius="@dimen/_20sdp"
+                        app:isCircular="true"
                         app:customHeight="@dimen/_40sdp"
                         app:isBGElevationEnabled="false"
                         app:isInstagram="true">
@@ -511,7 +511,7 @@
                         android:layout_width="@dimen/_40sdp"
                         android:layout_height="@dimen/_40sdp"
                         android:layout_marginHorizontal="@dimen/_8sdp"
-                        app:cornerRadius="@dimen/_20sdp"
+                        app:isCircular="true"
                         app:customHeight="@dimen/_40sdp"
                         app:isBGElevationEnabled="false"
                         app:isMessenger="true">
@@ -529,7 +529,7 @@
                         android:layout_width="@dimen/_40sdp"
                         android:layout_height="@dimen/_40sdp"
                         android:layout_marginHorizontal="@dimen/_8sdp"
-                        app:cornerRadius="@dimen/_20sdp"
+                        app:isCircular="true"
                         app:customHeight="@dimen/_40sdp"
                         app:isBGElevationEnabled="false"
                         app:isWhatsapp="true">
@@ -547,8 +547,8 @@
                         android:layout_width="@dimen/_40sdp"
                         android:layout_height="@dimen/_40sdp"
                         android:layout_marginHorizontal="@dimen/_8sdp"
-                        app:cornerRadius="@dimen/_20sdp"
                         app:customHeight="@dimen/_40sdp"
+                        app:isCircular="true"
                         app:isBGElevationEnabled="false"
                         app:isShare="true">
 
@@ -583,7 +583,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/privacy_policy"
-                        android:textSize="@dimen/_20ssp"
+                        android:textSize="@dimen/_16ssp"
                         app:txtStrokeEnabled="false"
                         android:textColor="@color/white"
                         app:layout_constraintTop_toTopOf="parent"

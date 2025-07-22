@@ -7,6 +7,7 @@
         <attr name="customHeight" format="dimension" />
         <attr name="isPositive" format="boolean" />
         <attr name="isStrokeEnabled" format="boolean" />
+        <attr name="isCircular" format="boolean" />
         <attr name="isBGElevationEnabled" format="boolean" />
         <attr name="isFgColorIsSingleDarkBlue" format="boolean" />
         <attr name="isInstagram" format="boolean" />
@@ -58,8 +59,10 @@
         <attr name="cStrokeWidth" format="dimension" />
         <attr name="cIsViewStrokeEnabled" format="boolean" />
         <attr name="cIsIconVisible" format="boolean" />
+        <attr name="cIsElevationEnabled" format="boolean" />
         <attr name="cViewHeight" format="dimension" />
         <attr name="cLabelText" format="string" />
+        <attr name="cTitleLabelText" format="string" />
         <attr name="cLabelTextSize" format="dimension" />
         <attr name="cIconSize" format="dimension" />
         <attr name="cIconResource" format="reference" />
@@ -110,4 +113,10 @@
         <attr name="isBetViewSelectedColorIsBlueGradient" format="boolean" />
         <attr name="betViewHeight" format="dimension" />
     </declare-styleable>
+
+    <declare-styleable name="PlayerProfileView">
+        <attr name="pContainerWidth" format="dimension" />
+        <attr name="pContainerHeight" format="dimension" />
+    </declare-styleable>
+
 </resources>

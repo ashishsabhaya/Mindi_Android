@@ -3,9 +3,9 @@
 
     <item android:state_checked="true"
         android:state_enabled="true"
-        android:drawable="@drawable/ic_selected_thumb"/>
+        android:drawable="@drawable/ic_switch_selected_thumb"/>
 
     <item android:state_checked="false"
         android:state_enabled="true"
-        android:drawable="@drawable/ic_un_selected_thumb"/>
+        android:drawable="@drawable/ic_switch_un_selected_thumb"/>
 </selector>

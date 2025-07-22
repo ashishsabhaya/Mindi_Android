@@ -21,6 +21,7 @@ class IconTextConstraintLayout @JvmOverloads constructor(
 ) : ConstraintLayout(context, attrs, defStyleAttr) {
 
     private var isStrokeEnabled = true
+    private var isElevationEnabled = true
     private var isIconVisible = true
     private var customCornerRadius = 0f.dpToPx(context)
     private var iconResource = 0
@@ -30,8 +31,10 @@ class IconTextConstraintLayout @JvmOverloads constructor(
 
     private lateinit var circleView: ImageView
     private lateinit var labelView: StrokeTextView
+    private lateinit var titleLabelView: StrokeTextView
 
     private var labelText: String = ""
+    private var titleLabelText: String = ""
     private var labelTextSize: Float = 18f.spToPx(context)
     private var iconSize: Float = 18f.spToPx(context)
     private var labelStartMargin: Int = 5.dpToPxInt()
@@ -48,7 +51,10 @@ class IconTextConstraintLayout @JvmOverloads constructor(
                 getBoolean(R.styleable.IconTextConstraintLayout_cIsViewStrokeEnabled, isStrokeEnabled)
             isIconVisible =
                 getBoolean(R.styleable.IconTextConstraintLayout_cIsIconVisible, isIconVisible)
+            isElevationEnabled =
+                getBoolean(R.styleable.IconTextConstraintLayout_cIsElevationEnabled, isElevationEnabled)
             labelText = getString(R.styleable.IconTextConstraintLayout_cLabelText) ?: labelText
+            titleLabelText = getString(R.styleable.IconTextConstraintLayout_cTitleLabelText) ?: titleLabelText
             context.withStyledAttributes(attrs, R.styleable.IconTextConstraintLayout) {
                 iconResource = getResourceId(
                     R.styleable.IconTextConstraintLayout_cIconResource,
@@ -86,7 +92,8 @@ class IconTextConstraintLayout @JvmOverloads constructor(
 
         updateVisualState()
 
-        elevation = elevationValue
+        if (isElevationEnabled)
+            elevation = elevationValue
     }
 
     fun setViewTextAndResource(text: String, resource: Int) {
@@ -117,6 +124,20 @@ class IconTextConstraintLayout @JvmOverloads constructor(
             setPadding(contentPadding, contentPadding, contentPadding, contentPadding)
         }
 
+        if (titleLabelText.isNotEmpty()) {
+            titleLabelView = StrokeTextView(context).apply {
+                id = generateViewId()
+                text = titleLabelText
+                setTextColor(Color.WHITE)
+                gravity = if (isIconVisible) Gravity.START else Gravity.CENTER
+                setTextSize(TypedValue.COMPLEX_UNIT_PX, labelTextSize)
+                layoutParams = LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT).apply {
+                    topToTop = LayoutParams.PARENT_ID
+                    startToStart = LayoutParams.PARENT_ID
+                }
+            }
+        }
+
         val circleSize = iconSize.toInt()
         circleView = ImageView(context).apply {
             id = generateViewId()
@@ -124,7 +145,12 @@ class IconTextConstraintLayout @JvmOverloads constructor(
                 marginStart = 0
                 topToTop = LayoutParams.PARENT_ID
                 bottomToBottom = LayoutParams.PARENT_ID
-                startToStart = LayoutParams.PARENT_ID
+                if (titleLabelText.isNotEmpty()) {
+                    startToEnd = titleLabelView.id
+                    marginStart = labelStartMargin
+                }
+                else
+                    startToStart = LayoutParams.PARENT_ID
             }
             setImageResource(iconResource)
         }
@@ -145,6 +171,8 @@ class IconTextConstraintLayout @JvmOverloads constructor(
             }
         }
 
+        if (titleLabelText.isNotEmpty())
+            linearLayout.addView(titleLabelView)
         if (isIconVisible)
             linearLayout.addView(circleView)
         linearLayout.addView(labelView)
