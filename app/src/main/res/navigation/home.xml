@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/home"
-    app:startDestination="@id/homeFragment">
+    app:startDestination="@id/splashFragment">
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.keylogic.mindi.Ui.HomeFragment"
@@ -50,23 +50,38 @@
             app:destination="@id/playAreaFragment" />
 
         <argument android:name="deckType" app:argType="com.keylogic.mindi.Enum.DeckType" />
+        <action
+            android:id="@+id/action_tableConfigFragment_to_chipStoreFragment"
+            app:destination="@id/chipStoreFragment" />
     </fragment>
     <fragment
         android:id="@+id/onlineConfigFragment"
         android:name="com.keylogic.mindi.Ui.Online.OnlineConfigFragment"
         android:label="fragment_online_config"
-        tools:layout="@layout/fragment_online_config" />
+        tools:layout="@layout/fragment_online_config" >
+        <action
+            android:id="@+id/action_onlineConfigFragment_to_chipStoreFragment"
+            app:destination="@id/chipStoreFragment" />
+    </fragment>
     <fragment
         android:id="@+id/multiplayerConfigFragment"
         android:name="com.keylogic.mindi.Ui.Multiplayer.MultiplayerConfigFragment"
         android:label="fragment_multiplayer_config"
-        tools:layout="@layout/fragment_multiplayer_config" />
+        tools:layout="@layout/fragment_multiplayer_config" >
+        <action
+            android:id="@+id/action_multiplayerConfigFragment_to_chipStoreFragment"
+            app:destination="@id/chipStoreFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/vipStoreFragment"
         android:name="com.keylogic.mindi.Ui.VipStoreFragment"
         android:label="fragment_vip_store"
-        tools:layout="@layout/fragment_vip_store" />
+        tools:layout="@layout/fragment_vip_store" >
+        <action
+            android:id="@+id/action_vipStoreFragment_to_chipStoreFragment"
+            app:destination="@id/chipStoreFragment" />
+    </fragment>
     <fragment
         android:id="@+id/profileSelectionFragment"
         android:name="com.keylogic.mindi.Ui.ProfileSelectionFragment"
@@ -84,6 +99,9 @@
         <action
             android:id="@+id/action_profileFragment_to_vipStoreFragment"
             app:destination="@id/vipStoreFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_chipStoreFragment"
+            app:destination="@id/chipStoreFragment" />
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
@@ -105,5 +123,17 @@
         <argument android:name="isHideMode" app:argType="boolean" />
         <argument android:name="totalPlayers" app:argType="integer" />
         <argument android:name="betPrice" app:argType="long" />
+    </fragment>
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="com.keylogic.mindi.Ui.SplashFragment"
+        android:label="fragment_splash"
+        tools:layout="@layout/fragment_splash" >
+        <action
+            android:id="@+id/action_splashFragment_to_profileSelectionFragment"
+            app:destination="@id/profileSelectionFragment" />
+        <action
+            android:id="@+id/action_splashFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
     </fragment>
 </navigation>

@@ -1,48 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_width="@dimen/_360sdp"
+    android:layout_height="match_parent"
     android:layout_margin="@dimen/_4sdp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/vip_store_item_card"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_140sdp"
-        android:layout_marginVertical="@dimen/_8sdp"
-        app:cardCornerRadius="@dimen/_4sdp"
-        app:cardBackgroundColor="@color/transparent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:strokeColor="@color/transparent"
-        app:strokeWidth="@dimen/_1sdp">
+        app:layout_constraintBottom_toBottomOf="parent">
 
-        <ImageView
-            android:id="@+id/vip_store_item_img"
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/vip_store_item_card"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@drawable/table_1" />
+            android:layout_height="@dimen/_140sdp"
+            app:cardCornerRadius="@dimen/_4sdp"
+            app:cardBackgroundColor="@color/transparent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:strokeColor="@color/transparent"
+            app:strokeWidth="@dimen/_1sdp">
 
-    </com.google.android.material.card.MaterialCardView>
+            <ImageView
+                android:id="@+id/vip_store_item_img"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/table_0" />
 
-    <com.keylogic.mindi.Custom.IconTextConstraintLayout
-        android:id="@+id/vip_store_item_info_cons"
-        android:layout_width="@dimen/_120sdp"
-        android:layout_height="@dimen/_30sdp"
-        app:cViewHeight="@dimen/_30sdp"
-        android:paddingHorizontal="@dimen/_6sdp"
-        app:cIconResource="@drawable/ic_chip"
-        app:cLabelText="@string/guest"
-        app:cIconSize="@dimen/_14sdp"
-        app:cIsElevationEnabled="false"
-        app:cLabelTextSize="@dimen/_12ssp"
-        app:cIsViewStrokeEnabled="true"
-        app:cStrokeWidth="@dimen/_1sdp"
-        android:layout_marginTop="@dimen/_8sdp"
-        android:layout_marginHorizontal="@dimen/_2sdp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/vip_store_item_card" />
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.keylogic.mindi.Custom.IconTextConstraintLayout
+            android:id="@+id/vip_store_item_info_cons"
+            android:layout_width="@dimen/_120sdp"
+            android:layout_height="@dimen/_30sdp"
+            app:cViewHeight="@dimen/_30sdp"
+            android:paddingHorizontal="@dimen/_6sdp"
+            app:cIconResource="@drawable/ic_chip"
+            app:cLabelText="@string/guest"
+            app:cIconSize="@dimen/_14sdp"
+            app:cIsElevationEnabled="false"
+            app:cLabelTextSize="@dimen/_12ssp"
+            app:cIsViewStrokeEnabled="true"
+            app:cStrokeWidth="@dimen/_1sdp"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:layout_marginHorizontal="@dimen/_2sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/vip_store_item_card" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

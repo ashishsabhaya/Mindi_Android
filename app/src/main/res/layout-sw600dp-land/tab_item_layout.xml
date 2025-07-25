@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.keylogic.mindi.Custom.SelectionConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/tab_item_bg_con"
+    android:layout_width="wrap_content"
+    android:layout_height="@dimen/_26sdp"
+    app:containerHeight="@dimen/_26sdp"
+    app:isBorderEnabled="true"
+    android:elevation="0dp"
+    app:isElevationEnabled="false">
+
+    <com.keylogic.mindi.Custom.StrokeTextView
+        android:id="@+id/tab_item_name_txt"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="@string/guest"
+        android:gravity="center"
+        app:txtStrokeEnabled="false"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_12ssp"
+        android:layout_marginHorizontal="@dimen/_12sdp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+</com.keylogic.mindi.Custom.SelectionConstraintLayout>

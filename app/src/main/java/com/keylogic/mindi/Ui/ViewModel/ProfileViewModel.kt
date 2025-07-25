@@ -19,6 +19,9 @@ class ProfileViewModel : ViewModel() {
     private val _gamePlayed = MutableLiveData<Int>()
     val gamePlayed: LiveData<Int> get() = _gamePlayed
 
+    private val _profileImageIndex = MutableLiveData<Int>()
+    val profileImageIndex: LiveData<Int> get() = _profileImageIndex
+
     init {
         loadProfileData()
     }
@@ -28,6 +31,7 @@ class ProfileViewModel : ViewModel() {
         _gameWin.value = ProfileHelper.gameWin
         _gameLost.value = ProfileHelper.gameLost
         _gamePlayed.value = ProfileHelper.gamePlayed
+        _profileImageIndex.value = if (ProfileHelper.profileId != -1) ProfileHelper.profileId else ProfileHelper.defaultProfileId
     }
 
     fun updateProfileName(name: String) {

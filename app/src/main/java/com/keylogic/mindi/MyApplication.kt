@@ -6,6 +6,7 @@ import android.os.Bundle
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ProcessLifecycleOwner
+import com.keylogic.mindi.Database.MyPreferences
 import com.keylogic.mindi.Helper.SystemUiHelper
 
 class MyApplication : Application() {
@@ -13,6 +14,8 @@ class MyApplication : Application() {
         super.onCreate()
         ProcessLifecycleOwner.get().lifecycle.addObserver(AppLifecycleObserver(this))
         registerActivityLifecycleCallbacks(ActivityLifecycleCallbacksImpl())
+
+        MyPreferences.INSTANCE.loadGameSettings(this)
 
     }
 

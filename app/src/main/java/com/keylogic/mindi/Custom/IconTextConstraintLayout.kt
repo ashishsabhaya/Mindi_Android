@@ -113,15 +113,14 @@ class IconTextConstraintLayout @JvmOverloads constructor(
             orientation = LinearLayout.HORIZONTAL
             gravity = Gravity.CENTER
             layoutParams = LayoutParams(
-                LayoutParams.WRAP_CONTENT,
-                LayoutParams.WRAP_CONTENT
+                LayoutParams.MATCH_PARENT,
+                LayoutParams.MATCH_PARENT
             ).apply {
                 topToTop = LayoutParams.PARENT_ID
                 bottomToBottom = LayoutParams.PARENT_ID
                 startToStart = LayoutParams.PARENT_ID
                 endToEnd = LayoutParams.PARENT_ID
             }
-            setPadding(contentPadding, contentPadding, contentPadding, contentPadding)
         }
 
         if (titleLabelText.isNotEmpty()) {
@@ -129,9 +128,9 @@ class IconTextConstraintLayout @JvmOverloads constructor(
                 id = generateViewId()
                 text = titleLabelText
                 setTextColor(Color.WHITE)
-                gravity = if (isIconVisible) Gravity.START else Gravity.CENTER
+                gravity = if (isIconVisible) Gravity.CENTER_VERTICAL else Gravity.CENTER
                 setTextSize(TypedValue.COMPLEX_UNIT_PX, labelTextSize)
-                layoutParams = LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT).apply {
+                layoutParams = LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT).apply {
                     topToTop = LayoutParams.PARENT_ID
                     startToStart = LayoutParams.PARENT_ID
                 }
@@ -159,14 +158,22 @@ class IconTextConstraintLayout @JvmOverloads constructor(
             id = generateViewId()
             text = labelText
             setTextColor(Color.WHITE)
-            gravity = if (isIconVisible) Gravity.START else Gravity.CENTER
+            isSingleLine = true
+            gravity = if (isIconVisible) Gravity.CENTER_VERTICAL else Gravity.CENTER
             setTextSize(TypedValue.COMPLEX_UNIT_PX, labelTextSize)
-            layoutParams = LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT).apply {
+            layoutParams = LayoutParams(LayoutParams.WRAP_CONTENT,
+                LayoutParams.MATCH_PARENT).apply {
                 topToTop = LayoutParams.PARENT_ID
                 bottomToBottom = LayoutParams.PARENT_ID
+                setPadding(0,0,0,0)
+                setMargins(0,0,0,0)
                 if (isIconVisible) {
                     startToEnd = circleView.id
                     marginStart = labelStartMargin
+                }
+                else {
+                    startToStart = LayoutParams.PARENT_ID
+                    endToEnd = LayoutParams.PARENT_ID
                 }
             }
         }

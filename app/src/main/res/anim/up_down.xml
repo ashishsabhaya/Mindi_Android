@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Move up -->
+    <translate
+        android:fromYDelta="0"
+        android:toYDelta="-12%p"
+        android:duration="1000"
+        android:startOffset="0"
+        android:fillAfter="true" />
+
+<!--    &lt;!&ndash; Bounce sequence &ndash;&gt;-->
+<!--    <translate-->
+<!--        android:fromYDelta="0"-->
+<!--        android:toYDelta="2%p"-->
+<!--        android:duration="250"-->
+<!--        android:startOffset="1000"-->
+<!--        android:fillAfter="true" />-->
+
+<!--    <translate-->
+<!--        android:fromYDelta="0"-->
+<!--        android:toYDelta="-2%p"-->
+<!--        android:duration="250"-->
+<!--        android:startOffset="1250"-->
+<!--        android:fillAfter="true" />-->
+
+<!--    <translate-->
+<!--        android:fromYDelta="0"-->
+<!--        android:toYDelta="2%p"-->
+<!--        android:duration="250"-->
+<!--        android:startOffset="1500"-->
+<!--        android:fillAfter="true" />-->
+
+<!--    <translate-->
+<!--        android:fromYDelta="0"-->
+<!--        android:toYDelta="-2%p"-->
+<!--        android:duration="250"-->
+<!--        android:startOffset="1750"-->
+<!--        android:fillAfter="true" />-->
+
+    <!-- Return to original position -->
+    <translate
+        android:fromYDelta="0"
+        android:toYDelta="12%p"
+        android:duration="1000"
+        android:startOffset="2000"
+        android:fillAfter="false" />
+
+</set>

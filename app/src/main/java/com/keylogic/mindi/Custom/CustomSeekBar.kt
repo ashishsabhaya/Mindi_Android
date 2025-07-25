@@ -100,7 +100,7 @@ class CustomSeekBar @JvmOverloads constructor(
         // Draw custom thumb
         val thumbSize = seekHeight
         thumbX = (progressX - thumbSize / 2f)
-        indicatorView?.x = thumbX - seekHeight / 4f
+        indicatorView?.x = thumbX - seekHeight * 0.1f
         val thumbY = centerY - thumbSize / 2f
 
         //chip count as per progress

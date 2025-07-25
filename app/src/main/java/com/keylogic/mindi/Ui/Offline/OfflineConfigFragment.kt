@@ -9,8 +9,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.keylogic.mindi.Adapters.DeckSelectionAdapter
 import com.keylogic.mindi.Enum.DeckType
-import com.keylogic.mindi.Enum.GameMode
-import com.keylogic.mindi.R
+import com.keylogic.mindi.Helper.CommonHelper
 import com.keylogic.mindi.databinding.FragmentOfflineConfigBinding
 
 class OfflineConfigFragment : Fragment() {
@@ -34,9 +33,9 @@ class OfflineConfigFragment : Fragment() {
         binding.deckTypeRecycler.suppressLayout(true)
         binding.deckTypeRecycler.layoutManager = GridLayoutManager(requireActivity(), DeckType.entries.toList().size)
 
-        binding.cancelCons.setOnClickListener {
+        CommonHelper.INSTANCE.setScaleOnTouch(binding.cancelCons, onclick = {
             findNavController().popBackStack()
-        }
+        })
 
         return binding.root
     }

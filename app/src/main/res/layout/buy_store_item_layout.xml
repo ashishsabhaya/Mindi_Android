@@ -48,7 +48,7 @@
                 android:id="@+id/title_txt"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_30sdp"
-                android:layout_marginHorizontal="@dimen/_10sdp"
+                android:layout_marginHorizontal="@dimen/_12sdp"
                 android:layout_marginVertical="@dimen/_6sdp"
                 android:height="@dimen/_30sdp"
                 android:gravity="center"
@@ -70,7 +70,7 @@
             app:isCircular="true"
             app:customHeight="@dimen/_28sdp"
             app:isPositive="false"
-            app:strokeWidth="@dimen/_1sdp"
+            app:strokeWidth="1dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="@id/title_layout"
             app:layout_constraintTop_toTopOf="@+id/title_layout">
@@ -142,7 +142,7 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <com.keylogic.mindi.Custom.BackgroundConstraintLayout
-                        android:id="@+id/today_watch_cons"
+                        android:id="@+id/today_watch_btn_cons"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/_28ssp"
                         android:layout_marginHorizontal="@dimen/_16sdp"
@@ -218,7 +218,7 @@
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <com.keylogic.mindi.Custom.BackgroundConstraintLayout
-                        android:id="@+id/week_buy_cons"
+                        android:id="@+id/week_buy_btn_cons"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/_28ssp"
                         android:layout_marginHorizontal="@dimen/_16sdp"

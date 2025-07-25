@@ -54,52 +54,90 @@
                 android:id="@+id/profile_name_cons"
                 android:layout_width="@dimen/_180sdp"
                 android:layout_height="@dimen/_36sdp"
-                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_14sdp"
                 app:containerHeight="@dimen/_36sdp"
                 app:containerRadius="@dimen/_2sdp"
                 app:isSingleLightColor="true"
-                android:paddingHorizontal="@dimen/_8sdp"
+                android:paddingStart="@dimen/_8sdp"
+                android:paddingEnd="@dimen/_2sdp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/profile_card">
 
-                <ImageView
-                    android:id="@+id/edit_img"
-                    android:layout_width="@dimen/_24sdp"
-                    android:layout_height="@dimen/_24sdp"
-                    android:src="@drawable/ic_edit"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/textInputLayout"
-                    android:layout_width="0dp"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    app:boxBackgroundMode="none"
-                    app:hintEnabled="false"
-                    android:layout_marginHorizontal="@dimen/_2sdp"
-                    app:layout_constraintStart_toEndOf="@+id/edit_img"
-                    app:layout_constraintEnd_toEndOf="parent">
+                    android:orientation="horizontal"
+                    android:gravity="center">
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/profile_name_edit_txt"
+                    <ImageView
+                        android:id="@+id/edit_img"
+                        android:layout_width="@dimen/_24sdp"
+                        android:layout_height="@dimen/_24sdp"
+                        android:src="@drawable/ic_edit"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@android:color/transparent"
-                        android:fontFamily="@font/poetsen_one_regular"
-                        android:hint="@string/enter_your_name"
-                        android:singleLine="true"
-                        android:paddingStart="0dp"
-                        android:paddingEnd="0dp"
-                        android:paddingTop="0dp"
-                        android:paddingBottom="0dp"
-                        android:textAlignment="center"
-                        android:textColor="@color/white"
-                        android:textColorHint="@color/white"
-                        android:textSize="@dimen/_14sdp" />
+                        android:layout_marginHorizontal="@dimen/_4sdp"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/edit_img"
+                        app:layout_constraintEnd_toEndOf="parent">
 
-                </com.google.android.material.textfield.TextInputLayout>
+                        <com.keylogic.mindi.Custom.StrokeTextView
+                            android:id="@+id/profile_name_txt"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:fontFamily="@font/poetsen_one_regular"
+                            android:gravity="center_vertical"
+                            android:singleLine="true"
+                            app:txtStrokeEnabled="false"
+                            android:text="@string/enter_your_name"
+                            android:textColor="@color/textColorPrimary"
+                            android:textSize="@dimen/_14ssp"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"/>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/profile_name_edit_layout"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            app:boxBackgroundMode="none"
+                            app:hintEnabled="false"
+                            android:visibility="gone"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/profile_name_edit_txt"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@android:color/transparent"
+                                android:fontFamily="@font/poetsen_one_regular"
+                                android:hint="@string/enter_your_name"
+                                android:singleLine="true"
+                                android:paddingStart="0dp"
+                                android:paddingEnd="0dp"
+                                android:paddingTop="0dp"
+                                android:paddingBottom="0dp"
+                                android:textAlignment="textStart"
+                                android:textColor="@color/white"
+                                android:textColorHint="@color/white"
+                                android:textSize="@dimen/_14sdp" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </LinearLayout>
 
             </com.keylogic.mindi.Custom.SelectionConstraintLayout>
 

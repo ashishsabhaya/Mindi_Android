@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".Ui.Offline.PlayAreaFragment">
+
+    <include
+        android:id="@+id/include"
+        layout="@layout/home_light_bg_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingHorizontal="@dimen/_6sdp"
+            android:paddingVertical="@dimen/_4sdp">
+
+            <com.keylogic.mindi.Custom.BackgroundConstraintLayout
+                android:id="@+id/cancel_cons"
+                android:layout_width="@dimen/_28sdp"
+                android:layout_height="@dimen/_28sdp"
+                app:customHeight="@dimen/_28sdp"
+                app:cornerRadius="@dimen/_6sdp"
+                app:strokeWidth="2dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="@dimen/_6sdp"
+                    android:src="@drawable/ic_back"/>
+
+            </com.keylogic.mindi.Custom.BackgroundConstraintLayout>
+
+            <com.keylogic.mindi.Custom.IconTextConstraintLayout
+                android:id="@+id/bit_price_cons"
+                android:layout_width="@dimen/_90sdp"
+                android:layout_height="@dimen/_26sdp"
+                app:cViewHeight="@dimen/_26sdp"
+                android:paddingHorizontal="@dimen/_6sdp"
+                app:cIconResource="@drawable/ic_chip"
+                app:cTitleLabelText="@string/bet"
+                app:cLabelText="@string/guest"
+                app:cIconSize="@dimen/_10sdp"
+                app:cIsElevationEnabled="false"
+                app:cLabelTextSize="@dimen/_10ssp"
+                app:cIsViewStrokeEnabled="true"
+                app:cStrokeWidth="@dimen/_1sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/table_0"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <RelativeLayout
+            android:id="@+id/programmatically_xml_relative"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <include
+                android:id="@+id/left_hand_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:isTopSide="false"
+                layout="@layout/left_hands_indicator_layout"/>
+
+            <include
+                android:id="@+id/right_hand_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:isTopSide="true"
+                layout="@layout/right_hands_indicator_layout"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/play_area_relative"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

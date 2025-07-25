@@ -20,6 +20,10 @@ class TableConfigViewModel : ViewModel() {
     private val _isCreateTable = MutableLiveData(true)
     val isCreateTable: LiveData<Boolean> get() = _isCreateTable
 
+    private val _JoinCode = MutableLiveData("")
+    val joinCode: LiveData<String> get() = _JoinCode
+
+
     fun setDeckType(deck: DeckType) {
         _deckType.value = deck
         // Update players based on deck selection
@@ -29,6 +33,10 @@ class TableConfigViewModel : ViewModel() {
             DeckType.DECK3 -> 6
             DeckType.DECK4 -> 6
         }
+    }
+
+    fun updateCode(code: String) {
+        _JoinCode.value = code
     }
 
     fun setGameMode(isHide: Boolean) {

@@ -114,6 +114,16 @@
         <attr name="betViewHeight" format="dimension" />
     </declare-styleable>
 
+    <declare-styleable name="HandsIndicator">
+        <attr name="hBetViewContainerRadius" format="dimension" />
+        <attr name="isCustomColor" format="boolean" />
+        <attr name="hBetViewBorderWidth" format="dimension" />
+        <attr name="hIsBetViewBorderEnabled" format="boolean" />
+        <attr name="hIsBetViewSelectedColorIsBlueGradient" format="boolean" />
+        <attr name="hBetViewHeight" format="dimension" />
+        <attr name="isTopSide" format="boolean" />
+    </declare-styleable>
+
     <declare-styleable name="PlayerProfileView">
         <attr name="pContainerWidth" format="dimension" />
         <attr name="pContainerHeight" format="dimension" />

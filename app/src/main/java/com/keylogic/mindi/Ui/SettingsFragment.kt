@@ -24,6 +24,9 @@ class SettingsFragment : Fragment() {
         binding.musicSwitch.isChecked = CommonHelper.isMusicEnabled
         binding.vibrationSwitch.isChecked = CommonHelper.isVibrationEnabled
 
+        binding.topTitleInclude.titleTxt.setText(requireContext().resources.getString(R.string.settings))
+        binding.topTitleInclude.chipCons.visibility = View.GONE
+
         binding.soundSwitch.setOnCheckedChangeListener { v, isChecked ->
             CommonHelper.isSoundEnabled = isChecked
         }
@@ -36,9 +39,33 @@ class SettingsFragment : Fragment() {
             CommonHelper.isVibrationEnabled = isChecked
         }
 
-        binding.cancelCons.setOnClickListener {
+        CommonHelper.INSTANCE.setScaleOnTouch(binding.topTitleInclude.cancelCons, onclick = {
             findNavController().popBackStack()
-        }
+        })
+
+        CommonHelper.INSTANCE.setScaleOnTouch(binding.privacyPolicyCons, onclick = {
+        })
+
+        CommonHelper.INSTANCE.setScaleOnTouch(binding.feedbackCons, onclick = {
+        })
+
+        CommonHelper.INSTANCE.setScaleOnTouch(binding.rateUsCons, onclick = {
+        })
+
+        CommonHelper.INSTANCE.setScaleOnTouch(binding.howToPlayCons, onclick = {
+        })
+
+        CommonHelper.INSTANCE.setScaleOnTouch(binding.instagramShare, onclick = {
+        })
+
+        CommonHelper.INSTANCE.setScaleOnTouch(binding.mesengerShare, onclick = {
+        })
+
+        CommonHelper.INSTANCE.setScaleOnTouch(binding.whatsappShare, onclick = {
+        })
+
+        CommonHelper.INSTANCE.setScaleOnTouch(binding.anyShare, onclick = {
+        })
 
         return binding.root
     }

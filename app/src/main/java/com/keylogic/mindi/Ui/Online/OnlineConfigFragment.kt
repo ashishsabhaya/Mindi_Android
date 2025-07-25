@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.keylogic.mindi.Enum.DeckType
 import com.keylogic.mindi.Helper.CommonHelper
+import com.keylogic.mindi.R
 import com.keylogic.mindi.Ui.ViewModel.TableConfigViewModel
 import com.keylogic.mindi.databinding.FragmentOnlineConfigBinding
 
@@ -24,11 +25,16 @@ class OnlineConfigFragment : Fragment() {
         _binding = FragmentOnlineConfigBinding.inflate(layoutInflater, container,false)
         viewModel = ViewModelProvider(this)[TableConfigViewModel::class.java]
 
-        binding.cancelCons.setOnClickListener {
+        CommonHelper.INSTANCE.setScaleOnTouch(binding.topTitleInclude.cancelCons, onclick = {
             findNavController().popBackStack()
-        }
+        })
 
-        binding.chipCountTxt.setText(CommonHelper.INSTANCE.getTotalChip())
+        CommonHelper.INSTANCE.setScaleOnTouch(binding.configInclude.createBtnCons, onclick = {
+        })
+
+        binding.topTitleInclude.titleTxt.setText(requireContext().resources.getString(R.string.find_table))
+        binding.topTitleInclude.chipCountTxt.setText(CommonHelper.INSTANCE.getTotalChip())
+        binding.configInclude.createBtnTxt.setText(requireContext().resources.getString(R.string.find))
 
         setupObservers()
         setupListeners()
@@ -48,40 +54,65 @@ class OnlineConfigFragment : Fragment() {
         }
 
         viewModel.isHideMode.observe(viewLifecycleOwner) { isHide ->
-            binding.hideModeCons.updateCheck(isHide)
-            binding.cutModeCons.updateCheck(!isHide)
+            binding.configInclude.hideModeCons.updateCheck(isHide)
+            binding.configInclude.cutModeCons.updateCheck(!isHide)
         }
 
         viewModel.isCreateTable.observe(viewLifecycleOwner) { isCreate ->
-            binding.createTableCons.visibility = if (isCreate) View.VISIBLE else View.GONE
+            binding.configInclude.createTableCons.visibility = if (isCreate) View.VISIBLE else View.GONE
         }
+
+        CommonHelper.INSTANCE.setScaleOnTouch(binding.topTitleInclude.chipCons, onclick = {
+            findNavController().navigate(R.id.action_onlineConfigFragment_to_chipStoreFragment)
+        })
     }
 
     private fun setupListeners() {
-        binding.deck1Cons.setOnClickListener { viewModel.setDeckType(DeckType.DECK1) }
-        binding.deck2Cons.setOnClickListener { viewModel.setDeckType(DeckType.DECK2) }
-        binding.deck3Cons.setOnClickListener { viewModel.setDeckType(DeckType.DECK3) }
-        binding.deck4Cons.setOnClickListener { viewModel.setDeckType(DeckType.DECK4) }
+        CommonHelper.INSTANCE.setScaleOnTouch(binding.configInclude.deck1Cons) {
+            viewModel.setDeckType(DeckType.DECK1)
+        }
+        CommonHelper.INSTANCE.setScaleOnTouch(binding.configInclude.deck2Cons) {
+            viewModel.setDeckType(DeckType.DECK2)
+        }
+        CommonHelper.INSTANCE.setScaleOnTouch(binding.configInclude.deck3Cons) {
+            viewModel.setDeckType(DeckType.DECK3)
+        }
+        CommonHelper.INSTANCE.setScaleOnTouch(binding.configInclude.deck4Cons) {
+            viewModel.setDeckType(DeckType.DECK4)
+        }
 
-        binding.hideModeCons.setOnClickListener { viewModel.setGameMode(true) }
-        binding.cutModeCons.setOnClickListener { viewModel.setGameMode(false) }
+        CommonHelper.INSTANCE.setScaleOnTouch(binding.configInclude.hideModeCons) {
+            viewModel.setGameMode(true)
+        }
+        CommonHelper.INSTANCE.setScaleOnTouch(binding.configInclude.cutModeCons) {
+            viewModel.setGameMode(false)
+        }
 
-        binding.player4Cons.setOnClickListener { viewModel.setTotalPlayers(4) }
-        binding.player6Cons.setOnClickListener { viewModel.setTotalPlayers(6) }
-        binding.player8Cons.setOnClickListener { viewModel.setTotalPlayers(8) }
+        CommonHelper.INSTANCE.setScaleOnTouch(binding.configInclude.player4Cons) {
+            viewModel.setTotalPlayers(4)
+        }
+        CommonHelper.INSTANCE.setScaleOnTouch(binding.configInclude.player6Cons) {
+            viewModel.setTotalPlayers(6)
+        }
+        CommonHelper.INSTANCE.setScaleOnTouch(binding.configInclude.player8Cons) {
+            viewModel.setTotalPlayers(8)
+        }
 
-        binding.customSeekBar.updateIndicatorPosition(binding.betPriceIndicator, binding.betPriceCountTxt)
+        binding.configInclude.customSeekBar.updateIndicatorPosition(
+            binding.configInclude.betPriceIndicator,
+            binding.configInclude.betPriceCountTxt
+        )
     }
 
     private fun updateSeekBarProgress(deck: DeckType) {
-        binding.customSeekBar.setCustomProgress(deck.deckCount)
+        binding.configInclude.customSeekBar.setCustomProgress(deck.deckCount)
     }
 
     private fun updateDeckSelection(deck: DeckType) {
-        binding.deck1Cons.updateSelection(deck == DeckType.DECK1)
-        binding.deck2Cons.updateSelection(deck == DeckType.DECK2)
-        binding.deck3Cons.updateSelection(deck == DeckType.DECK3)
-        binding.deck4Cons.updateSelection(deck == DeckType.DECK4)
+        binding.configInclude.deck1Cons.updateSelection(deck == DeckType.DECK1)
+        binding.configInclude.deck2Cons.updateSelection(deck == DeckType.DECK2)
+        binding.configInclude.deck3Cons.updateSelection(deck == DeckType.DECK3)
+        binding.configInclude.deck4Cons.updateSelection(deck == DeckType.DECK4)
     }
 
     private fun updatePlayerOptions(deck: DeckType) {
@@ -90,28 +121,28 @@ class OnlineConfigFragment : Fragment() {
             view.alpha = if (enabled) 1f else 0.6f
         }
 
-        enableView(binding.player4Cons, true)
-        enableView(binding.player6Cons, true)
-        enableView(binding.player8Cons, true)
+        enableView(binding.configInclude.player4Cons, true)
+        enableView(binding.configInclude.player6Cons, true)
+        enableView(binding.configInclude.player8Cons, true)
 
         when (deck) {
             DeckType.DECK1 -> {
-                enableView(binding.player6Cons, false)
-                enableView(binding.player8Cons, false)
+                enableView(binding.configInclude.player6Cons, false)
+                enableView(binding.configInclude.player8Cons, false)
             }
             DeckType.DECK2 -> {
-                enableView(binding.player8Cons, false)
+                enableView(binding.configInclude.player8Cons, false)
             }
             else -> {
-                enableView(binding.player4Cons, false)
+                enableView(binding.configInclude.player4Cons, false)
             }
         }
     }
 
     private fun updatePlayerCheck(players: Int) {
-        binding.player4Cons.updateCheck(players == 4)
-        binding.player6Cons.updateCheck(players == 6)
-        binding.player8Cons.updateCheck(players == 8)
+        binding.configInclude.player4Cons.updateCheck(players == 4)
+        binding.configInclude.player6Cons.updateCheck(players == 6)
+        binding.configInclude.player8Cons.updateCheck(players == 8)
     }
 
     override fun onDestroyView() {

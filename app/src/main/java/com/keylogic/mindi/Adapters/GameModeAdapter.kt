@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.keylogic.mindi.Enum.GameMode
+import com.keylogic.mindi.Helper.CommonHelper
 import com.keylogic.mindi.R
 
 class GameModeAdapter(
@@ -27,7 +28,9 @@ class GameModeAdapter(
         val gameMode = gameModes[position]
         holder.modeImg.setImageResource(gameMode.resource)
 
-        holder.itemView.setOnClickListener { onItemClick(gameMode) }
+        CommonHelper.INSTANCE.setScaleOnTouch(holder.itemView, onclick = {
+            onItemClick(gameMode)
+        })
     }
 
     override fun getItemCount(): Int = gameModes.size

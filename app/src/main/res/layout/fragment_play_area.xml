@@ -46,7 +46,7 @@
 
             <com.keylogic.mindi.Custom.IconTextConstraintLayout
                 android:id="@+id/bit_price_cons"
-                android:layout_width="@dimen/_110sdp"
+                android:layout_width="@dimen/_100sdp"
                 android:layout_height="@dimen/_28sdp"
                 app:cViewHeight="@dimen/_28sdp"
                 android:paddingHorizontal="@dimen/_6sdp"
@@ -67,6 +67,27 @@
                 android:src="@drawable/table_0"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <RelativeLayout
+            android:id="@+id/programmatically_xml_relative"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <include
+                android:id="@+id/left_hand_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:isTopSide="false"
+                layout="@layout/left_hands_indicator_layout"/>
+
+            <include
+                android:id="@+id/right_hand_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:isTopSide="true"
+                layout="@layout/right_hands_indicator_layout"/>
+
+        </RelativeLayout>
 
         <RelativeLayout
             android:id="@+id/play_area_relative"

@@ -10,6 +10,8 @@
     <color name="black_transparent_75">#BF000000</color>
     <color name="setting_option_icon_bg">#012738</color>
 
+    <color name="chip_store_price_txt">#012738</color>
+
     <color name="bg_img_fg">#4D000000</color>
 
     <color name="border_start">#02B3E0</color>
@@ -36,6 +38,11 @@
 
     <color name="bet_price_start">#012738</color>
     <color name="bet_price_end">#046F9E</color>
+
+    <color name="counter_txt_border">#02BBE9</color>
+
+    <color name="red_team">#FF0204</color>
+    <color name="green_team">#1DF107</color>
 
     <color name="red_selected_start">#FF4E85</color>
     <color name="red_selected_end">#6E092D</color>
@@ -102,5 +109,14 @@
     <color name="textColorPrimary">#FFFFFFFF</color>
 
     <color name="selected_profile_stroke">#FED915</color>
+
+    <color name="disable_cards">#CB000000</color>
+    <color name="selected_cards">#32F9A825</color>
+    <color name="trump_cards">#32388D00</color>
+
+    <color name="player_team">#000E6D</color>
+    <color name="cpu_team">#670000</color>
+
+    <color name="message_txt_bg">#B2000000</color>
 
 </resources>

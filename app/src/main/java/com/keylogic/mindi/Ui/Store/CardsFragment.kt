@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
-import com.keylogic.mindi.Adapters.CardBackAdapter
+import com.keylogic.mindi.Adapters.StoreAdapter
 import com.keylogic.mindi.Dialogs.BuyStoreItemDialogFragment
 import com.keylogic.mindi.Enum.VIPStore
 import com.keylogic.mindi.Helper.VIPStoreHelper
@@ -19,6 +19,8 @@ class CardsFragment : Fragment() {
     private var _binding: FragmentCardsBinding? = null
     private val binding get() = _binding!!
     private val viewModel: CardBackViewModel by viewModels()
+    private lateinit var cardsAdapter: StoreAdapter
+    private val currTab = VIPStore.CARDS
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,15 +28,57 @@ class CardsFragment : Fragment() {
     ): View {
         _binding = FragmentCardsBinding.inflate(inflater, container, false)
 
-        viewModel.cardBacks.observe(viewLifecycleOwner) { cardBackList ->
-            val adapter = CardBackAdapter(requireContext(), cardBackList, onItemClick = { position ->
-                BuyStoreItemDialogFragment.show(requireActivity(), VIPStore.CARDS.tabIndex, position)
-            })
-            binding.cardBackRecycler.adapter = adapter
-            binding.cardBackRecycler.layoutManager = GridLayoutManager(requireContext(), 5)
+        setupFragmentResultListener()
+
+        cardsAdapter = StoreAdapter(
+            requireContext(),
+            currTab.tabIndex,
+            emptyList(),
+            onItemClick = { position ->
+                val cardsList = viewModel.cardBacks.value ?: return@StoreAdapter
+                if (position !in cardsList.indices) return@StoreAdapter
+
+                if (cardsList[position].purchaseEndDate == 0L) {
+                    BuyStoreItemDialogFragment.show(
+                        requireActivity(),
+                        childFragmentManager,
+                        currTab.tabIndex,
+                        position
+                    )
+                } else {
+                    VIPStoreHelper.INSTANCE.buyOrSelectStoreItem(
+                        context = requireContext(),
+                        isBuyItem = false,
+                        tabIndex = currTab.tabIndex,
+                        itemIndex = position,
+                        forWeek = false
+                    )
+                    cardsAdapter.notifyItemChanged(position)
+                }
+            }
+        )
+
+        binding.cardBackRecycler.adapter = cardsAdapter
+        binding.cardBackRecycler.layoutManager = GridLayoutManager(requireContext(), 5)
+
+        viewModel.cardBacks.observe(viewLifecycleOwner) { cardsList ->
+            cardsAdapter.updateList(cardsList)
         }
 
         return binding.root
+    }
+
+    private fun setupFragmentResultListener() {
+        childFragmentManager.setFragmentResultListener(
+            resources.getString(currTab.tabName),
+            viewLifecycleOwner
+        ) { _, bundle ->
+            val isPurchased = bundle.getBoolean(BuyStoreItemDialogFragment.KEY_IS_ITEM_PURCHASED, false)
+            val index = bundle.getInt(BuyStoreItemDialogFragment.KEY_ITEM_INDEX, -1)
+            if (isPurchased && index >= 0) {
+                viewModel.updateCardBacks()
+            }
+        }
     }
 
     override fun onDestroyView() {

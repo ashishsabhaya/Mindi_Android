@@ -14,6 +14,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.keylogic.mindi.Adapters.ViewPagerAdapter
 import com.keylogic.mindi.Custom.SelectionConstraintLayout
 import com.keylogic.mindi.Custom.StrokeTextView
+import com.keylogic.mindi.Enum.DeviceType
 import com.keylogic.mindi.Enum.VIPStore
 import com.keylogic.mindi.Helper.CommonHelper
 import com.keylogic.mindi.R
@@ -33,11 +34,16 @@ class VipStoreFragment : Fragment() {
     ): View? {
         _binding = FragmentVipStoreBinding.inflate(layoutInflater, container,false)
 
-        binding.cancelCons.setOnClickListener {
+        CommonHelper.INSTANCE.setScaleOnTouch(binding.topTitleInclude.cancelCons, onclick = {
             findNavController().popBackStack()
-        }
+        })
 
-        binding.chipCountTxt.setText(CommonHelper.INSTANCE.getTotalChip())
+        CommonHelper.INSTANCE.setScaleOnTouch(binding.topTitleInclude.chipCons, onclick = {
+            findNavController().navigate(R.id.action_vipStoreFragment_to_chipStoreFragment)
+        })
+
+        binding.topTitleInclude.titleTxt.setText(resources.getString(R.string.vip_store))
+        binding.topTitleInclude.chipCountTxt.setText(CommonHelper.INSTANCE.getTotalChip())
 
         val adapter = ViewPagerAdapter(requireActivity())
         adapter.addFragment(resources.getString(VIPStore.AVATAR.tabName),AvatarFragment())
@@ -53,9 +59,12 @@ class VipStoreFragment : Fragment() {
                 LayoutInflater.from(requireContext()).inflate(R.layout.tab_item_layout, null)
             val tabNameTxt = tabView.findViewById<StrokeTextView>(R.id.tab_item_name_txt)
             tabNameTxt.text = adapter.getItemName(position)
+            val dimen =
+                if (CommonHelper.deviceType == DeviceType.NORMAL) com.intuit.sdp.R.dimen._30sdp
+                else com.intuit.sdp.R.dimen._24sdp
             val layoutParams = LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
-                resources.getDimensionPixelSize(com.intuit.sdp.R.dimen._32sdp)
+                resources.getDimensionPixelSize(dimen)
             )
             tabView.layoutParams = layoutParams
             tab.customView = tabView
@@ -89,5 +98,9 @@ class VipStoreFragment : Fragment() {
         return binding.root
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 
 }

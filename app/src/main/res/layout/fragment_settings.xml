@@ -22,61 +22,14 @@
         android:paddingHorizontal="@dimen/_10sdp"
         android:paddingTop="@dimen/_8sdp">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/top_title_cons"
+        <include
+            android:id="@+id/top_title_include"
+            layout="@layout/top_title_layout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_height="@dimen/_42sdp"
+            app:layout_constraintEnd_toStartOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <com.keylogic.mindi.Custom.BackgroundConstraintLayout
-                android:id="@+id/cancel_cons"
-                android:layout_width="@dimen/_34sdp"
-                android:layout_height="@dimen/_34sdp"
-                app:cornerRadius="@dimen/_6sdp"
-                app:customHeight="@dimen/_34sdp"
-                app:isPositive="false"
-                app:layout_constraintBottom_toBottomOf="@+id/title_cons"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/title_cons"
-                app:strokeWidth="@dimen/_1sdp">
-
-                <ImageView
-                    android:id="@+id/cancel_img"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:padding="@dimen/_6sdp"
-                    android:src="@drawable/ic_cancel" />
-
-            </com.keylogic.mindi.Custom.BackgroundConstraintLayout>
-
-            <com.keylogic.mindi.Custom.TitleConstraintLayout
-                android:id="@+id/title_cons"
-                android:layout_width="@dimen/_300sdp"
-                android:layout_height="@dimen/_40sdp"
-                app:isTitleStrokeEnabled="true"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/cancel_cons"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:titleHeight="@dimen/_40sdp">
-
-                <com.keylogic.mindi.Custom.StrokeTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:text="@string/settings"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_20ssp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-            </com.keylogic.mindi.Custom.TitleConstraintLayout>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <com.keylogic.mindi.Custom.DialogBackgroundCard
             android:layout_width="match_parent"
@@ -85,7 +38,7 @@
             android:layout_marginHorizontal="@dimen/_30sdp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/top_title_cons"
+            app:layout_constraintTop_toBottomOf="@id/top_title_include"
             app:layout_constraintBottom_toBottomOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -106,6 +59,7 @@
                     app:layout_constraintTop_toTopOf="parent">
 
                     <com.keylogic.mindi.Custom.SelectionConstraintLayout
+                        android:id="@+id/music_cons"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
@@ -172,6 +126,7 @@
                     </com.keylogic.mindi.Custom.SelectionConstraintLayout>
 
                     <com.keylogic.mindi.Custom.SelectionConstraintLayout
+                        android:id="@+id/sound_cons"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
@@ -238,6 +193,7 @@
                     </com.keylogic.mindi.Custom.SelectionConstraintLayout>
 
                     <com.keylogic.mindi.Custom.SelectionConstraintLayout
+                        android:id="@+id/vibration_cons"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
@@ -317,6 +273,7 @@
                     app:layout_constraintTop_toBottomOf="@id/option_linear1">
 
                     <com.keylogic.mindi.Custom.SelectionConstraintLayout
+                        android:id="@+id/feedback_cons"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
@@ -370,6 +327,7 @@
                     </com.keylogic.mindi.Custom.SelectionConstraintLayout>
 
                     <com.keylogic.mindi.Custom.SelectionConstraintLayout
+                        android:id="@+id/rate_us_cons"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
@@ -423,6 +381,7 @@
                     </com.keylogic.mindi.Custom.SelectionConstraintLayout>
 
                     <com.keylogic.mindi.Custom.SelectionConstraintLayout
+                        android:id="@+id/how_to_play_cons"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"

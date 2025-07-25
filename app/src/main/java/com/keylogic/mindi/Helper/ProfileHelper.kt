@@ -7,17 +7,21 @@ class ProfileHelper {
     companion object {
         val INSTANCE = ProfileHelper()
 
+        var freeChipCount = 500L
         var totalChips = 1_500L
         var defaultProfileId = 0
+        var defaultTableId = 0
+        var defaultBackgroundId = 0
+        var defaultCardsId = 0
         var profileName = ""
         var profileUID = ""
         var gameWin = 0
         var gameLost = 0
         var gamePlayed = 0
         var profileId = -1
-        var tableId = 0
-        var cardBackId = 0
-        var backgroundId = 0
+        var tableId = -1
+        var cardBackId = -1
+        var backgroundId = -1
     }
 
     fun getDefaultProfileResource(context: Context, position: Int): Int {
@@ -27,7 +31,7 @@ class ProfileHelper {
     }
 
     fun getVIPProfileResource(context: Context, position: Int): Int {
-        val defaultProfileName = getVIPProfilePrefix() + position
+        val defaultProfileName = VIPStoreHelper.INSTANCE.getAvatarPreFix() + position
         val resource = getProfileImageByName(context, defaultProfileName)
         return resource
     }
@@ -54,10 +58,6 @@ class ProfileHelper {
 
     fun getDefaultProfilePrefix(): String {
         return "dp_"
-    }
-
-    fun getVIPProfilePrefix(): String {
-        return "vip_avatar_"
     }
 
     fun generateUniqueKey(): String {

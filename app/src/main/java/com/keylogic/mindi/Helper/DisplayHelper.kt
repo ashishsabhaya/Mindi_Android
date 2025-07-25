@@ -4,10 +4,13 @@ import android.content.Context
 import android.os.Build
 import android.util.DisplayMetrics
 import android.view.WindowManager
+import com.keylogic.mindi.Enum.DeviceType
 
 class DisplayHelper {
     companion object {
         val INSTANCE = DisplayHelper()
+        var cardImgW = 221
+        var cardImgH = 306
         var screenWidth = 0
         var screenHeight = 0
 
@@ -17,7 +20,7 @@ class DisplayHelper {
         var profileWidth = 0
         var profileHeight = 0
 
-        var totalProfileDivision = 5f
+        var totalProfileDivision = 0f
     }
 
     fun calculateScreenWH(context: Context) {
@@ -47,8 +50,9 @@ class DisplayHelper {
     }
 
     private fun calculateProfileWH() {
-        profileHeight = (screenHeight / totalProfileDivision).toInt()
-        profileWidth = profileHeight
+        totalProfileDivision = if (CommonHelper.deviceType == DeviceType.NORMAL) 11f else 9.5f
+        profileWidth = (screenWidth / totalProfileDivision).toInt()
+        profileHeight = profileWidth
     }
 
 }

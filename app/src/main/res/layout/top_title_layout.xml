@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/top_title_cons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.keylogic.mindi.Custom.BackgroundConstraintLayout
+            android:id="@+id/chip_cons"
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="@dimen/_36sdp"
+            app:customHeight="@dimen/_36sdp"
+            android:layout_marginHorizontal="@dimen/_8sdp"
+            android:paddingHorizontal="@dimen/_6sdp"
+            app:cornerRadius="@dimen/_6sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/title_cons"
+            app:layout_constraintTop_toTopOf="@+id/title_cons"
+            app:strokeWidth="@dimen/_1sdp">
+
+            <ImageView
+                android:id="@+id/chip_card"
+                android:layout_width="@dimen/_16sdp"
+                android:layout_height="@dimen/_16sdp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:src="@drawable/ic_chip" />
+
+            <com.keylogic.mindi.Custom.StrokeTextView
+                android:id="@+id/chip_count_txt"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_2sdp"
+                android:fontFamily="@font/poetsen_one_regular"
+                android:gravity="center_vertical"
+                android:singleLine="true"
+                app:txtStrokeEnabled="false"
+                android:text="@string/guest_chip"
+                android:textColor="@color/textColorPrimary"
+                android:textSize="@dimen/_14ssp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/chip_add_img"
+                app:layout_constraintStart_toEndOf="@+id/chip_card"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/chip_add_img"
+                android:layout_width="@dimen/_16sdp"
+                android:layout_height="@dimen/_16sdp"
+                android:src="@drawable/ic_add"
+                android:padding="@dimen/_2sdp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </com.keylogic.mindi.Custom.BackgroundConstraintLayout>
+
+        <com.keylogic.mindi.Custom.BackgroundConstraintLayout
+            android:id="@+id/cancel_cons"
+            android:layout_width="@dimen/_34sdp"
+            android:layout_height="@dimen/_34sdp"
+            app:cornerRadius="@dimen/_6sdp"
+            app:customHeight="@dimen/_34sdp"
+            app:isPositive="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/title_cons"
+            app:layout_constraintTop_toTopOf="@+id/title_cons"
+            app:strokeWidth="@dimen/_1sdp">
+
+            <ImageView
+                android:id="@+id/cancel_img"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="@dimen/_6sdp"
+                android:src="@drawable/ic_cancel" />
+
+        </com.keylogic.mindi.Custom.BackgroundConstraintLayout>
+
+        <com.keylogic.mindi.Custom.TitleConstraintLayout
+            android:id="@+id/title_cons"
+            android:layout_width="@dimen/_300sdp"
+            android:layout_height="@dimen/_40sdp"
+            app:isTitleStrokeEnabled="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/cancel_cons"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:titleHeight="@dimen/_40sdp">
+
+            <com.keylogic.mindi.Custom.StrokeTextView
+                android:id="@+id/title_txt"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_20ssp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </com.keylogic.mindi.Custom.TitleConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

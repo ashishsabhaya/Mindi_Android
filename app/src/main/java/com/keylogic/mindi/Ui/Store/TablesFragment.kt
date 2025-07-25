@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.PagerSnapHelper
-import com.keylogic.mindi.Adapters.TableAdapter
+import com.keylogic.mindi.Adapters.StoreAdapter
 import com.keylogic.mindi.Dialogs.BuyStoreItemDialogFragment
 import com.keylogic.mindi.Enum.VIPStore
 import com.keylogic.mindi.Helper.VIPStoreHelper
@@ -21,26 +21,69 @@ class TablesFragment : Fragment() {
     private var _binding: FragmentTablesBinding? = null
     private val binding get() = _binding!!
     private val viewModel: TableViewModel by viewModels()
+    private lateinit var tableAdapter: StoreAdapter
+    private val currTab = VIPStore.TABLES
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentTablesBinding.inflate(inflater, container, false)
+        setupFragmentResultListener()
+
+        tableAdapter = StoreAdapter(
+            requireContext(),
+            currTab.tabIndex,
+            emptyList(),
+            onItemClick = { position ->
+                val tableList = viewModel.tables.value ?: return@StoreAdapter
+                if (position !in tableList.indices) return@StoreAdapter
+
+                if (tableList[position].purchaseEndDate == 0L) {
+                    BuyStoreItemDialogFragment.show(
+                        requireActivity(),
+                        childFragmentManager,
+                        currTab.tabIndex,
+                        position
+                    )
+                } else {
+                    VIPStoreHelper.INSTANCE.buyOrSelectStoreItem(
+                        context = requireContext(),
+                        isBuyItem = false,
+                        tabIndex = currTab.tabIndex,
+                        itemIndex = position,
+                        forWeek = false
+                    )
+                    tableAdapter.notifyItemChanged(position)
+                }
+            }
+        )
+
+        binding.tableRecycler.adapter = tableAdapter
+        val layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        binding.tableRecycler.layoutManager = layoutManager
+
+        val pagerSnapHelper = PagerSnapHelper()
+        pagerSnapHelper.attachToRecyclerView(binding.tableRecycler)
 
         viewModel.tables.observe(viewLifecycleOwner) { tableList ->
-            val adapter = TableAdapter(requireContext(), tableList, onItemClick = { position ->
-                BuyStoreItemDialogFragment.show(requireActivity(), VIPStore.TABLES.tabIndex, position)
-            })
-            binding.tableRecycler.adapter = adapter
-            val layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-            binding.tableRecycler.layoutManager = layoutManager
-
-            val pagerSnapHelper = PagerSnapHelper()
-            pagerSnapHelper.attachToRecyclerView(binding.tableRecycler)
+            tableAdapter.updateList(tableList)
         }
 
         return binding.root
+    }
+
+    private fun setupFragmentResultListener() {
+        childFragmentManager.setFragmentResultListener(
+            resources.getString(currTab.tabName),
+            viewLifecycleOwner
+        ) { _, bundle ->
+            val isPurchased = bundle.getBoolean(BuyStoreItemDialogFragment.KEY_IS_ITEM_PURCHASED, false)
+            val index = bundle.getInt(BuyStoreItemDialogFragment.KEY_ITEM_INDEX, -1)
+            if (isPurchased && index >= 0) {
+                viewModel.updateTables()
+            }
+        }
     }
 
     override fun onDestroyView() {
