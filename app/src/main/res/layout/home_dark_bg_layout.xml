@@ -4,4 +4,5 @@
     android:layout_height="match_parent"
     android:src="@drawable/home_bg"
     android:scaleType="centerCrop"
-    android:foreground="@color/bg_img_fg"/>
+    android:foreground="@color/bg_img_fg"
+    android:contentDescription="@string/image_content_description"/>

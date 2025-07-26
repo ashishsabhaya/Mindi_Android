@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.navigation.safe.args)
+    id("kotlin-kapt")
 }
 
 android {
@@ -57,5 +58,15 @@ dependencies {
 
     implementation(libs.sdp.android)
     implementation(libs.ssp.android)
+
+    // Room components
+    implementation(libs.androidx.room.runtime)
+    //noinspection KaptUsageInsteadOfKsp
+    kapt(libs.androidx.room.compiler) // for annotation processing
+
+    // Kotlin Coroutines support for Room
+    implementation(libs.androidx.room.ktx)
+
+    implementation(libs.gson)
 
 }

@@ -69,5 +69,7 @@
     <string name="restore">Restore</string>
     <string name="chip_store">Chip Store</string>
 
+    <string name="image_content_description">Image</string>
+
 
 </resources>

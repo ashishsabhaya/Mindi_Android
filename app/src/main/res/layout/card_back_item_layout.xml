@@ -29,11 +29,11 @@
                 android:id="@+id/vip_store_item_img"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@drawable/cards_0" />
+                android:contentDescription="@string/image_content_description" />
 
         </com.google.android.material.card.MaterialCardView>
 
-        <com.keylogic.mindi.Custom.IconTextConstraintLayout
+        <com.keylogic.mindi.custom.IconTextConstraintLayout
             android:id="@+id/vip_store_item_info_cons"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_30sdp"

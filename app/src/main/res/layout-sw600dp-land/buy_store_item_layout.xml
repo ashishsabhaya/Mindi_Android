@@ -13,7 +13,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <com.keylogic.mindi.Custom.BackgroundConstraintLayout
+        <com.keylogic.mindi.custom.BackgroundConstraintLayout
             android:id="@+id/title_layout"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/_20sdp"
@@ -24,7 +24,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <com.keylogic.mindi.Custom.StrokeTextView
+            <com.keylogic.mindi.custom.StrokeTextView
                 android:id="@+id/title_txt"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_18sdp"
@@ -41,9 +41,9 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:txtStrokeEnabled="false" />
 
-        </com.keylogic.mindi.Custom.BackgroundConstraintLayout>
+        </com.keylogic.mindi.custom.BackgroundConstraintLayout>
 
-        <com.keylogic.mindi.Custom.BackgroundConstraintLayout
+        <com.keylogic.mindi.custom.BackgroundConstraintLayout
             android:id="@+id/cancel_cons"
             android:layout_width="@dimen/_18sdp"
             android:layout_height="@dimen/_18sdp"
@@ -60,11 +60,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:padding="@dimen/_4sdp"
-                android:src="@drawable/ic_cancel" />
+                android:src="@drawable/ic_cancel"
+                android:contentDescription="@string/image_content_description"/>
 
-        </com.keylogic.mindi.Custom.BackgroundConstraintLayout>
+        </com.keylogic.mindi.custom.BackgroundConstraintLayout>
 
-        <com.keylogic.mindi.Custom.DialogBackgroundCard
+        <com.keylogic.mindi.custom.DialogBackgroundCard
             android:id="@+id/center_background_cons"
             android:layout_width="0dp"
             android:layout_height="@dimen/_140sdp"
@@ -94,7 +95,7 @@
                     app:layout_constraintGuide_percent="0.5"
                     app:layout_constraintStart_toStartOf="parent" />
 
-                <com.keylogic.mindi.Custom.SeparationView
+                <com.keylogic.mindi.custom.SeparationView
                     android:id="@+id/divider_view"
                     android:layout_width="@dimen/_1sdp"
                     android:layout_height="match_parent"
@@ -117,11 +118,12 @@
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/_80sdp"
                         android:src="@drawable/free_today_1"
+                        android:contentDescription="@string/image_content_description"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                    <com.keylogic.mindi.Custom.BackgroundConstraintLayout
+                    <com.keylogic.mindi.custom.BackgroundConstraintLayout
                         android:id="@+id/today_watch_btn_cons"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/_16ssp"
@@ -133,7 +135,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/today_ads_img">
 
-                        <com.keylogic.mindi.Custom.StrokeTextView
+                        <com.keylogic.mindi.custom.StrokeTextView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:gravity="center"
@@ -142,7 +144,7 @@
                             android:textSize="@dimen/_8ssp"
                             app:txtStrokeEnabled="false" />
 
-                    </com.keylogic.mindi.Custom.BackgroundConstraintLayout>
+                    </com.keylogic.mindi.custom.BackgroundConstraintLayout>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -160,6 +162,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/_80sdp"
                         android:src="@drawable/free_week_1"
+                        android:contentDescription="@string/image_content_description"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -177,11 +180,12 @@
                             android:layout_width="@dimen/_10sdp"
                             android:layout_height="@dimen/_10sdp"
                             android:src="@drawable/ic_chip"
+                            android:contentDescription="@string/image_content_description"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
-                        <com.keylogic.mindi.Custom.StrokeTextView
+                        <com.keylogic.mindi.custom.StrokeTextView
                             android:id="@+id/week_chip_count_txt"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
@@ -198,7 +202,7 @@
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
-                    <com.keylogic.mindi.Custom.BackgroundConstraintLayout
+                    <com.keylogic.mindi.custom.BackgroundConstraintLayout
                         android:id="@+id/week_buy_btn_cons"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/_16ssp"
@@ -210,7 +214,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/week_ads_img">
 
-                        <com.keylogic.mindi.Custom.StrokeTextView
+                        <com.keylogic.mindi.custom.StrokeTextView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:gravity="center"
@@ -219,13 +223,13 @@
                             android:textSize="@dimen/_8ssp"
                             app:txtStrokeEnabled="false" />
 
-                    </com.keylogic.mindi.Custom.BackgroundConstraintLayout>
+                    </com.keylogic.mindi.custom.BackgroundConstraintLayout>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </com.keylogic.mindi.Custom.DialogBackgroundCard>
+        </com.keylogic.mindi.custom.DialogBackgroundCard>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

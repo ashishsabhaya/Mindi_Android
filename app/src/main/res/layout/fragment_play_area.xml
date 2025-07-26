@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".Ui.Offline.PlayAreaFragment">
+    tools:context=".ui.offline.PlayAreaFragment">
 
     <include
         android:id="@+id/include"
@@ -26,7 +26,7 @@
             android:paddingHorizontal="@dimen/_6sdp"
             android:paddingVertical="@dimen/_4sdp">
 
-            <com.keylogic.mindi.Custom.BackgroundConstraintLayout
+            <com.keylogic.mindi.custom.BackgroundConstraintLayout
                 android:id="@+id/cancel_cons"
                 android:layout_width="@dimen/_34sdp"
                 android:layout_height="@dimen/_34sdp"
@@ -40,11 +40,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:padding="@dimen/_6sdp"
-                    android:src="@drawable/ic_back"/>
+                    android:src="@drawable/ic_back"
+                    android:contentDescription="@string/image_content_description"/>
 
-            </com.keylogic.mindi.Custom.BackgroundConstraintLayout>
+            </com.keylogic.mindi.custom.BackgroundConstraintLayout>
 
-            <com.keylogic.mindi.Custom.IconTextConstraintLayout
+            <com.keylogic.mindi.custom.IconTextConstraintLayout
                 android:id="@+id/bit_price_cons"
                 android:layout_width="@dimen/_100sdp"
                 android:layout_height="@dimen/_28sdp"
@@ -64,7 +65,8 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@drawable/table_0"/>
+                android:src="@drawable/table_0"
+                android:contentDescription="@string/image_content_description"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

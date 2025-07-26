@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".Ui.Multiplayer.MultiplayerConfigFragment">
+    tools:context=".ui.multiplayer.MultiplayerConfigFragment">
 
     <include
         android:id="@+id/include"
@@ -39,7 +39,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <com.keylogic.mindi.Custom.BackgroundConstraintLayout
+            <com.keylogic.mindi.custom.BackgroundConstraintLayout
                 android:layout_width="@dimen/_266sdp"
                 android:layout_height="@dimen/_46sdp"
                 app:customHeight="@dimen/_46sdp"
@@ -57,7 +57,7 @@
                     android:gravity="center"
                     android:paddingVertical="@dimen/_4sdp">
 
-                    <com.keylogic.mindi.Custom.SelectionConstraintLayout
+                    <com.keylogic.mindi.custom.SelectionConstraintLayout
                         android:id="@+id/create_table_selection_cons"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -68,7 +68,7 @@
                         app:isSelected="true"
                         android:layout_weight="1">
 
-                        <com.keylogic.mindi.Custom.StrokeTextView
+                        <com.keylogic.mindi.custom.StrokeTextView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             app:txtStrokeEnabled="false"
@@ -77,9 +77,9 @@
                             android:text="@string/create_table"
                             android:textSize="@dimen/_16ssp"/>
 
-                    </com.keylogic.mindi.Custom.SelectionConstraintLayout>
+                    </com.keylogic.mindi.custom.SelectionConstraintLayout>
 
-                    <com.keylogic.mindi.Custom.SelectionConstraintLayout
+                    <com.keylogic.mindi.custom.SelectionConstraintLayout
                         android:id="@+id/join_table_selection_cons"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -89,7 +89,7 @@
                         app:isStrokeEnabled="false"
                         android:layout_weight="1">
 
-                        <com.keylogic.mindi.Custom.StrokeTextView
+                        <com.keylogic.mindi.custom.StrokeTextView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:gravity="center"
@@ -99,11 +99,11 @@
                             app:layout_constraintEnd_toEndOf="parent"
                             app:txtStrokeEnabled="false" />
 
-                    </com.keylogic.mindi.Custom.SelectionConstraintLayout>
+                    </com.keylogic.mindi.custom.SelectionConstraintLayout>
 
                 </LinearLayout>
 
-            </com.keylogic.mindi.Custom.BackgroundConstraintLayout>
+            </com.keylogic.mindi.custom.BackgroundConstraintLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -145,7 +145,7 @@
                 app:layout_constraintGuide_percent="0.85"
                 app:layout_constraintStart_toStartOf="parent" />
 
-            <com.keylogic.mindi.Custom.BackgroundConstraintLayout
+            <com.keylogic.mindi.custom.BackgroundConstraintLayout
                 android:id="@+id/enter_code_title_cons"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/_44sdp"
@@ -157,7 +157,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <com.keylogic.mindi.Custom.StrokeTextView
+                <com.keylogic.mindi.custom.StrokeTextView
                     android:id="@+id/title_txt"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -166,9 +166,9 @@
                     android:text="@string/enter_code"
                     android:textSize="@dimen/_14sdp"/>
 
-            </com.keylogic.mindi.Custom.BackgroundConstraintLayout>
+            </com.keylogic.mindi.custom.BackgroundConstraintLayout>
 
-            <com.keylogic.mindi.Custom.DialogBackgroundCard
+            <com.keylogic.mindi.custom.DialogBackgroundCard
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginTop="@dimen/_minus22sdp"
@@ -178,7 +178,7 @@
                 app:layout_constraintEnd_toStartOf="@id/guideline2"
                 app:layout_constraintBottom_toBottomOf="parent">
 
-                <com.keylogic.mindi.Custom.SelectionConstraintLayout
+                <com.keylogic.mindi.custom.SelectionConstraintLayout
                     android:id="@+id/enter_code_cons"
                     android:layout_width="@dimen/_200sdp"
                     android:layout_height="@dimen/_36sdp"
@@ -202,6 +202,7 @@
                             android:layout_width="@dimen/_24sdp"
                             android:layout_height="@dimen/_24sdp"
                             android:src="@drawable/ic_edit"
+                            android:contentDescription="@string/image_content_description"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -215,7 +216,7 @@
                             app:layout_constraintStart_toEndOf="@+id/edit_img"
                             app:layout_constraintEnd_toEndOf="parent">
 
-                            <com.keylogic.mindi.Custom.StrokeTextView
+                            <com.keylogic.mindi.custom.StrokeTextView
                                 android:id="@+id/code_txt"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
@@ -266,9 +267,9 @@
 
                     </LinearLayout>
 
-                </com.keylogic.mindi.Custom.SelectionConstraintLayout>
+                </com.keylogic.mindi.custom.SelectionConstraintLayout>
 
-                <com.keylogic.mindi.Custom.StrokeTextView
+                <com.keylogic.mindi.custom.StrokeTextView
                     android:id="@+id/strokeTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -282,7 +283,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"/>
 
-                <com.keylogic.mindi.Custom.BackgroundConstraintLayout
+                <com.keylogic.mindi.custom.BackgroundConstraintLayout
                     android:id="@+id/join_btn_cons"
                     android:layout_width="@dimen/_110sdp"
                     android:layout_height="@dimen/_38sdp"
@@ -293,7 +294,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/strokeTextView">
 
-                    <com.keylogic.mindi.Custom.StrokeTextView
+                    <com.keylogic.mindi.custom.StrokeTextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:padding="@dimen/_2sdp"
@@ -306,9 +307,9 @@
                         android:text="@string/join"
                         android:textSize="@dimen/_16ssp" />
 
-                </com.keylogic.mindi.Custom.BackgroundConstraintLayout>
+                </com.keylogic.mindi.custom.BackgroundConstraintLayout>
 
-            </com.keylogic.mindi.Custom.DialogBackgroundCard>
+            </com.keylogic.mindi.custom.DialogBackgroundCard>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -28,16 +28,17 @@
                 android:id="@+id/vip_store_item_img"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@drawable/free_1" />
+                android:contentDescription="@string/image_content_description"/>
 
         </com.google.android.material.card.MaterialCardView>
 
-        <com.keylogic.mindi.Custom.IconTextConstraintLayout
+        <com.keylogic.mindi.custom.IconTextConstraintLayout
             android:id="@+id/vip_store_item_info_cons"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_30sdp"
             app:cViewHeight="@dimen/_30sdp"
-            android:paddingHorizontal="@dimen/_6sdp"
+            android:paddingStart="@dimen/_6sdp"
+            android:paddingEnd="@dimen/_6sdp"
             app:cIconResource="@drawable/ic_chip"
             app:cLabelText="@string/guest"
             app:cIconSize="@dimen/_14sdp"

@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".Ui.ProfileSelectionFragment">
+    tools:context=".ui.ProfileSelectionFragment">
 
     <include
         android:id="@+id/include"
@@ -46,11 +46,12 @@
                     android:id="@+id/selected_profile_img"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:src="@drawable/free_1" />
+                    android:src="@drawable/free_1"
+                    android:contentDescription="@string/image_content_description"/>
 
             </com.google.android.material.card.MaterialCardView>
 
-            <com.keylogic.mindi.Custom.SelectionConstraintLayout
+            <com.keylogic.mindi.custom.SelectionConstraintLayout
                 android:id="@+id/profile_name_cons"
                 android:layout_width="@dimen/_180sdp"
                 android:layout_height="@dimen/_36sdp"
@@ -75,6 +76,7 @@
                         android:layout_width="@dimen/_24sdp"
                         android:layout_height="@dimen/_24sdp"
                         android:src="@drawable/ic_edit"
+                        android:contentDescription="@string/image_content_description"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -88,7 +90,7 @@
                         app:layout_constraintStart_toEndOf="@+id/edit_img"
                         app:layout_constraintEnd_toEndOf="parent">
 
-                        <com.keylogic.mindi.Custom.StrokeTextView
+                        <com.keylogic.mindi.custom.StrokeTextView
                             android:id="@+id/profile_name_txt"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
@@ -139,9 +141,9 @@
 
                 </LinearLayout>
 
-            </com.keylogic.mindi.Custom.SelectionConstraintLayout>
+            </com.keylogic.mindi.custom.SelectionConstraintLayout>
 
-            <com.keylogic.mindi.Custom.BackgroundConstraintLayout
+            <com.keylogic.mindi.custom.BackgroundConstraintLayout
                 android:id="@+id/submit_cons"
                 android:layout_width="@dimen/_100sdp"
                 android:layout_height="@dimen/_36sdp"
@@ -152,7 +154,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/profile_name_cons">
 
-                <com.keylogic.mindi.Custom.StrokeTextView
+                <com.keylogic.mindi.custom.StrokeTextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:padding="@dimen/_2sdp"
@@ -165,7 +167,7 @@
                     android:text="@string/submit"
                     android:textSize="@dimen/_14ssp" />
 
-            </com.keylogic.mindi.Custom.BackgroundConstraintLayout>
+            </com.keylogic.mindi.custom.BackgroundConstraintLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -179,7 +181,7 @@
             app:layout_constraintGuide_percent="0.45"
             app:layout_constraintStart_toStartOf="parent" />
 
-        <com.keylogic.mindi.Custom.SeparationView
+        <com.keylogic.mindi.custom.SeparationView
             android:id="@+id/divider_view"
             android:layout_width="@dimen/_1sdp"
             android:layout_height="match_parent"
@@ -188,7 +190,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/guideline"/>
 
-        <com.keylogic.mindi.Custom.DialogBackgroundCard
+        <com.keylogic.mindi.custom.DialogBackgroundCard
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginVertical="@dimen/_30sdp"
@@ -203,7 +205,7 @@
                 android:layout_height="match_parent"
                 android:layout_margin="@dimen/_4sdp"/>
 
-        </com.keylogic.mindi.Custom.DialogBackgroundCard>
+        </com.keylogic.mindi.custom.DialogBackgroundCard>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

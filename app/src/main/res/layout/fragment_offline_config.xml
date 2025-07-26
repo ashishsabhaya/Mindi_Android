@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".Ui.Offline.OfflineConfigFragment">
+    tools:context=".ui.offline.OfflineConfigFragment">
 
     <include
         android:id="@+id/include"
@@ -22,7 +22,7 @@
         android:paddingHorizontal="@dimen/_10sdp"
         android:paddingVertical="@dimen/_8sdp">
 
-        <com.keylogic.mindi.Custom.BackgroundConstraintLayout
+        <com.keylogic.mindi.custom.BackgroundConstraintLayout
             android:id="@+id/cancel_cons"
             android:layout_width="@dimen/_34sdp"
             android:layout_height="@dimen/_34sdp"
@@ -40,7 +40,7 @@
                 android:padding="@dimen/_6sdp"
                 android:src="@drawable/ic_cancel"/>
 
-        </com.keylogic.mindi.Custom.BackgroundConstraintLayout>
+        </com.keylogic.mindi.custom.BackgroundConstraintLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/deck_type_recycler"

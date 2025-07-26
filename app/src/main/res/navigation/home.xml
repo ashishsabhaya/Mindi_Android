@@ -6,85 +6,137 @@
     app:startDestination="@id/splashFragment">
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.keylogic.mindi.Ui.HomeFragment"
+        android:name="com.keylogic.mindi.ui.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
             android:id="@+id/action_homeFragment_to_offlineConfigFragment"
-            app:destination="@id/offlineConfigFragment" />
+            app:destination="@id/offlineConfigFragment"
+            app:enterAnim="@anim/right_in"
+            app:exitAnim="@anim/no_anim"
+            app:popEnterAnim="@anim/no_anim"
+            app:popExitAnim="@anim/right_out" />
         <action
             android:id="@+id/action_homeFragment_to_onlineConfigFragment"
-            app:destination="@id/onlineConfigFragment" />
+            app:destination="@id/onlineConfigFragment"
+            app:enterAnim="@anim/right_in"
+            app:exitAnim="@anim/no_anim"
+            app:popEnterAnim="@anim/no_anim"
+            app:popExitAnim="@anim/right_out" />
         <action
             android:id="@+id/action_homeFragment_to_multiplayerConfigFragment"
-            app:destination="@id/multiplayerConfigFragment" />
-        <action
-            android:id="@+id/action_homeFragment_to_vipStoreFragment"
-            app:destination="@id/vipStoreFragment" />
-        <action
-            android:id="@+id/action_homeFragment_to_profileFragment"
-            app:destination="@id/profileFragment" />
+            app:destination="@id/multiplayerConfigFragment"
+            app:enterAnim="@anim/right_in"
+            app:exitAnim="@anim/no_anim"
+            app:popEnterAnim="@anim/no_anim"
+            app:popExitAnim="@anim/right_out" />
         <action
             android:id="@+id/action_homeFragment_to_settingsFragment"
-            app:destination="@id/settingsFragment" />
+            app:destination="@id/settingsFragment"
+            app:enterAnim="@anim/right_in"
+            app:exitAnim="@anim/no_anim"
+            app:popEnterAnim="@anim/no_anim"
+            app:popExitAnim="@anim/right_out"  />
+        <action
+            android:id="@+id/action_homeFragment_to_vipStoreFragment"
+            app:destination="@id/vipStoreFragment"
+            app:enterAnim="@anim/bottom_in"
+            app:exitAnim="@anim/no_anim"
+            app:popEnterAnim="@anim/no_anim"
+            app:popExitAnim="@anim/bottom_out" />
+        <action
+            android:id="@+id/action_homeFragment_to_profileFragment"
+            app:destination="@id/profileFragment"
+            app:enterAnim="@anim/left_in"
+            app:exitAnim="@anim/no_anim"
+            app:popEnterAnim="@anim/no_anim"
+            app:popExitAnim="@anim/left_out" />
         <action
             android:id="@+id/action_homeFragment_to_chipStoreFragment"
-            app:destination="@id/chipStoreFragment" />
+            app:destination="@id/chipStoreFragment"
+            app:enterAnim="@anim/left_in"
+            app:exitAnim="@anim/no_anim"
+            app:popEnterAnim="@anim/no_anim"
+            app:popExitAnim="@anim/left_out" />
     </fragment>
     <fragment
         android:id="@+id/offlineConfigFragment"
-        android:name="com.keylogic.mindi.Ui.Offline.OfflineConfigFragment"
+        android:name="com.keylogic.mindi.ui.offline.OfflineConfigFragment"
         android:label="fragment_offline_config"
         tools:layout="@layout/fragment_offline_config" >
         <action
             android:id="@+id/action_offlineConfigFragment_to_tableConfigFragment"
-            app:destination="@id/tableConfigFragment" />
+            app:destination="@id/tableConfigFragment"
+            app:enterAnim="@anim/right_in"
+            app:exitAnim="@anim/no_anim"
+            app:popEnterAnim="@anim/no_anim"
+            app:popExitAnim="@anim/right_out" />
     </fragment>
     <fragment
         android:id="@+id/tableConfigFragment"
-        android:name="com.keylogic.mindi.Ui.Offline.TableConfigFragment"
+        android:name="com.keylogic.mindi.ui.offline.TableConfigFragment"
         android:label="fragment_table_config"
         tools:layout="@layout/fragment_table_config" >
         <action
             android:id="@+id/action_tableConfigFragment_to_playAreaFragment"
-            app:destination="@id/playAreaFragment" />
+            app:destination="@id/playAreaFragment"
+            app:enterAnim="@anim/right_in"
+            app:exitAnim="@anim/no_anim"
+            app:popEnterAnim="@anim/no_anim"
+            app:popExitAnim="@anim/right_out" />
 
-        <argument android:name="deckType" app:argType="com.keylogic.mindi.Enum.DeckType" />
+        <argument android:name="deckType" app:argType="com.keylogic.mindi.enums.DeckType" />
         <action
             android:id="@+id/action_tableConfigFragment_to_chipStoreFragment"
-            app:destination="@id/chipStoreFragment" />
+            app:destination="@id/chipStoreFragment"
+            app:enterAnim="@anim/left_in"
+            app:exitAnim="@anim/no_anim"
+            app:popEnterAnim="@anim/no_anim"
+            app:popExitAnim="@anim/left_out" />
     </fragment>
     <fragment
         android:id="@+id/onlineConfigFragment"
-        android:name="com.keylogic.mindi.Ui.Online.OnlineConfigFragment"
+        android:name="com.keylogic.mindi.ui.online.OnlineConfigFragment"
         android:label="fragment_online_config"
         tools:layout="@layout/fragment_online_config" >
         <action
             android:id="@+id/action_onlineConfigFragment_to_chipStoreFragment"
-            app:destination="@id/chipStoreFragment" />
+            app:destination="@id/chipStoreFragment"
+            app:enterAnim="@anim/left_in"
+            app:exitAnim="@anim/no_anim"
+            app:popEnterAnim="@anim/no_anim"
+            app:popExitAnim="@anim/left_out" />
     </fragment>
     <fragment
         android:id="@+id/multiplayerConfigFragment"
-        android:name="com.keylogic.mindi.Ui.Multiplayer.MultiplayerConfigFragment"
+        android:name="com.keylogic.mindi.ui.multiplayer.MultiplayerConfigFragment"
         android:label="fragment_multiplayer_config"
         tools:layout="@layout/fragment_multiplayer_config" >
         <action
             android:id="@+id/action_multiplayerConfigFragment_to_chipStoreFragment"
-            app:destination="@id/chipStoreFragment" />
+            app:destination="@id/chipStoreFragment"
+            app:enterAnim="@anim/left_in"
+            app:exitAnim="@anim/no_anim"
+            app:popEnterAnim="@anim/no_anim"
+            app:popExitAnim="@anim/left_out" />
     </fragment>
 
     <fragment
         android:id="@+id/vipStoreFragment"
-        android:name="com.keylogic.mindi.Ui.VipStoreFragment"
+        android:name="com.keylogic.mindi.ui.VipStoreFragment"
         android:label="fragment_vip_store"
         tools:layout="@layout/fragment_vip_store" >
         <action
             android:id="@+id/action_vipStoreFragment_to_chipStoreFragment"
-            app:destination="@id/chipStoreFragment" />
+            app:destination="@id/chipStoreFragment"
+            app:enterAnim="@anim/left_in"
+            app:exitAnim="@anim/no_anim"
+            app:popEnterAnim="@anim/no_anim"
+            app:popExitAnim="@anim/left_out" />
     </fragment>
     <fragment
         android:id="@+id/profileSelectionFragment"
-        android:name="com.keylogic.mindi.Ui.ProfileSelectionFragment"
+        android:name="com.keylogic.mindi.ui.ProfileSelectionFragment"
         android:label="fragment_profile_selection"
         tools:layout="@layout/fragment_profile_selection" >
         <action
@@ -93,47 +145,63 @@
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.keylogic.mindi.Ui.ProfileFragment"
+        android:name="com.keylogic.mindi.ui.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" >
         <action
             android:id="@+id/action_profileFragment_to_vipStoreFragment"
-            app:destination="@id/vipStoreFragment" />
+            app:destination="@id/vipStoreFragment"
+            app:enterAnim="@anim/bottom_in"
+            app:exitAnim="@anim/no_anim"
+            app:popEnterAnim="@anim/no_anim"
+            app:popExitAnim="@anim/bottom_out" />
         <action
             android:id="@+id/action_profileFragment_to_chipStoreFragment"
-            app:destination="@id/chipStoreFragment" />
+            app:destination="@id/chipStoreFragment"
+            app:enterAnim="@anim/left_in"
+            app:exitAnim="@anim/no_anim"
+            app:popEnterAnim="@anim/no_anim"
+            app:popExitAnim="@anim/left_out" />
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="com.keylogic.mindi.Ui.SettingsFragment"
+        android:name="com.keylogic.mindi.ui.SettingsFragment"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings" />
     <fragment
         android:id="@+id/chipStoreFragment"
-        android:name="com.keylogic.mindi.Ui.ChipStoreFragment"
+        android:name="com.keylogic.mindi.ui.ChipStoreFragment"
         android:label="fragment_chip_store"
         tools:layout="@layout/fragment_chip_store" />
     <fragment
         android:id="@+id/playAreaFragment"
-        android:name="com.keylogic.mindi.Ui.Offline.PlayAreaFragment"
+        android:name="com.keylogic.mindi.ui.offline.PlayAreaFragment"
         android:label="fragment_play_area"
         tools:layout="@layout/fragment_play_area">
 
-        <argument android:name="deckType" app:argType="com.keylogic.mindi.Enum.DeckType" />
+        <argument android:name="deckType" app:argType="com.keylogic.mindi.enums.DeckType" />
         <argument android:name="isHideMode" app:argType="boolean" />
         <argument android:name="totalPlayers" app:argType="integer" />
         <argument android:name="betPrice" app:argType="long" />
     </fragment>
     <fragment
         android:id="@+id/splashFragment"
-        android:name="com.keylogic.mindi.Ui.SplashFragment"
+        android:name="com.keylogic.mindi.ui.SplashFragment"
         android:label="fragment_splash"
         tools:layout="@layout/fragment_splash" >
         <action
             android:id="@+id/action_splashFragment_to_profileSelectionFragment"
-            app:destination="@id/profileSelectionFragment" />
+            app:destination="@id/profileSelectionFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
         <action
             android:id="@+id/action_splashFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
+            app:destination="@id/homeFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
     </fragment>
 </navigation>

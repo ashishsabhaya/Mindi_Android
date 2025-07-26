@@ -9,6 +9,7 @@
         android:layout_width="@dimen/_110sdp"
         android:layout_height="@dimen/_110sdp"
         android:src="@drawable/deck_1"
+        android:contentDescription="@string/image_content_description"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

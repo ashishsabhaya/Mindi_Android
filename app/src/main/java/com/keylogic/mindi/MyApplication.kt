@@ -6,8 +6,8 @@ import android.os.Bundle
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ProcessLifecycleOwner
-import com.keylogic.mindi.Database.MyPreferences
-import com.keylogic.mindi.Helper.SystemUiHelper
+import com.keylogic.mindi.database.MyPreferences
+import com.keylogic.mindi.helper.SystemUiHelper
 
 class MyApplication : Application() {
     override fun onCreate() {

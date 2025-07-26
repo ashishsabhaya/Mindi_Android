@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.os.PersistableBundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import com.keylogic.mindi.Helper.SystemUiHelper
+import com.keylogic.mindi.helper.SystemUiHelper
 
 open class BaseActivity: AppCompatActivity() {
 

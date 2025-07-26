@@ -23,9 +23,10 @@
                 android:id="@+id/chip_store_bg_img"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@drawable/chip_store_item_bg1" />
+                android:src="@drawable/chip_store_item_bg1"
+                android:contentDescription="@string/image_content_description" />
 
-            <com.keylogic.mindi.Custom.StrokeTextView
+            <com.keylogic.mindi.custom.StrokeTextView
                 android:id="@+id/chip_store_remove_ads_txt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -48,6 +49,7 @@
                 android:layout_height="@dimen/_80sdp"
                 android:visibility="gone"
                 android:src="@drawable/chip_store_restore"
+                android:contentDescription="@string/image_content_description"
                 android:layout_marginHorizontal="@dimen/_6sdp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -71,6 +73,7 @@
                     android:id="@+id/chip_img"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_70sdp"
+                    android:contentDescription="@string/image_content_description"
                     android:src="@drawable/chip_store_plan1"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
@@ -84,9 +87,10 @@
                     <ImageView
                         android:layout_width="@dimen/_16sdp"
                         android:layout_height="@dimen/_16sdp"
-                        android:src="@drawable/ic_chip" />
+                        android:src="@drawable/ic_chip"
+                        android:contentDescription="@string/image_content_description"/>
 
-                    <com.keylogic.mindi.Custom.StrokeTextView
+                    <com.keylogic.mindi.custom.StrokeTextView
                         android:id="@+id/total_chip_txt"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -104,7 +108,7 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <com.keylogic.mindi.Custom.BackgroundConstraintLayout
+        <com.keylogic.mindi.custom.BackgroundConstraintLayout
             android:id="@+id/chip_price_btn"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_30ssp"
@@ -117,7 +121,7 @@
             app:layout_constraintStart_toStartOf="@+id/chip_plan_cons"
             app:layout_constraintTop_toBottomOf="@+id/chip_plan_cons">
 
-            <com.keylogic.mindi.Custom.StrokeTextView
+            <com.keylogic.mindi.custom.StrokeTextView
                 android:id="@+id/chip_price_btn_txt"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -128,7 +132,7 @@
                 android:textColor="@color/white"
                 android:textSize="@dimen/_14ssp" />
 
-        </com.keylogic.mindi.Custom.BackgroundConstraintLayout>
+        </com.keylogic.mindi.custom.BackgroundConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

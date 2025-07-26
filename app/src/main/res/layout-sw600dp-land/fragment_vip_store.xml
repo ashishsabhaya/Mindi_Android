@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".Ui.VipStoreFragment">
+    tools:context=".ui.VipStoreFragment">
 
     <include
         android:id="@+id/include"
@@ -31,7 +31,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.keylogic.mindi.Custom.DialogBackgroundCard
+        <com.keylogic.mindi.custom.DialogBackgroundCard
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginBottom="@dimen/_minus6sdp"
@@ -45,7 +45,7 @@
                 android:layout_height="match_parent"
                 android:paddingBottom="@dimen/_minus4sdp">
 
-                <com.keylogic.mindi.Custom.TitleConstraintLayout
+                <com.keylogic.mindi.custom.TitleConstraintLayout
                     android:id="@+id/tab_cons"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_34sdp"
@@ -73,7 +73,7 @@
                         app:tabIndicatorFullWidth="true"
                         app:tabIndicatorGravity="stretch" />
 
-                </com.keylogic.mindi.Custom.TitleConstraintLayout>
+                </com.keylogic.mindi.custom.TitleConstraintLayout>
 
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/tab_card"
@@ -95,7 +95,7 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </com.keylogic.mindi.Custom.DialogBackgroundCard>
+        </com.keylogic.mindi.custom.DialogBackgroundCard>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

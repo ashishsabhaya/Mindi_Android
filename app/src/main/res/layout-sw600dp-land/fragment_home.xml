@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".Ui.HomeFragment">
+    tools:context=".ui.HomeFragment">
 
     <include
         android:id="@+id/include"
@@ -22,7 +22,7 @@
         android:paddingHorizontal="@dimen/_8sdp"
         android:paddingVertical="@dimen/_4sdp">
 
-        <com.keylogic.mindi.Custom.BackgroundConstraintLayout
+        <com.keylogic.mindi.custom.BackgroundConstraintLayout
             android:id="@+id/profile_cons"
             android:layout_width="@dimen/_90sdp"
             android:layout_height="@dimen/_30sdp"
@@ -47,11 +47,12 @@
                     android:id="@+id/profile_img"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:src="@drawable/ic_guest_profile"/>
+                    android:src="@drawable/ic_guest_profile"
+                    android:contentDescription="@string/image_content_description"/>
 
             </com.google.android.material.card.MaterialCardView>
 
-            <com.keylogic.mindi.Custom.StrokeTextView
+            <com.keylogic.mindi.custom.StrokeTextView
                 android:id="@+id/profile_name_txt"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -68,9 +69,9 @@
                 app:layout_constraintStart_toEndOf="@+id/profile_img_card"
                 app:layout_constraintTop_toTopOf="parent" />
 
-        </com.keylogic.mindi.Custom.BackgroundConstraintLayout>
+        </com.keylogic.mindi.custom.BackgroundConstraintLayout>
 
-        <com.keylogic.mindi.Custom.BackgroundConstraintLayout
+        <com.keylogic.mindi.custom.BackgroundConstraintLayout
             android:id="@+id/chip_cons"
             android:layout_width="@dimen/_80sdp"
             android:layout_height="@dimen/_30sdp"
@@ -86,12 +87,13 @@
                 android:id="@+id/chip_card"
                 android:layout_width="@dimen/_14sdp"
                 android:layout_height="@dimen/_14sdp"
+                android:contentDescription="@string/image_content_description"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 android:src="@drawable/ic_chip" />
 
-            <com.keylogic.mindi.Custom.StrokeTextView
+            <com.keylogic.mindi.custom.StrokeTextView
                 android:id="@+id/chip_count_txt"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -114,13 +116,14 @@
                 android:layout_height="@dimen/_14sdp"
                 android:src="@drawable/ic_add"
                 android:padding="@dimen/_2sdp"
+                android:contentDescription="@string/image_content_description"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-        </com.keylogic.mindi.Custom.BackgroundConstraintLayout>
+        </com.keylogic.mindi.custom.BackgroundConstraintLayout>
 
-        <com.keylogic.mindi.Custom.BackgroundConstraintLayout
+        <com.keylogic.mindi.custom.BackgroundConstraintLayout
             android:id="@+id/settings_cons"
             android:layout_width="@dimen/_32sdp"
             android:layout_height="@dimen/_30sdp"
@@ -135,11 +138,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:padding="@dimen/_4sdp"
+                android:contentDescription="@string/image_content_description"
                 android:src="@drawable/ic_settings"/>
 
-        </com.keylogic.mindi.Custom.BackgroundConstraintLayout>
+        </com.keylogic.mindi.custom.BackgroundConstraintLayout>
 
-        <com.keylogic.mindi.Custom.BackgroundConstraintLayout
+        <com.keylogic.mindi.custom.BackgroundConstraintLayout
             android:id="@+id/statistics_cons"
             android:layout_width="@dimen/_32sdp"
             android:layout_height="@dimen/_30sdp"
@@ -155,11 +159,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:padding="@dimen/_4sdp"
+                android:contentDescription="@string/image_content_description"
                 android:src="@drawable/ic_statistics"/>
 
-        </com.keylogic.mindi.Custom.BackgroundConstraintLayout>
+        </com.keylogic.mindi.custom.BackgroundConstraintLayout>
 
-        <com.keylogic.mindi.Custom.StoreConstraintLayout
+        <com.keylogic.mindi.custom.StoreConstraintLayout
             android:id="@+id/vip_cons"
             android:layout_width="@dimen/_46sdp"
             android:layout_height="@dimen/_38sdp"
@@ -174,11 +179,12 @@
                 android:id="@+id/vip_img"
                 android:layout_width="@dimen/_16sdp"
                 android:layout_height="@dimen/_16sdp"
+                android:contentDescription="@string/image_content_description"
                 android:src="@drawable/ic_vip_store"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 
-            <com.keylogic.mindi.Custom.StrokeTextView
+            <com.keylogic.mindi.custom.StrokeTextView
                 android:id="@+id/vip_store_txt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -195,7 +201,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/vip_img" />
 
-        </com.keylogic.mindi.Custom.StoreConstraintLayout>
+        </com.keylogic.mindi.custom.StoreConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/free_chip_count_cons"
@@ -206,7 +212,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/free_chip_cons">
 
-            <com.keylogic.mindi.Custom.HandsIndicator
+            <com.keylogic.mindi.custom.HandsIndicator
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/_24sdp"
                 android:paddingHorizontal="@dimen/_4sdp"
@@ -224,11 +230,12 @@
                     android:layout_width="@dimen/_10sdp"
                     android:layout_height="@dimen/_10sdp"
                     android:src="@drawable/ic_chip"
+                    android:contentDescription="@string/image_content_description"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <com.keylogic.mindi.Custom.StrokeTextView
+                <com.keylogic.mindi.custom.StrokeTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/_2sdp"
@@ -244,7 +251,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:txtStrokeEnabled="false" />
 
-            </com.keylogic.mindi.Custom.HandsIndicator>
+            </com.keylogic.mindi.custom.HandsIndicator>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -275,6 +282,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:src="@drawable/free_chip_bg"
+                        android:contentDescription="@string/image_content_description"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -301,6 +309,7 @@
                 android:layout_width="@dimen/_38sdp"
                 android:layout_height="@dimen/_38sdp"
                 android:src="@drawable/free_chip_icon"
+                android:contentDescription="@string/image_content_description"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
