@@ -29,10 +29,6 @@ class VipStoreViewModel : ViewModel() {
     }
 
     fun refreshChipCount() {
-        println("B > ${_chipCount.value} ==> ${ProfileHelper.totalChips}")
-        _chipCount.value = 0L
-        println("AB > ${_chipCount.value} ==> ${ProfileHelper.totalChips}")
         _chipCount.value = ProfileHelper.totalChips
-        println("A > ${_chipCount.value} ==> ${ProfileHelper.totalChips}")
     }
 }

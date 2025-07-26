@@ -13,6 +13,7 @@ class DialogBackgroundCard @JvmOverloads constructor(
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
 ) : ConstraintLayout(context, attrs, defStyleAttr) {
+    private lateinit var imageView: ImageView
 
     init {
         // Set layout size to match parent
@@ -38,7 +39,7 @@ class DialogBackgroundCard @JvmOverloads constructor(
             strokeWidth = resources.getDimensionPixelSize(com.intuit.sdp.R.dimen._1sdp)
         }
 
-        val imageView = ImageView(context).apply {
+        imageView = ImageView(context).apply {
             layoutParams = LayoutParams(
                 LayoutParams.MATCH_PARENT,
                 LayoutParams.MATCH_PARENT
@@ -50,4 +51,9 @@ class DialogBackgroundCard @JvmOverloads constructor(
         cardView.addView(imageView)
         addView(cardView)
     }
+
+    fun setSpotlightBackgroundResource() {
+        imageView.setImageResource(R.drawable.dialog_background1)
+    }
+
 }

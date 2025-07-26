@@ -13,9 +13,9 @@ class Card(val suit: SuitType,val rank: Int,val uniqueIndex: Int = 0) {
         }
     }
 
-//    fun getTag(): String {
-//        return "$suit$rank$uniqueIndex"
-//    }
+    fun getTag(): String {
+        return "$suit$rank$uniqueIndex"
+    }
 
     fun getCard(): String {
         return "${suit.suitName}${if (rank == 14) 1 else rank}"

@@ -69,4 +69,7 @@ dependencies {
 
     implementation(libs.gson)
 
+    implementation(libs.moshi)
+    implementation(libs.moshi.kotlin)
+
 }

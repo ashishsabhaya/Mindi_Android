@@ -1,11 +1,8 @@
 package com.keylogic.mindi.dialogs
 
-import android.app.Activity
 import android.os.Bundle
 import android.view.*
-import android.widget.Toast
-import androidx.fragment.app.FragmentActivity
-import androidx.fragment.app.FragmentManager
+import androidx.navigation.fragment.findNavController
 import com.keylogic.mindi.enums.VIPStore
 import com.keylogic.mindi.helper.AdHelper
 import com.keylogic.mindi.helper.CommonHelper
@@ -18,16 +15,19 @@ class BuyStoreItemDialogFragment : BaseDialogFragment() {
 
     private var _binding: BuyStoreItemLayoutBinding? = null
     private val binding get() = _binding!!
+    private var tabIndex = -1
+    private var itemIndex = -1
 
     override fun getContentView(inflater: LayoutInflater): View {
         _binding = BuyStoreItemLayoutBinding.inflate(inflater)
+        tabIndex = requireArguments().getInt(KEY_TAB_INDEX)
+        itemIndex = requireArguments().getInt(KEY_ITEM_INDEX)
         setupDialogUI()
         return binding.root
     }
 
     private fun setupDialogUI() {
         if (tabIndex == -1 || itemIndex == -1) {
-            dismiss()
             return
         }
 
@@ -48,7 +48,7 @@ class BuyStoreItemDialogFragment : BaseDialogFragment() {
         }
 
         CommonHelper.INSTANCE.setScaleOnTouch(binding.cancelCons, onclick = {
-            dismiss()
+            findNavController().popBackStack()
         })
 
         CommonHelper.INSTANCE.setScaleOnTouch(binding.todayWatchBtnCons, onclick = {
@@ -66,7 +66,12 @@ class BuyStoreItemDialogFragment : BaseDialogFragment() {
                     buyStoreItem(true)
                 }
                 else {
-                    Toast.makeText(requireContext(), "Not enough chip dialog", Toast.LENGTH_SHORT).show()
+                    if (findNavController().currentDestination?.id == R.id.buyStoreItemDialogFragment) {
+                        val bundle = Bundle().apply {
+                            putBoolean(NotEnoughChipDialogFragment.KEY_IS_NOT_ENOUGH_FOR_STORE, true)
+                        }
+                        findNavController().navigate(R.id.notEnoughChipDialogFragment,bundle)
+                    }
                 }
             }
         })
@@ -110,8 +115,8 @@ class BuyStoreItemDialogFragment : BaseDialogFragment() {
             putBoolean(KEY_IS_ITEM_PURCHASED, true)
             putInt(KEY_ITEM_INDEX, itemIndex)
         }
-        parentFragmentManager.setFragmentResult(tabNameId, result)
-        dismiss()
+        requireActivity().supportFragmentManager.setFragmentResult(tabNameId, result)
+        findNavController().popBackStack()
     }
 
     override fun onDestroyView() {
@@ -121,24 +126,8 @@ class BuyStoreItemDialogFragment : BaseDialogFragment() {
 
     companion object {
         const val KEY_IS_ITEM_PURCHASED = "is_item_purchased"
-        const val KEY_ITEM_INDEX = "item_index"
-        private const val TAG = "BuyStoreItemDialogFragment"
-        private var tabIndex = -1
-        private var itemIndex = -1
+        const val KEY_ITEM_INDEX = "itemIndex"
+        const val KEY_TAB_INDEX = "tabIndex"
 
-        fun show(activity: Activity, fm: FragmentManager, tabPosition: Int, position: Int) {
-            if (activity is FragmentActivity) {
-                if (ShowDialog.INSTANCE.openDialogOnce(activity, fm,TAG)) {
-                    tabIndex = tabPosition
-                    itemIndex = position
-                    val dialog = BuyStoreItemDialogFragment()
-                    dialog.show(fm, TAG)
-                }
-            }
-        }
-
-//        fun dismiss(activity: Activity) {
-//            ShowDialog.INSTANCE.dismiss(activity,TAG)
-//        }
     }
 }

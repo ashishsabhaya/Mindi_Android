@@ -133,6 +133,9 @@
             app:exitAnim="@anim/no_anim"
             app:popEnterAnim="@anim/no_anim"
             app:popExitAnim="@anim/left_out" />
+        <action
+            android:id="@+id/action_vipStoreFragment_to_buyStoreItemDialogFragment"
+            app:destination="@id/buyStoreItemDialogFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileSelectionFragment"
@@ -204,4 +207,17 @@
             app:popEnterAnim="@android:anim/fade_in"
             app:popExitAnim="@android:anim/fade_out" />
     </fragment>
+    <dialog
+        android:id="@+id/buyStoreItemDialogFragment"
+        android:name="com.keylogic.mindi.dialogs.BuyStoreItemDialogFragment"
+        android:label="BuyStoreItemDialogFragment">
+        <argument android:name="tabIndex" app:argType="integer" />
+        <argument android:name="itemIndex" app:argType="integer" />
+    </dialog>
+    <dialog
+        android:id="@+id/notEnoughChipDialogFragment"
+        android:name="com.keylogic.mindi.dialogs.NotEnoughChipDialogFragment"
+        android:label="NotEnoughChipDialogFragment">
+        <argument android:name="isNotEnoughChipForStore" app:argType="boolean" />
+    </dialog>
 </navigation>

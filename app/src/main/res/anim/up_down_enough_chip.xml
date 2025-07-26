@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Move up -->
+    <translate
+        android:fromYDelta="0"
+        android:toYDelta="-16%p"
+        android:duration="1000"
+        android:startOffset="0"
+        android:fillAfter="true" />
+
+    <translate
+        android:fromYDelta="0"
+        android:toYDelta="16%p"
+        android:duration="1000"
+        android:startOffset="2000"
+        android:fillAfter="false" />
+
+</set>

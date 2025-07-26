@@ -32,6 +32,8 @@ class SplashFragment : Fragment() {
         ChipStoreHelper.INSTANCE.generateChipStorePlans()
         updateVIPStoreDetails()
 
+//        ProfileHelper.totalChips = 50_500L
+
         return binding.root
     }
 

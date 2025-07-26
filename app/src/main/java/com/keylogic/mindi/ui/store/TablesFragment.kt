@@ -6,8 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
+import com.keylogic.mindi.R
 import com.keylogic.mindi.adapters.StoreAdapter
 import com.keylogic.mindi.dialogs.BuyStoreItemDialogFragment
 import com.keylogic.mindi.enums.VIPStore
@@ -38,12 +40,13 @@ class TablesFragment : Fragment() {
                 if (position !in tableList.indices) return@StoreAdapter
 
                 if (tableList[position].purchaseEndDate == 0L) {
-                    BuyStoreItemDialogFragment.show(
-                        requireActivity(),
-                        childFragmentManager,
-                        currTab.tabIndex,
-                        position
-                    )
+                    if (findNavController().currentDestination?.id == R.id.vipStoreFragment) {
+                        val bundle = Bundle().apply {
+                            putInt(BuyStoreItemDialogFragment.KEY_TAB_INDEX, currTab.tabIndex)
+                            putInt(BuyStoreItemDialogFragment.KEY_ITEM_INDEX, position)
+                        }
+                        findNavController().navigate(R.id.buyStoreItemDialogFragment, bundle)
+                    }
                 } else {
                     VIPStoreHelper.INSTANCE.buyOrSelectStoreItem(
                         context = requireContext(),

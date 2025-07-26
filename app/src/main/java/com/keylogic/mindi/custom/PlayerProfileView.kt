@@ -9,13 +9,14 @@ import android.widget.LinearLayout
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.google.android.material.card.MaterialCardView
 import com.keylogic.mindi.R
+import com.keylogic.mindi.gamePlay.models.PlayerDetails
 
 class PlayerProfileView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
 ) : ConstraintLayout(context, attrs, defStyleAttr) {
-
+    val profileDetails: PlayerDetails? = null
     private var containerWidth = 0
     private var containerHeight = 0
     private var backgroundHeight = 0
