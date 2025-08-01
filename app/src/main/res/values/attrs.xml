@@ -8,6 +8,7 @@
         <attr name="isPositive" format="boolean" />
         <attr name="isStrokeEnabled" format="boolean" />
         <attr name="isCircular" format="boolean" />
+        <attr name="isSingleLightColors" format="boolean" />
         <attr name="isBGElevationEnabled" format="boolean" />
         <attr name="isFgColorIsSingleDarkBlue" format="boolean" />
         <attr name="isInstagram" format="boolean" />
@@ -27,6 +28,8 @@
         <attr name="containerBorderWidth" format="dimension" />
         <attr name="isSelected" format="boolean" />
         <attr name="isBorderEnabled" format="boolean" />
+        <attr name="isRewardCollected" format="boolean" />
+        <attr name="isRewardNotCollected" format="boolean" />
         <attr name="isElevationEnabled" format="boolean" />
         <attr name="isCommonGradient" format="boolean" />
         <attr name="isSingleDarkColor" format="boolean" />

@@ -5,9 +5,14 @@ import androidx.core.content.edit
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.keylogic.mindi.helper.CommonHelper
+import com.keylogic.mindi.helper.DailyRewardHelper
 import com.keylogic.mindi.helper.ProfileHelper
 import com.keylogic.mindi.helper.VIPStoreHelper
 import com.keylogic.mindi.models.StoreItem
+import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.temporal.ChronoUnit
+import java.util.Locale
 
 
 class MyPreferences {
@@ -41,12 +46,17 @@ class MyPreferences {
         private const val KEY_TABLE_LIST = "tableList"
         private const val KEY_CARD_BACK_LIST = "cardBackList"
         private const val KEY_BACKGROUND_LIST = "backgroundList"
+
+        private const val KEY_CURR_REWARD = "curr_reward"
+        private const val KEY_CURR_REWARD_DAY = "curr_reward_day"
+        private const val KEY_IS_REWARD_COLLECTED = "isRewardCollected"
     }
 
     fun saveGameDetails(context: Context) {
         saveGameSettings(context)
         saveGameThemeDetails(context)
         saveGameProfileDetails(context)
+        saveDailyReward(context)
     }
 
     fun saveGameSettings(context: Context) {
@@ -59,6 +69,15 @@ class MyPreferences {
             putBoolean(KEY_IS_NEW_DAY, CommonHelper.isMusicEnabled)
             putBoolean(KEY_SOUND, CommonHelper.isSoundEnabled)
             putBoolean(KEY_VIBRATION, CommonHelper.isVibrationEnabled)
+        }
+    }
+
+    fun saveDailyReward(context: Context) {
+        val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+        prefs.edit {
+            putInt(KEY_CURR_REWARD, DailyRewardHelper.currDay)
+            putString(KEY_CURR_REWARD_DAY, DailyRewardHelper.lastSavedRewardDay)
+            putBoolean(KEY_IS_REWARD_COLLECTED, DailyRewardHelper.isDailyRewardCollected)
         }
     }
 
@@ -105,6 +124,10 @@ class MyPreferences {
         CommonHelper.isMusicEnabled = prefs.getBoolean(KEY_MUSIC, CommonHelper.isMusicEnabled)
         CommonHelper.isSoundEnabled = prefs.getBoolean(KEY_SOUND, CommonHelper.isSoundEnabled)
         CommonHelper.isVibrationEnabled = prefs.getBoolean(KEY_VIBRATION, CommonHelper.isVibrationEnabled)
+
+        DailyRewardHelper.currDay = prefs.getInt(KEY_CURR_REWARD, DailyRewardHelper.currDay)
+        DailyRewardHelper.lastSavedRewardDay = prefs.getString(KEY_CURR_REWARD_DAY, DailyRewardHelper.lastSavedRewardDay) ?: DailyRewardHelper.lastSavedRewardDay
+        DailyRewardHelper.isDailyRewardCollected = prefs.getBoolean(KEY_IS_REWARD_COLLECTED, DailyRewardHelper.isDailyRewardCollected)
 
         ProfileHelper.totalChips = prefs.getLong(KEY_TOTAL_CHIPS, ProfileHelper.totalChips)
         ProfileHelper.profileName = prefs.getString(KEY_PROFILE_NAME, ProfileHelper.profileName) ?: ProfileHelper.profileName

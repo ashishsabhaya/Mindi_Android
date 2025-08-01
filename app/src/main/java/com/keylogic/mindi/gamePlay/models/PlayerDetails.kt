@@ -1,11 +1,15 @@
 package com.keylogic.mindi.gamePlay.models
 
 data class PlayerDetails(
-    val joinerIndex: Int = 0,
-    val uniqueKey: String = "",
-    val playerName: String = "",
-    val profileName: String = "",
-    val lastTime: Long = 0L,
-    val isBot: Boolean = false,
-    var isCreator: Boolean = false
+    val isCurrPlayer: Boolean,
+    val name: String,
+    val uId: String,
+    val profileId: Int,
+    val joinIndex: Int,
+    val isBot: Boolean,
+    var isOnline: Boolean,
+    var isCreator: Boolean,
+    var isRedTeamMember: Boolean,
+    var lastTimeStamp: Long,
+    val playerGameDetails: PlayerGameDetails = PlayerGameDetails()
 )

@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.keylogic.mindi.custom.BackgroundConstraintLayout
 import com.keylogic.mindi.custom.StrokeTextView
@@ -21,6 +22,7 @@ class ChipStorePlanAdapter(
 ) : RecyclerView.Adapter<ChipStorePlanAdapter.PlanViewHolder>() {
 
     class PlanViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val mainCons: ConstraintLayout = itemView.findViewById(R.id.chip_plan_cons)
         val bgImg: ImageView = itemView.findViewById(R.id.chip_store_bg_img)
         val chipImg: ImageView = itemView.findViewById(R.id.chip_img)
         val restoreImg: ImageView = itemView.findViewById(R.id.chip_restore_img)
@@ -72,6 +74,10 @@ class ChipStorePlanAdapter(
             plan.planPrice
 
         CommonHelper.INSTANCE.setScaleOnTouch(holder.buyBtn, onclick = {
+            onItemClick(plan)
+        })
+
+        CommonHelper.INSTANCE.setScaleOnTouch(holder.mainCons, onclick = {
             onItemClick(plan)
         })
     }

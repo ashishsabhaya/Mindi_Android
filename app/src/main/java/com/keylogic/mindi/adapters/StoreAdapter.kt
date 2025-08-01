@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.card.MaterialCardView
 import com.keylogic.mindi.custom.IconTextConstraintLayout
 import com.keylogic.mindi.enums.VIPStore
 import com.keylogic.mindi.helper.CommonHelper
@@ -23,6 +24,7 @@ class StoreAdapter(
     var selectedIndex = 0
 
     class StoreItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val itemCard: MaterialCardView = itemView.findViewById(R.id.vip_store_item_card)
         val itemImg: ImageView = itemView.findViewById(R.id.vip_store_item_img)
         val itemInfoCons: IconTextConstraintLayout = itemView.findViewById(R.id.vip_store_item_info_cons)
     }
@@ -79,6 +81,12 @@ class StoreAdapter(
         holder.itemInfoCons.setViewTextAndResource(infoTxt, infoIcon)
 
         CommonHelper.INSTANCE.setScaleOnTouch(holder.itemInfoCons, onclick = {
+            notifyItemChanged(selectedIndex)
+            selectedIndex = position
+            onItemClick(position)
+        })
+
+        CommonHelper.INSTANCE.setScaleOnTouch(holder.itemCard, onclick = {
             notifyItemChanged(selectedIndex)
             selectedIndex = position
             onItemClick(position)

@@ -1,25 +1,25 @@
 package com.keylogic.mindi.dialogs
 
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
 import androidx.navigation.fragment.findNavController
+import com.keylogic.mindi.R
+import com.keylogic.mindi.databinding.DialogFragmentBuyStoreItemBinding
 import com.keylogic.mindi.enums.VIPStore
 import com.keylogic.mindi.helper.AdHelper
 import com.keylogic.mindi.helper.CommonHelper
 import com.keylogic.mindi.helper.ProfileHelper
 import com.keylogic.mindi.helper.VIPStoreHelper
-import com.keylogic.mindi.R
-import com.keylogic.mindi.databinding.BuyStoreItemLayoutBinding
 
 class BuyStoreItemDialogFragment : BaseDialogFragment() {
-
-    private var _binding: BuyStoreItemLayoutBinding? = null
+    private var _binding: DialogFragmentBuyStoreItemBinding? = null
     private val binding get() = _binding!!
     private var tabIndex = -1
     private var itemIndex = -1
 
     override fun getContentView(inflater: LayoutInflater): View {
-        _binding = BuyStoreItemLayoutBinding.inflate(inflater)
+        _binding = DialogFragmentBuyStoreItemBinding.inflate(inflater)
         tabIndex = requireArguments().getInt(KEY_TAB_INDEX)
         itemIndex = requireArguments().getInt(KEY_ITEM_INDEX)
         setupDialogUI()
@@ -68,7 +68,7 @@ class BuyStoreItemDialogFragment : BaseDialogFragment() {
                 else {
                     if (findNavController().currentDestination?.id == R.id.buyStoreItemDialogFragment) {
                         val bundle = Bundle().apply {
-                            putBoolean(NotEnoughChipDialogFragment.KEY_IS_NOT_ENOUGH_FOR_STORE, true)
+                            putInt(NotEnoughChipDialogFragment.KEY_IS_NOT_ENOUGH_FOR_STORE, tabIndex)
                         }
                         findNavController().navigate(R.id.notEnoughChipDialogFragment,bundle)
                     }

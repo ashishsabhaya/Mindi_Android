@@ -11,12 +11,11 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.keylogic.mindi.R
 import com.keylogic.mindi.adapters.StoreAdapter
+import com.keylogic.mindi.databinding.FragmentAvatarBinding
 import com.keylogic.mindi.dialogs.BuyStoreItemDialogFragment
 import com.keylogic.mindi.enums.VIPStore
 import com.keylogic.mindi.helper.VIPStoreHelper
 import com.keylogic.mindi.ui.viewModel.AvatarViewModel
-import com.keylogic.mindi.databinding.FragmentAvatarBinding
-import com.keylogic.mindi.ui.VipStoreFragment
 import com.keylogic.mindi.ui.viewModel.VipStoreViewModel
 
 class AvatarFragment : Fragment() {

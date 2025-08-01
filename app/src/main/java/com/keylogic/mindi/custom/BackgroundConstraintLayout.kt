@@ -27,6 +27,7 @@ class BackgroundConstraintLayout @JvmOverloads constructor(
     private var isFgColorIsSingleDarkBlue: Boolean = false
     private var isInstagram: Boolean = false
     private var isMessenger: Boolean = false
+    private var isSingleLightColor: Boolean = false
     private var isWhatsapp: Boolean = false
     private var isShare: Boolean = false
 
@@ -47,6 +48,7 @@ class BackgroundConstraintLayout @JvmOverloads constructor(
                 isElevationEnabled
             )
             isCircular = getBoolean(R.styleable.BackgroundConstraintLayout_isCircular, isCircular)
+            isSingleLightColor = getBoolean(R.styleable.BackgroundConstraintLayout_isSingleLightColors, isSingleLightColor)
             isFgColorIsSingleDarkBlue = getBoolean(
                 R.styleable.BackgroundConstraintLayout_isFgColorIsSingleDarkBlue,
                 isFgColorIsSingleDarkBlue
@@ -103,7 +105,14 @@ class BackgroundConstraintLayout @JvmOverloads constructor(
 
         val bgDrawable = GradientDrawable(
             GradientDrawable.Orientation.LEFT_RIGHT,
-            if (isInstagram) {
+            if (isSingleLightColor) {
+                intArrayOf(
+                    ContextCompat.getColor(context, R.color.single_light_bg_start),
+                    ContextCompat.getColor(context, R.color.single_light_bg_center),
+                    ContextCompat.getColor(context, R.color.single_light_bg_end)
+                )
+            }
+            else if (isInstagram) {
                 intArrayOf(
                     ContextCompat.getColor(context, R.color.instagram_bg_start),
                     ContextCompat.getColor(context, R.color.instagram_bg_center),
@@ -151,7 +160,13 @@ class BackgroundConstraintLayout @JvmOverloads constructor(
 
         val fgDrawable = GradientDrawable(
             GradientDrawable.Orientation.TOP_BOTTOM,
-            if (isInstagram) {
+            if (isSingleLightColor) {
+                intArrayOf(
+                    ContextCompat.getColor(context, R.color.single_light_fg_start),
+                    ContextCompat.getColor(context, R.color.single_light_fg_end)
+                )
+            }
+            else if (isInstagram) {
                 intArrayOf(
                     ContextCompat.getColor(context, R.color.instagram_fg_start),
                     ContextCompat.getColor(context, R.color.instagram_fg_center),

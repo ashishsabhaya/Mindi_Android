@@ -67,15 +67,15 @@ class CustomSeekBar @JvmOverloads constructor(
         // Draw background
         val bgRect = RectF(0f, top, width, bottom)
         paint.shader = null
-        paint.color = resources.getColor(R.color.position_fg_single, null)
+        paint.color = context.getColor(R.color.position_fg_single)
         canvas.drawRoundRect(bgRect, seekCornerRadius, seekCornerRadius, paint)
 
         // Draw progress gradient
         val progressRect = RectF(0f, top, progressX, bottom)
         val gradient = LinearGradient(
             0f, top, 0f, bottom,
-            resources.getColor(R.color.blue_selected_start, null),
-            resources.getColor(R.color.blue_selected_end, null),
+            context.getColor(R.color.blue_selected_start),
+            context.getColor(R.color.blue_selected_end),
             Shader.TileMode.CLAMP
         )
         paint.shader = gradient

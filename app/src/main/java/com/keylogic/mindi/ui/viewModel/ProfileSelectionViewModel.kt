@@ -23,7 +23,7 @@ class ProfileSelectionViewModel : ViewModel() {
     }
 
     fun getProfileResource(context: Context): Int {
-        return ProfileHelper.INSTANCE.getDefaultProfileResource(context, _selectedProfile.value ?: 0)
+        return ProfileHelper.INSTANCE.getProfileResource(context, _selectedProfile.value ?: 0)
     }
 
     fun submitProfile() {
@@ -34,6 +34,7 @@ class ProfileSelectionViewModel : ViewModel() {
         }
         ProfileHelper.profileName = name
         ProfileHelper.defaultProfileId = _selectedProfile.value ?: 0
+        ProfileHelper.profileId = _selectedProfile.value ?: 0
         ProfileHelper.profileUID = ProfileHelper.INSTANCE.generateUniqueKey()
     }
 }

@@ -3,9 +3,9 @@ package com.keylogic.mindi.dialogs
 import android.view.View
 import android.widget.RelativeLayout
 import com.keylogic.mindi.enums.SuitType
-import com.keylogic.mindi.helper.DisplayHelper
-import com.keylogic.mindi.models.Card
-import com.keylogic.mindi.models.CardView
+import com.keylogic.mindi.gamePlay.helper.DisplayHelper
+import com.keylogic.mindi.gamePlay.models.Card
+import com.keylogic.mindi.gamePlay.models.CardView
 
 class LoadingAnimDesign {
     companion object {

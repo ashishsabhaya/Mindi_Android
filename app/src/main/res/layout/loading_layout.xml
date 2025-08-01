@@ -18,7 +18,8 @@
         <RelativeLayout
             android:id="@+id/d_loading_games_rela"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"/>
 
         <com.keylogic.mindi.custom.StrokeTextView
             android:id="@+id/loading_txt"

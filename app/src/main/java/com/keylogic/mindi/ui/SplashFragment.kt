@@ -14,6 +14,7 @@ import com.keylogic.mindi.helper.ProfileHelper
 import com.keylogic.mindi.helper.VIPStoreHelper
 import com.keylogic.mindi.R
 import com.keylogic.mindi.databinding.FragmentSplashBinding
+import com.keylogic.mindi.helper.DailyRewardHelper
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.util.Calendar
@@ -27,61 +28,19 @@ class SplashFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentSplashBinding.inflate(inflater, container, false)
-        println("SplashFragment ==> onCreateView")
+        CommonHelper.print("SplashFragment = onCreateView")
 
         ChipStoreHelper.INSTANCE.generateChipStorePlans()
-        updateVIPStoreDetails()
+        DailyRewardHelper.INSTANCE.generateDailyRewards()
+        DailyRewardHelper.INSTANCE.updateTodayReward()
+        VIPStoreHelper.INSTANCE.updateVIPStoreDetails()
 
+        CommonHelper.shouldShowNetworkDialog = false
 //        ProfileHelper.totalChips = 50_500L
 
         return binding.root
     }
 
-    private fun updateVIPStoreDetails() {
-        for (avatar in VIPStoreHelper.avatarList) {
-            if (CommonHelper.INSTANCE.isTimePassed(System.currentTimeMillis(), avatar.purchaseEndDate)) {
-                avatar.purchaseDate = 0
-                avatar.purchaseEndDate = 0
-                if (avatar.isSelected) {
-                    ProfileHelper.profileId = -1
-                    avatar.isSelected = false
-                }
-            }
-        }
-
-        for (cards in VIPStoreHelper.cardBackList) {
-            if (CommonHelper.INSTANCE.isTimePassed(System.currentTimeMillis(), cards.purchaseEndDate)) {
-                cards.purchaseDate = 0
-                cards.purchaseEndDate = 0
-                if (cards.isSelected) {
-                    ProfileHelper.cardBackId = -1
-                    cards.isSelected = false
-                }
-            }
-        }
-
-        for (table in VIPStoreHelper.tablesList) {
-            if (CommonHelper.INSTANCE.isTimePassed(System.currentTimeMillis(), table.purchaseEndDate)) {
-                table.purchaseDate = 0
-                table.purchaseEndDate = 0
-                if (table.isSelected) {
-                    ProfileHelper.tableId = -1
-                    table.isSelected = false
-                }
-            }
-        }
-
-        for (background in VIPStoreHelper.backgroundList) {
-            if (CommonHelper.INSTANCE.isTimePassed(System.currentTimeMillis(), background.purchaseEndDate)) {
-                background.purchaseDate = 0
-                background.purchaseEndDate = 0
-                if (background.isSelected) {
-                    ProfileHelper.backgroundId = -1
-                    background.isSelected = false
-                }
-            }
-        }
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

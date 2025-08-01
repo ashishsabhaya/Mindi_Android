@@ -63,7 +63,9 @@ class OnlineConfigFragment : Fragment() {
         }
 
         CommonHelper.INSTANCE.setScaleOnTouch(binding.topTitleInclude.chipCons, onclick = {
-            findNavController().navigate(R.id.action_onlineConfigFragment_to_chipStoreFragment)
+            if (findNavController().currentDestination?.id == R.id.onlineConfigFragment) {
+                findNavController().navigate(R.id.chipStoreFragment)
+            }
         })
     }
 

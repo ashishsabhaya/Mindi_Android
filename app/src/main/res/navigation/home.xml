@@ -52,12 +52,12 @@
             app:popEnterAnim="@anim/no_anim"
             app:popExitAnim="@anim/left_out" />
         <action
-            android:id="@+id/action_homeFragment_to_chipStoreFragment"
-            app:destination="@id/chipStoreFragment"
-            app:enterAnim="@anim/left_in"
+            android:id="@+id/action_homeFragment_to_dailyRewardFragment"
+            app:destination="@id/dailyRewardFragment"
+            app:enterAnim="@anim/bottom_in"
             app:exitAnim="@anim/no_anim"
             app:popEnterAnim="@anim/no_anim"
-            app:popExitAnim="@anim/left_out" />
+            app:popExitAnim="@anim/bottom_out" />
     </fragment>
     <fragment
         android:id="@+id/offlineConfigFragment"
@@ -86,57 +86,23 @@
             app:popExitAnim="@anim/right_out" />
 
         <argument android:name="deckType" app:argType="com.keylogic.mindi.enums.DeckType" />
-        <action
-            android:id="@+id/action_tableConfigFragment_to_chipStoreFragment"
-            app:destination="@id/chipStoreFragment"
-            app:enterAnim="@anim/left_in"
-            app:exitAnim="@anim/no_anim"
-            app:popEnterAnim="@anim/no_anim"
-            app:popExitAnim="@anim/left_out" />
     </fragment>
     <fragment
         android:id="@+id/onlineConfigFragment"
         android:name="com.keylogic.mindi.ui.online.OnlineConfigFragment"
         android:label="fragment_online_config"
-        tools:layout="@layout/fragment_online_config" >
-        <action
-            android:id="@+id/action_onlineConfigFragment_to_chipStoreFragment"
-            app:destination="@id/chipStoreFragment"
-            app:enterAnim="@anim/left_in"
-            app:exitAnim="@anim/no_anim"
-            app:popEnterAnim="@anim/no_anim"
-            app:popExitAnim="@anim/left_out" />
-    </fragment>
+        tools:layout="@layout/fragment_online_config" />
     <fragment
         android:id="@+id/multiplayerConfigFragment"
         android:name="com.keylogic.mindi.ui.multiplayer.MultiplayerConfigFragment"
         android:label="fragment_multiplayer_config"
-        tools:layout="@layout/fragment_multiplayer_config" >
-        <action
-            android:id="@+id/action_multiplayerConfigFragment_to_chipStoreFragment"
-            app:destination="@id/chipStoreFragment"
-            app:enterAnim="@anim/left_in"
-            app:exitAnim="@anim/no_anim"
-            app:popEnterAnim="@anim/no_anim"
-            app:popExitAnim="@anim/left_out" />
-    </fragment>
+        tools:layout="@layout/fragment_multiplayer_config" />
 
     <fragment
         android:id="@+id/vipStoreFragment"
         android:name="com.keylogic.mindi.ui.VipStoreFragment"
         android:label="fragment_vip_store"
-        tools:layout="@layout/fragment_vip_store" >
-        <action
-            android:id="@+id/action_vipStoreFragment_to_chipStoreFragment"
-            app:destination="@id/chipStoreFragment"
-            app:enterAnim="@anim/left_in"
-            app:exitAnim="@anim/no_anim"
-            app:popEnterAnim="@anim/no_anim"
-            app:popExitAnim="@anim/left_out" />
-        <action
-            android:id="@+id/action_vipStoreFragment_to_buyStoreItemDialogFragment"
-            app:destination="@id/buyStoreItemDialogFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_vip_store" />
     <fragment
         android:id="@+id/profileSelectionFragment"
         android:name="com.keylogic.mindi.ui.ProfileSelectionFragment"
@@ -158,13 +124,6 @@
             app:exitAnim="@anim/no_anim"
             app:popEnterAnim="@anim/no_anim"
             app:popExitAnim="@anim/bottom_out" />
-        <action
-            android:id="@+id/action_profileFragment_to_chipStoreFragment"
-            app:destination="@id/chipStoreFragment"
-            app:enterAnim="@anim/left_in"
-            app:exitAnim="@anim/no_anim"
-            app:popEnterAnim="@anim/no_anim"
-            app:popExitAnim="@anim/left_out" />
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
@@ -172,20 +131,12 @@
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings" />
     <fragment
-        android:id="@+id/chipStoreFragment"
-        android:name="com.keylogic.mindi.ui.ChipStoreFragment"
-        android:label="fragment_chip_store"
-        tools:layout="@layout/fragment_chip_store" />
-    <fragment
         android:id="@+id/playAreaFragment"
         android:name="com.keylogic.mindi.ui.offline.PlayAreaFragment"
         android:label="fragment_play_area"
         tools:layout="@layout/fragment_play_area">
 
-        <argument android:name="deckType" app:argType="com.keylogic.mindi.enums.DeckType" />
-        <argument android:name="isHideMode" app:argType="boolean" />
-        <argument android:name="totalPlayers" app:argType="integer" />
-        <argument android:name="betPrice" app:argType="long" />
+        <argument android:name="tableConfig" app:argType="com.keylogic.mindi.gamePlay.models.TableConfig" />
     </fragment>
     <fragment
         android:id="@+id/splashFragment"
@@ -210,14 +161,27 @@
     <dialog
         android:id="@+id/buyStoreItemDialogFragment"
         android:name="com.keylogic.mindi.dialogs.BuyStoreItemDialogFragment"
-        android:label="BuyStoreItemDialogFragment">
-        <argument android:name="tabIndex" app:argType="integer" />
-        <argument android:name="itemIndex" app:argType="integer" />
-    </dialog>
+        android:label="BuyStoreItemDialogFragment"/>
     <dialog
         android:id="@+id/notEnoughChipDialogFragment"
         android:name="com.keylogic.mindi.dialogs.NotEnoughChipDialogFragment"
-        android:label="NotEnoughChipDialogFragment">
-        <argument android:name="isNotEnoughChipForStore" app:argType="boolean" />
-    </dialog>
+        android:label="NotEnoughChipDialogFragment" />
+    <dialog
+        android:id="@+id/chipStoreFragment"
+        android:name="com.keylogic.mindi.dialogs.ChipStoreFragment"
+        android:label="fragment_chip_store"
+        tools:layout="@layout/dialog_fragment_chip_store" />
+    <dialog
+        android:id="@+id/exitGameDialogFragment"
+        android:name="com.keylogic.mindi.dialogs.ExitGameDialogFragment"
+        android:label="ExitGameDialogFragment" />
+    <dialog
+        android:id="@+id/internetErrorDialogFragment"
+        android:name="com.keylogic.mindi.dialogs.InternetErrorDialogFragment"
+        android:label="InternetErrorDialogFragment" />
+    <fragment
+        android:id="@+id/dailyRewardFragment"
+        android:name="com.keylogic.mindi.ui.DailyRewardFragment"
+        android:label="fragment_daily_reward"
+        tools:layout="@layout/fragment_daily_reward" />
 </navigation>

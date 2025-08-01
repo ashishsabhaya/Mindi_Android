@@ -71,7 +71,9 @@ class ProfileFragment : Fragment() {
 
         // Chip button
         CommonHelper.INSTANCE.setScaleOnTouch(binding.topTitleInclude.chipCons) {
-            findNavController().navigate(R.id.action_profileFragment_to_chipStoreFragment)
+            if (findNavController().currentDestination?.id == R.id.profileFragment) {
+                findNavController().navigate(R.id.chipStoreFragment)
+            }
         }
 
         // Cancel/back button

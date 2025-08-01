@@ -2,8 +2,7 @@ package com.keylogic.mindi.gamePlay.helper
 
 import com.keylogic.mindi.enums.DeckType
 import com.keylogic.mindi.enums.SuitType
-import com.keylogic.mindi.gamePlay.models.Player
-import com.keylogic.mindi.models.Card
+import com.keylogic.mindi.gamePlay.models.Card
 import kotlin.collections.iterator
 
 class CardGenerator {
@@ -11,7 +10,7 @@ class CardGenerator {
         var INSTANCE = CardGenerator()
     }
 
-    fun generateCard(deck: DeckType, numPlayers: Int): ArrayList<Card> {
+    fun generateCard(deck: DeckType, numPlayers: Int): ArrayList<ArrayList<Card>> {
         val deckIndex = deck.deckCount
         val allCardStack = mutableListOf<Card>()
 
@@ -43,21 +42,26 @@ class CardGenerator {
 
         // Shuffle remaining deck and distribute the rest of the cards randomly
         allCardStack.shuffle()
-        return ArrayList(allCardStack)
+        return distributeCards(numPlayers, ArrayList(allCardStack))
     }
 
-    fun distributeCards(totalPlayers: Int, allCardStack: ArrayList<Card>, playersList: ArrayList<Player>) {
+    fun distributeCards(totalPlayers: Int, allCardStack: ArrayList<Card>): ArrayList<ArrayList<Card>> {
+        val allCards = ArrayList<ArrayList<Card>>()
         var cardIndex = 0
         val totalCards = allCardStack.size
         val cardsPerPlayer = totalCards / totalPlayers
 
         for (i in 0 until totalPlayers) {
+            val list = ArrayList<Card>()
             for (j in 0 until cardsPerPlayer) {
                 if (cardIndex < totalCards) {
-                    playersList[i].addCard(allCardStack[cardIndex++])
+                    list.add(allCardStack[cardIndex++])
                 }
             }
+            allCards.add(list)
         }
+
+        return allCards
     }
 
     private fun getDeckConfiguration(deckIndex: Int, numPlayers: Int): Map<Int, Int>? {

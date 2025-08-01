@@ -31,7 +31,7 @@ class ProfileViewModel : ViewModel() {
         _gameWin.value = ProfileHelper.gameWin
         _gameLost.value = ProfileHelper.gameLost
         _gamePlayed.value = ProfileHelper.gamePlayed
-        _profileImageIndex.value = if (ProfileHelper.profileId != -1) ProfileHelper.profileId else ProfileHelper.defaultProfileId
+        _profileImageIndex.value = ProfileHelper.profileId
     }
 
     fun updateProfileName(name: String) {

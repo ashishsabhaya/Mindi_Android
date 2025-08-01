@@ -122,7 +122,7 @@ class HandsIndicator @JvmOverloads constructor(
         val triangleBase = triangleHeight
 
         // Determine triangle X position
-        val triangleCenterX = if (isTopSide) width * 0.75f else width * 0.25f
+        val triangleCenterX = if (isTopSide) width - triangleHeight else triangleHeight
 
         trianglePaint.color = if (isCustomColor) {
             ContextCompat.getColor(context, R.color.white)

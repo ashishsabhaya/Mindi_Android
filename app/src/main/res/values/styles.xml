@@ -5,6 +5,16 @@
         <item name="android:windowExitAnimation">@anim/scale_out_center</item>
     </style>
 
+    <style name="DialogBottomInAnimationEntryExit">
+        <item name="android:windowEnterAnimation">@anim/bottom_in</item>
+        <item name="android:windowExitAnimation">@anim/bottom_out</item>
+    </style>
+
+    <style name="DialogBottomInAnimationExit">
+        <item name="android:windowEnterAnimation">@null</item>
+        <item name="android:windowExitAnimation">@anim/bottom_out</item>
+    </style>
+
     <style name="DialogAnimationExitOnly">
         <item name="android:windowEnterAnimation">@null</item>
         <item name="android:windowExitAnimation">@anim/scale_out_center</item>
@@ -16,6 +26,7 @@
     </style>
 
     <style name="TransparentDialogTheme" parent="Theme.AppCompat.Dialog">
+        <item name="android:windowIsFloating">false</item> <!-- Required -->
         <item name="android:windowBackground">@android:color/transparent</item>
     </style>
 

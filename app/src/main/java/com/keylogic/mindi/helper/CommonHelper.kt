@@ -23,6 +23,8 @@ class CommonHelper {
     companion object {
         val INSTANCE = CommonHelper()
         var currCFTheme = "_free0"
+        var shouldShowNetworkDialog = true
+
         var currCBTheme = R.drawable.cards_0
         var isAdsFree = false
         var isNewUser = true
@@ -32,6 +34,10 @@ class CommonHelper {
         var isSoundEnabled = false
         var isVibrationEnabled = true
         var deviceType = DeviceType.NONE
+
+        fun print(message: Any) {
+            println("~~> $message")
+        }
     }
 
     fun setScaleOnTouch(
@@ -127,12 +133,12 @@ class CommonHelper {
                 }
                 num < 1_00_00_000L -> {
                     // Lakhs
-                    String.format("%.1fl", num / 1_00_000.0)
+                    String.format("%.1fL", num / 1_00_000.0)
                         .trimEnd('0').trimEnd('.')
                 }
                 else -> {
-                    // Crores
-                    String.format("%.2fcr", num / 1_00_00_000.0)
+                    // Corers
+                    String.format("%.2fCr", num / 1_00_00_000.0)
                         .trimEnd('0').trimEnd('.')
                 }
             }
@@ -236,7 +242,10 @@ class CommonHelper {
         }
     }
 
-
+    @SuppressLint("DiscouragedApi")
+    fun getResourceByName(context: Context, name: String): Int {
+        return context.resources.getIdentifier(name, "drawable", context.packageName)
+    }
     fun getItemSelected(): String {
         return "Selected"
     }

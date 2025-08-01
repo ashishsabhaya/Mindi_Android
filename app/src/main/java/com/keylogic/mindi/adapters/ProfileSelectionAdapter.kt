@@ -29,8 +29,7 @@ class ProfileSelectionAdapter(
     }
 
     override fun onBindViewHolder(holder: ProfileViewHolder, position: Int) {
-        val defaultProfileName = ProfileHelper.INSTANCE.getDefaultProfilePrefix() + position
-        val resource = ProfileHelper.INSTANCE.getProfileImageByName(context, defaultProfileName)
+        val resource = ProfileHelper.INSTANCE.getProfileResource(context, position)
         holder.itemImg.setImageResource(resource)
 
         updateSelection(holder.itemCard, position)
@@ -45,9 +44,9 @@ class ProfileSelectionAdapter(
 
     private fun updateSelection(itemCard: MaterialCardView, position: Int) {
         if (position == selectedProfileIndex)
-            itemCard.strokeColor = context.resources.getColor(R.color.selected_profile_stroke,null)
+            itemCard.strokeColor = context.getColor(R.color.selected_profile_stroke)
         else
-            itemCard.strokeColor = context.resources.getColor(R.color.white,null)
+            itemCard.strokeColor = context.getColor(R.color.white)
     }
 
     override fun getItemCount(): Int = totalProfile

@@ -9,23 +9,21 @@ import android.widget.LinearLayout
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.google.android.material.card.MaterialCardView
 import com.keylogic.mindi.R
-import com.keylogic.mindi.gamePlay.models.PlayerDetails
 
 class PlayerProfileView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
 ) : ConstraintLayout(context, attrs, defStyleAttr) {
-    val profileDetails: PlayerDetails? = null
     private var containerWidth = 0
+    private var isRedTeam = true
     private var containerHeight = 0
     private var backgroundHeight = 0
     private var cardMarginArr = intArrayOf(0, 0, 0, 0)
     private var textMarginArr = intArrayOf(0, 0, 0, 0)
     private var textSize = 16f
     private var cardStrokeWidth = 0
-    private var cardStrokeColor = Color.TRANSPARENT
-    private var initDefine = true
+    private var cardStrokeColor = Color.WHITE
 
     private lateinit var imageView: ImageView
     private lateinit var nameTextView: StrokeTextView
@@ -34,7 +32,6 @@ class PlayerProfileView @JvmOverloads constructor(
 
     init {
         initializeAttributes(context, attrs)
-        if (initDefine) setupLayout(context)
     }
 
     private fun initializeAttributes(context: Context, attrs: AttributeSet?) {
@@ -45,12 +42,15 @@ class PlayerProfileView @JvmOverloads constructor(
         }
     }
 
-    private fun setupLayout(context: Context) {
+    fun setupLayout(context: Context) {
         layoutParams = LayoutParams(containerWidth, containerHeight)
 
         val linearLayout = LinearLayout(context).apply {
             orientation = LinearLayout.VERTICAL
-            layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
+            layoutParams = LayoutParams(
+                LayoutParams.MATCH_PARENT,
+                LayoutParams.MATCH_PARENT
+            )
         }
 
         val imageSectionHeight = containerHeight - backgroundHeight
@@ -64,6 +64,7 @@ class PlayerProfileView @JvmOverloads constructor(
             radius = imageSectionHeight / 2f
             strokeWidth = cardStrokeWidth
             strokeColor = cardStrokeColor
+            setCardBackgroundColor(context.getColor(R.color.player_waiting_bg))
         }
 
         imageView = ImageView(context).apply {
@@ -94,7 +95,7 @@ class PlayerProfileView @JvmOverloads constructor(
             setIsStrokeEnabled(false)
             textSize = this@PlayerProfileView.textSize
             gravity = Gravity.CENTER
-            setTextColor(resources.getColor(R.color.white, null))
+            setTextColor(context.getColor(R.color.white))
             isSingleLine = true
         }
 
@@ -105,53 +106,29 @@ class PlayerProfileView @JvmOverloads constructor(
     }
 
     // ========= Setter Functions =========
-    fun setContainerSize(widthPx: Int, heightPx: Int) {
+    fun setContainerSize(widthPx: Int, heightPx: Int, isRed: Boolean = true) {
         containerWidth = widthPx
         containerHeight = heightPx
-    }
-
-    fun setCardViewProperties(strokeWidthPx: Int = containerWidth / 60, strokeColor: Int = Color.WHITE, marginPxArr: IntArray? = null) {
-        cardStrokeWidth = strokeWidthPx
-        cardStrokeColor = strokeColor
-        if (marginPxArr != null)
-            cardMarginArr = marginPxArr
-    }
-
-    fun setBackgroundLayoutHeight(heightPx: Int = containerHeight / 4) {
-        backgroundHeight = heightPx
-    }
-
-    fun setTextViewProperties(textSizePx: Float = backgroundHeight / 4f, marginPxArr: IntArray? = null) {
-        textSize = textSizePx
+        cardStrokeWidth = containerWidth / 60
+        isRedTeam = isRed
+        backgroundHeight = containerHeight / 4
+        textSize = backgroundHeight / 4f
         val margin = backgroundHeight / 8
-        textMarginArr = marginPxArr ?: intArrayOf(margin, 0, margin, 0)
-    }
+        textMarginArr = intArrayOf(margin, 0, margin, 0)
+        setupLayout(context)
 
-    fun setPlayerName(name: String) {
-        if (::nameTextView.isInitialized) {
-            nameTextView.text = name
-        }
-    }
-
-    fun setPlayerImage(resId: Int) {
-        if (::imageView.isInitialized) {
-            imageView.setImageResource(resId)
-        }
+        if (isRedTeam)
+            imageCardView.strokeColor = context.getColor(R.color.red_team)
+        else
+            imageCardView.strokeColor = context.getColor(R.color.green_team)
     }
 
     fun updateDetails(
         name: String,
-        imageResId: Int,
-        initDefine: Boolean = true
+        imageResId: Int
     ) {
-        this.initDefine = initDefine
-        if (initDefine) {
-            this.removeAllViews()
-            setupLayout(context)
-        }
-
-        setPlayerName(name)
-        setPlayerImage(imageResId)
+        nameTextView.text = name
+        imageView.setImageResource(imageResId)
     }
 
 }

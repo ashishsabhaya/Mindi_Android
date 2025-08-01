@@ -7,6 +7,9 @@
     <color name="transparent_50">#8001B2DE</color>
     <color name="transparent_75">#BF01B2DE</color>
 
+    <color name="message_bg">#4001B2DE</color>
+    <color name="player_waiting_bg">#02BBE9</color>
+
     <color name="black_transparent_75">#BF000000</color>
     <color name="setting_option_icon_bg">#012738</color>
 
@@ -71,6 +74,27 @@
     <color name="radio_selected">#02BBE9</color>
     <color name="radio_container_fill">#012738</color>
     <color name="icon_txt_container_fill1">#023D57</color>
+
+    <color name="single_light_fg_start">#7DA0B3</color>
+    <color name="single_light_fg_end">#305366</color>
+
+    <color name="rc_fg">#B3000000</color>
+
+    <color name="rnc_border">#012738</color>
+    <color name="rc_border">#022A00</color>
+
+    <color name="rnc_bottom">#02BBE9</color>
+    <color name="rc_bottom">#078A01</color>
+
+    <color name="rnc_bottom_start">#012738</color>
+    <color name="rnc_bottom_end">#012738</color>
+
+    <color name="rc_bottom_start">#089201</color>
+    <color name="rc_bottom_end">#022500</color>
+
+    <color name="single_light_bg_start">#30536600</color>
+    <color name="single_light_bg_center">#305366</color>
+    <color name="single_light_bg_end">#30536600</color>
 
     <color name="instagram_bg_start">#00FF004F</color>
     <color name="instagram_bg_center">#FF004F</color>

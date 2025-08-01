@@ -6,6 +6,7 @@ import android.util.AttributeSet
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import com.keylogic.mindi.R
+import androidx.core.content.withStyledAttributes
 
 class SelectionConstraintLayout @JvmOverloads constructor(
     context: Context,
@@ -13,6 +14,8 @@ class SelectionConstraintLayout @JvmOverloads constructor(
     defStyleAttr: Int = 0
 ) : ConstraintLayout(context, attrs, defStyleAttr) {
 
+    private var isRewardCollected = false
+    private var isRewardNotCollected = false
     private var isViewSelected = false
     private var isSelectedColorIsBlueGradient = false
     private var isStrokeEnabled = false
@@ -26,22 +29,51 @@ class SelectionConstraintLayout @JvmOverloads constructor(
     private var elevationValue = 8f.dpToPx(context) // Example: fixed elevation = 8dp
 
     init {
-        val a = context.obtainStyledAttributes(attrs, R.styleable.SelectionConstraintLayout)
+        context.withStyledAttributes(attrs, R.styleable.SelectionConstraintLayout) {
 
-        defaultStrokeWidth = a.getDimension(R.styleable.SelectionConstraintLayout_containerBorderWidth, defaultStrokeWidth)
-        customCornerRadius = a.getDimension(R.styleable.SelectionConstraintLayout_containerRadius,0f)
-        isViewSelected = a.getBoolean(R.styleable.SelectionConstraintLayout_isSelected,false)
-        isStrokeEnabled = a.getBoolean(R.styleable.SelectionConstraintLayout_isBorderEnabled,false)
-        isElevationEnabled = a.getBoolean(R.styleable.SelectionConstraintLayout_isElevationEnabled,true)
-        isCommonGradient = a.getBoolean(R.styleable.SelectionConstraintLayout_isCommonGradient,false)
-        isSingleDarkColor = a.getBoolean(R.styleable.SelectionConstraintLayout_isSingleDarkColor,false)
-        isSingleLightColor = a.getBoolean(R.styleable.SelectionConstraintLayout_isSingleLightColor,false)
-        isSelectedColorIsBlueGradient = a.getBoolean(R.styleable.SelectionConstraintLayout_isSelectedColorIsBlueGradient,false)
+            defaultStrokeWidth = getDimension(
+                R.styleable.SelectionConstraintLayout_containerBorderWidth,
+                defaultStrokeWidth
+            )
+            customCornerRadius = getDimension(
+                R.styleable.SelectionConstraintLayout_containerRadius,
+                customCornerRadius
+            )
+            isViewSelected = getBoolean(R.styleable.SelectionConstraintLayout_isSelected, false)
+            isRewardCollected = getBoolean(
+                R.styleable.SelectionConstraintLayout_isRewardCollected,
+                isRewardCollected
+            )
+            isRewardNotCollected = getBoolean(
+                R.styleable.SelectionConstraintLayout_isRewardNotCollected,
+                isRewardNotCollected
+            )
+            isStrokeEnabled =
+                getBoolean(R.styleable.SelectionConstraintLayout_isBorderEnabled, isStrokeEnabled)
+            isElevationEnabled = getBoolean(
+                R.styleable.SelectionConstraintLayout_isElevationEnabled,
+                isElevationEnabled
+            )
+            isCommonGradient =
+                getBoolean(R.styleable.SelectionConstraintLayout_isCommonGradient, isCommonGradient)
+            isSingleDarkColor = getBoolean(
+                R.styleable.SelectionConstraintLayout_isSingleDarkColor,
+                isSingleDarkColor
+            )
+            isSingleLightColor = getBoolean(
+                R.styleable.SelectionConstraintLayout_isSingleLightColor,
+                isSingleLightColor
+            )
+            isSelectedColorIsBlueGradient = getBoolean(
+                R.styleable.SelectionConstraintLayout_isSelectedColorIsBlueGradient,
+                false
+            )
 
-        if (a.hasValue(R.styleable.SelectionConstraintLayout_containerHeight)) {
-            customHeight = a.getDimension(R.styleable.SelectionConstraintLayout_containerHeight, 0f)
+            if (hasValue(R.styleable.SelectionConstraintLayout_containerHeight)) {
+                customHeight =
+                    getDimension(R.styleable.SelectionConstraintLayout_containerHeight, 0f)
+            }
         }
-        a.recycle()
 
         background = buildBackgroundDrawable()
     }
@@ -66,7 +98,19 @@ class SelectionConstraintLayout @JvmOverloads constructor(
         else
             0f
 
-        val colors = if (isCommonGradient) {
+        val colors = if (isRewardCollected) {
+            intArrayOf(
+                ContextCompat.getColor(context, R.color.rc_bottom_start),
+                ContextCompat.getColor(context, R.color.rc_bottom_end),
+            )
+        }
+        else if (isRewardNotCollected) {
+            intArrayOf(
+                ContextCompat.getColor(context, R.color.rnc_bottom_start),
+                ContextCompat.getColor(context, R.color.rnc_bottom_end),
+            )
+        }
+        else if (isCommonGradient) {
             intArrayOf(
                 ContextCompat.getColor(context, R.color.position_fg_start),
                 ContextCompat.getColor(context, R.color.position_fg_end),
@@ -130,6 +174,12 @@ class SelectionConstraintLayout @JvmOverloads constructor(
 
     fun updateSelection(newSelection: Boolean) {
         isViewSelected = newSelection
+        background = buildBackgroundDrawable()
+    }
+
+    fun updateRewardCollection(isCurrDay: Boolean = false, isNotCurrDay: Boolean = false) {
+        isRewardCollected = isCurrDay
+        isRewardNotCollected = isNotCurrDay
         background = buildBackgroundDrawable()
     }
 

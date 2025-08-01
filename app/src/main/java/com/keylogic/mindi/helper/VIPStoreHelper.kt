@@ -36,6 +36,52 @@ class VIPStoreHelper {
         }
     }
 
+    fun updateVIPStoreDetails() {
+        for (avatar in VIPStoreHelper.avatarList) {
+            if (CommonHelper.INSTANCE.isTimePassed(System.currentTimeMillis(), avatar.purchaseEndDate)) {
+                avatar.purchaseDate = 0
+                avatar.purchaseEndDate = 0
+                if (avatar.isSelected) {
+                    ProfileHelper.profileId = ProfileHelper.defaultProfileId
+                    avatar.isSelected = false
+                }
+            }
+        }
+
+        for (cards in VIPStoreHelper.cardBackList) {
+            if (CommonHelper.INSTANCE.isTimePassed(System.currentTimeMillis(), cards.purchaseEndDate)) {
+                cards.purchaseDate = 0
+                cards.purchaseEndDate = 0
+                if (cards.isSelected) {
+                    ProfileHelper.cardBackId = ProfileHelper.defaultCardsId
+                    cards.isSelected = false
+                }
+            }
+        }
+
+        for (table in VIPStoreHelper.tablesList) {
+            if (CommonHelper.INSTANCE.isTimePassed(System.currentTimeMillis(), table.purchaseEndDate)) {
+                table.purchaseDate = 0
+                table.purchaseEndDate = 0
+                if (table.isSelected) {
+                    ProfileHelper.tableId = ProfileHelper.defaultTableId
+                    table.isSelected = false
+                }
+            }
+        }
+
+        for (background in VIPStoreHelper.backgroundList) {
+            if (CommonHelper.INSTANCE.isTimePassed(System.currentTimeMillis(), background.purchaseEndDate)) {
+                background.purchaseDate = 0
+                background.purchaseEndDate = 0
+                if (background.isSelected) {
+                    ProfileHelper.backgroundId = ProfileHelper.defaultBackgroundId
+                    background.isSelected = false
+                }
+            }
+        }
+    }
+
     @SuppressLint("DiscouragedApi")
     fun getResourceByName(context: Context, itemName: String): Int {
         return context.resources.getIdentifier(itemName, "drawable", context.packageName)

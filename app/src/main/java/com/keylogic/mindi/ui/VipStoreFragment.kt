@@ -52,7 +52,9 @@ class VipStoreFragment : Fragment() {
         }
 
         CommonHelper.INSTANCE.setScaleOnTouch(binding.topTitleInclude.chipCons) {
-            findNavController().navigate(R.id.action_vipStoreFragment_to_chipStoreFragment)
+            if (findNavController().currentDestination?.id == R.id.vipStoreFragment) {
+                findNavController().navigate(R.id.chipStoreFragment)
+            }
         }
 
         binding.topTitleInclude.titleTxt.text = getString(R.string.vip_store)

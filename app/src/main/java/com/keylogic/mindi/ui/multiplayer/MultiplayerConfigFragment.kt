@@ -90,7 +90,9 @@ class MultiplayerConfigFragment : Fragment() {
         )
 
         CommonHelper.INSTANCE.setScaleOnTouch(binding.topTitleInclude.chipCons) {
-            findNavController().navigate(R.id.action_multiplayerConfigFragment_to_chipStoreFragment)
+            if (findNavController().currentDestination?.id == R.id.multiplayerConfigFragment) {
+                findNavController().navigate(R.id.chipStoreFragment)
+            }
         }
 
         CommonHelper.INSTANCE.setScaleOnTouch(binding.configInclude.deck1Cons) {

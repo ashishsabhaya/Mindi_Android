@@ -1,6 +1,12 @@
 package com.keylogic.mindi.ui
 
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import android.net.ConnectivityManager
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,12 +20,15 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import com.keylogic.mindi.MainActivity
 import com.keylogic.mindi.adapters.GameModeAdapter
 import com.keylogic.mindi.enums.GameMode
 import com.keylogic.mindi.helper.AdHelper
 import com.keylogic.mindi.helper.CommonHelper
 import com.keylogic.mindi.R
 import com.keylogic.mindi.databinding.FragmentHomeBinding
+import com.keylogic.mindi.helper.DailyRewardHelper
+import com.keylogic.mindi.internet.NetworkMonitor
 import com.keylogic.mindi.ui.viewModel.HomeViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -39,6 +48,14 @@ class HomeFragment : Fragment() {
     ): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
 
+        CommonHelper.shouldShowNetworkDialog = true
+
+        if (!DailyRewardHelper.isDailyRewardCollected) {
+            Handler(Looper.getMainLooper()).postDelayed({
+                findNavController().navigate(R.id.action_homeFragment_to_dailyRewardFragment)
+            }, 500)
+        }
+
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
             requireActivity().finish()
         }
@@ -52,7 +69,9 @@ class HomeFragment : Fragment() {
         }
 
         CommonHelper.INSTANCE.setScaleOnTouch(binding.chipCons) {
-            findNavController().navigate(R.id.action_homeFragment_to_chipStoreFragment)
+            if (findNavController().currentDestination?.id == R.id.homeFragment) {
+                findNavController().navigate(R.id.chipStoreFragment)
+            }
         }
 
         CommonHelper.INSTANCE.setScaleOnTouch(binding.profileCons) {
@@ -64,6 +83,10 @@ class HomeFragment : Fragment() {
                 if (isAdDismiss)
                     viewModel.addFreeChips(requireContext())
             }
+        }
+
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
+            findNavController().navigate(R.id.exitGameDialogFragment)
         }
 
         CommonHelper.INSTANCE.setScaleOnTouch(binding.statisticsCons) {
@@ -91,6 +114,9 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val mainActivity = requireActivity() as MainActivity
+        mainActivity.shouldShowNetworkDialog = true
+        mainActivity.recheckNetworkState() // check and trigger if offline
 
         observeViewModel()
         viewModel.loadProfileData(requireContext())

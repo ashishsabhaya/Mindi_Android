@@ -10,11 +10,11 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.keylogic.mindi.R
 import com.keylogic.mindi.adapters.StoreAdapter
-import com.keylogic.mindi.dialogs.BuyStoreItemDialogFragment
 import com.keylogic.mindi.enums.VIPStore
 import com.keylogic.mindi.helper.VIPStoreHelper
 import com.keylogic.mindi.ui.viewModel.CardBackViewModel
 import com.keylogic.mindi.databinding.FragmentCardsBinding
+import com.keylogic.mindi.dialogs.BuyStoreItemDialogFragment
 
 class CardsFragment : Fragment() {
     private var _binding: FragmentCardsBinding? = null

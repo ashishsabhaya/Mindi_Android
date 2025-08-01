@@ -13,6 +13,7 @@ import com.keylogic.mindi.helper.CommonHelper
 import com.keylogic.mindi.R
 import com.keylogic.mindi.ui.viewModel.TableConfigViewModel
 import com.keylogic.mindi.databinding.FragmentTableConfigBinding
+import com.keylogic.mindi.gamePlay.models.TableConfig
 
 class TableConfigFragment : Fragment() {
     private var _binding: FragmentTableConfigBinding? = null
@@ -63,7 +64,9 @@ class TableConfigFragment : Fragment() {
         }
 
         CommonHelper.INSTANCE.setScaleOnTouch(binding.topTitleInclude.chipCons, onclick = {
-            findNavController().navigate(R.id.action_tableConfigFragment_to_chipStoreFragment)
+            if (findNavController().currentDestination?.id == R.id.tableConfigFragment) {
+                findNavController().navigate(R.id.chipStoreFragment)
+            }
         })
 
         CommonHelper.INSTANCE.setScaleOnTouch(binding.configInclude.createBtnCons) {
@@ -74,16 +77,19 @@ class TableConfigFragment : Fragment() {
             val betPrice = viewModel.betPrice.value
 
             if (deckType != null && isHideMode != null && totalPlayers != null && betPrice != null) {
+                val tableConfig = TableConfig(
+                    deckType = deckType,
+                    betPrice = betPrice,
+                    isHideMode = isHideMode,
+                    totalPlayers = totalPlayers,
+                    isRoomFull = true,
+                    isPrivateTable = true
+                )
                 val action = TableConfigFragmentDirections
-                    .actionTableConfigFragmentToPlayAreaFragment(
-                        deckType = deckType,
-                        isHideMode = isHideMode,
-                        totalPlayers = totalPlayers,
-                        betPrice = betPrice
-                    )
+                    .actionTableConfigFragmentToPlayAreaFragment(tableConfig = tableConfig)
                 findNavController().navigate(action)
             } else {
-                println("Null value ==> $deckType | $isHideMode | $totalPlayers | $betPrice")
+                CommonHelper.print("Null value = $deckType | $isHideMode | $totalPlayers | $betPrice")
             }
         }
     }

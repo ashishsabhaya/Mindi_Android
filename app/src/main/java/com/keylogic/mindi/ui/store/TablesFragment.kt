@@ -11,11 +11,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
 import com.keylogic.mindi.R
 import com.keylogic.mindi.adapters.StoreAdapter
-import com.keylogic.mindi.dialogs.BuyStoreItemDialogFragment
 import com.keylogic.mindi.enums.VIPStore
 import com.keylogic.mindi.helper.VIPStoreHelper
 import com.keylogic.mindi.ui.viewModel.TableViewModel
 import com.keylogic.mindi.databinding.FragmentTablesBinding
+import com.keylogic.mindi.dialogs.BuyStoreItemDialogFragment
 
 class TablesFragment : Fragment() {
     private var _binding: FragmentTablesBinding? = null

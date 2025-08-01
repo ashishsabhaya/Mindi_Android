@@ -68,8 +68,13 @@
     <string name="remove_ads">Remove Ads</string>
     <string name="restore">Restore</string>
     <string name="chip_store">Chip Store</string>
-    <string name="not_enough_chip_for_store">You have not enough chips to buy.</string>
-    <string name="not_enough_chip_for_game">You have not enough chips to play game.</string>
+    <string name="not_enough_chip_create_table">You don\'t have enough chips to create a table.</string>
+    <string name="not_enough_chip_join_table">Insufficient chips to join the table.</string>
+    <string name="not_enough_chip_find_table">Oops! You need chips to Find  a table.</string>
+    <string name="not_enough_chips_avatar">You’ll need more chips to get this awesome avatar!</string>
+    <string name="not_enough_chips_cards">Looks like you\'re short on chips for these cards.</string>
+    <string name="not_enough_chips_tables">This table can\'t be yours just yet — earn more chips!</string>
+    <string name="not_enough_chips_background">Not enough chips! Try again after stacking up some more.</string>
     <string name="internet_error_message">No network is available. Please check your internet connection.</string>
     <string name="are_you_sure_to_exit">Are you sure you want to exit game?</string>
     <string name="exit_game">Exit Game</string>
@@ -82,6 +87,18 @@
     <string name="image_content_description">Image</string>
     <string name="buy_chip">Buy Chip</string>
     <string name="watch_ads">Watch Ad</string>
+    <string name="check_internet">Checking connection…</string>
+    <string name="collected">Collected</string>
+    <string name="today">Today</string>
+    <string name="tomorrow">Tomorrow</string>
+    <string name="day">Day</string>
+    <string name="daily_reward">Daily Bonus</string>
+    <string name="daily_reward_message">Congratulations! Today’s Coins Are Here!</string>
+    <string name="or">OR</string>
+    <string name="collect">Collect</string>
+    <string name="zero">0</string>
+    <string name="waiting">Waiting…</string>
+    <string name="invite">Invite</string>
 
 
 </resources>
