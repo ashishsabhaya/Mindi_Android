@@ -2,6 +2,7 @@ package com.keylogic.mindi.dialogs
 
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
@@ -93,13 +94,14 @@ class GameResultFragment : BaseFullDialogFragment() {
         }
 
         CommonHelper.INSTANCE.setScaleOnTouch(binding.newGameBtnCons) {
-            // Send a signal to the parent fragment
-            parentFragmentManager.setFragmentResult(
-                "game_result_action",
-                bundleOf("action" to "new_game")
-            )
-
-            // Close the dialog
+//            // Send a signal to the parent fragment
+//            parentFragmentManager.setFragmentResult(
+//                "game_result_action",
+//                bundleOf("action" to "new_game")
+//            )
+//
+//            // Close the dialog
+            Toast.makeText(requireContext(), "Coming soon...", Toast.LENGTH_SHORT).show()
             findNavController().popBackStack()
         }
 

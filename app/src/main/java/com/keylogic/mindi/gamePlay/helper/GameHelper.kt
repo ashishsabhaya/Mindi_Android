@@ -239,7 +239,7 @@ class GameHelper {
                     isWinner = player.isMyTeammate == gameStatus,
                     profileImgId = player.profileId
                 )
-                if (profile.isWinner)
+                if (gameStatus == player.isMyTeammate)
                     winnerList.add(profile)
                 else
                     loserList.add(profile)

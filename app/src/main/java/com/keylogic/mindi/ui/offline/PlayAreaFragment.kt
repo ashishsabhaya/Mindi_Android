@@ -128,6 +128,20 @@ class PlayAreaFragment : Fragment() {
         playerDesignHelper.designWaitingPlayer(GameHelper.playerDetailsList)
         centerCardHelper.designCenterCards()
 
+        binding.includeLayouts.rightHandLayout.root.setOnClickListener {
+            AlertDialog.Builder(requireContext())
+                .setTitle("Start New Game?")
+                .setMessage("Are you sure you want to start a new game?")
+                .setPositiveButton("Yes") { dialog, _ ->
+                    restartGame()
+                    dialog.dismiss()
+                }
+                .setNegativeButton("No") { dialog, _ ->
+                    dialog.dismiss()
+                }
+                .show()
+        }
+
         startEntryAnimation()
     }
 
@@ -576,6 +590,11 @@ class PlayAreaFragment : Fragment() {
         val deckType = tableConfig.deckType
         val cards = CardGenerator.INSTANCE.generateCard(deckType, totalPlayers)
         GameHelper.reOrderPlayerList(highestPlayer.uId)
+
+        val score = Score(0,0,0,0,0)
+        GameHelper.greenTeamScore = score
+        GameHelper.redTeamScore = score
+        playAreaViewModel.resetScores()
 
         for ((index, player) in GameHelper.playerDetailsList.withIndex()) {
             player.playerGameDetails.apply {
