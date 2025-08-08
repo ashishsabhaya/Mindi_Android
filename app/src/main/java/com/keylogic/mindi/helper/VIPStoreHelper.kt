@@ -186,7 +186,7 @@ class VIPStoreHelper {
     fun generateTableList(): ArrayList<StoreItem> {
         val list = ArrayList<StoreItem>()
 
-        for (i in 0..5) {
+        for (i in 0..2) {
             list.add(StoreItem(i,false,2_500L * (i+1)))
         }
         return list

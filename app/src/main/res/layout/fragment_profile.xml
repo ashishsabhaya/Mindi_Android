@@ -166,6 +166,13 @@
 
             </com.keylogic.mindi.custom.SelectionConstraintLayout>
 
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_10ssp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/profile_name_cons"/>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.Guideline
@@ -178,7 +185,7 @@
             app:layout_constraintGuide_percent="0.45"
             app:layout_constraintStart_toStartOf="parent" />
 
-        <com.keylogic.mindi.custom.SeparationView
+        <com.keylogic.mindi.custom.SeparationTCBView
             android:id="@+id/divider_view"
             android:layout_width="@dimen/_1sdp"
             android:layout_height="0dp"

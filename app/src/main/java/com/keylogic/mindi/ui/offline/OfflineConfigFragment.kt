@@ -33,7 +33,10 @@ class OfflineConfigFragment : Fragment() {
         binding.deckTypeRecycler.suppressLayout(true)
         binding.deckTypeRecycler.layoutManager = GridLayoutManager(requireActivity(), DeckType.entries.toList().size)
 
-        CommonHelper.INSTANCE.setScaleOnTouch(binding.cancelCons, onclick = {
+        binding.topTitleInclude.chipCons.visibility = View.INVISIBLE
+        binding.topTitleInclude.titleCons.visibility = View.INVISIBLE
+
+        CommonHelper.INSTANCE.setScaleOnTouch(binding.topTitleInclude.cancelCons, onclick = {
             findNavController().popBackStack()
         })
 

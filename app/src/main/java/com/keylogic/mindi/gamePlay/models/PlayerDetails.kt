@@ -9,7 +9,8 @@ data class PlayerDetails(
     val isBot: Boolean,
     var isOnline: Boolean,
     var isCreator: Boolean,
-    var isRedTeamMember: Boolean,
     var lastTimeStamp: Long,
+    var isMyTeammate: Int,
+    var centerCardIndex: Int,
     val playerGameDetails: PlayerGameDetails = PlayerGameDetails()
 )

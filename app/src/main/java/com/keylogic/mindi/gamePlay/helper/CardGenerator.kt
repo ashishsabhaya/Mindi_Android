@@ -3,6 +3,7 @@ package com.keylogic.mindi.gamePlay.helper
 import com.keylogic.mindi.enums.DeckType
 import com.keylogic.mindi.enums.SuitType
 import com.keylogic.mindi.gamePlay.models.Card
+import com.keylogic.mindi.helper.CommonHelper
 import kotlin.collections.iterator
 
 class CardGenerator {
@@ -31,13 +32,21 @@ class CardGenerator {
             suitStacks[suitType] = mutableListOf()
         }
 
+        val suitRankCounters = mutableMapOf<Pair<SuitType, Int>, Int>()  // Track uniqueIndex for each suit+rank
+
         for ((rank, count) in deckConfig) {
             for (i in 0 until count) {
                 val suit = getSuit(i % 4)
-                val card = Card(suit, rank, count)
+                val key = suit to rank
+                val uniqueIndex = (suitRankCounters[key] ?: 0) + 1
+                suitRankCounters[key] = uniqueIndex
+
+                val card = Card(suit, rank, uniqueIndex)
+//                CommonHelper.print("$count = ${card.getTag()}")
                 suitStacks[suit]?.add(card)
             }
         }
+
         suitStacks.values.forEach { allCardStack.addAll(it) }
 
         // Shuffle remaining deck and distribute the rest of the cards randomly
@@ -60,7 +69,6 @@ class CardGenerator {
             }
             allCards.add(list)
         }
-
         return allCards
     }
 

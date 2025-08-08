@@ -16,6 +16,7 @@ class DisplayHelper {
         var screenHeight = 0
 
         var cardWidth = 0
+        var chipWH = 0
         var cardHeight = 0
 
         var profileWidth = 0
@@ -42,12 +43,13 @@ class DisplayHelper {
         screenHeight = height
 
         calculateProfileWH()
-        calculateCardWH()
+        calculateCardWH(context)
     }
 
-    private fun calculateCardWH() {
-        cardWidth = screenWidth / 18
+    private fun calculateCardWH(context: Context) {
+        cardWidth = screenWidth / 16
         cardHeight = cardWidth * 306 / 221
+        chipWH = cardWidth / 3
     }
 
     private fun calculateProfileWH() {

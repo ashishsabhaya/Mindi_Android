@@ -18,8 +18,9 @@ class BotHelper {
             isBot = true,
             isOnline = false,
             isCreator = false,
-            isRedTeamMember = false,
-            lastTimeStamp = 0
+            lastTimeStamp = 0,
+            isMyTeammate = -1,
+            centerCardIndex = -1
         )
     }
 

@@ -3,9 +3,9 @@
 
     <!-- test id-->
     <string name="ads_id">ca-app-pub-3940256099942544~3347511713</string>
-    <string name="ads_unit_id">ca-app-pub-3940256099942544/5224354917</string>
+    <string name="reward_ad_unit_id">ca-app-pub-3940256099942544/5224354917</string>
+    <string name="interstitial_ad_unit_id">ca-app-pub-3940256099942544/1033173712</string>
     <string name="rectangle_banner_ad_unit">ca-app-pub-3940256099942544/6300978111</string>
-
 
     <string name="guest">Guest</string>
     <string name="settings">Settings</string>
@@ -15,6 +15,8 @@
     <string name="free_chip_count">500</string>
     <string name="create_table">Create Table</string>
     <string name="create">Create</string>
+    <string name="new_game">New Game</string>
+    <string name="back_to_lobby">Back to lobby</string>
     <string name="join_table">Join Table</string>
     <string name="join">Join</string>
     <string name="find_table">Find Table</string>
@@ -49,6 +51,17 @@
     <string name="tab_tables">Tables</string>
     <string name="tab_background">Background</string>
 
+    <string name="your">Your</string>
+    <string name="opponent">Opponent</string>
+    <string name="team_acquired_mindis"> team acquired %s mindis </string>
+    <string name="total_hands">&amp; total %s hands</string>
+
+    <string name="m_team_declaration">Declare Teams</string>
+    <string name="m_first_turn">First Turn: %s</string>
+    <string name="m_distributing_cards">Dealing Cards</string>
+    <string name="m_wait_for_all_players">Waiting for Players</string>
+    <string name="m_collecting_bet_price">Collecting bet price</string>
+
     <string name="music">Music</string>
     <string name="sound">Sound</string>
     <string name="vibration">Vibrate</string>
@@ -63,6 +76,9 @@
     <string name="buy_table_title">Set This Table</string>
     <string name="buy_background_title">Set This Background</string>
     <string name="bet">Bet:</string>
+    <string name="game_result">Game Result</string>
+    <string name="game_winner">Winner</string>
+    <string name="game_loser">Loser</string>
     <string name="please_wait">Please Wait…</string>
     <string name="ad_loading">Ad loading…</string>
     <string name="remove_ads">Remove Ads</string>
@@ -99,6 +115,9 @@
     <string name="zero">0</string>
     <string name="waiting">Waiting…</string>
     <string name="invite">Invite</string>
+    <string name="trump_card">Trump Card</string>
+    <string name="mindi">Mindi</string>
+    <string name="hands">Hands</string>
 
 
 </resources>

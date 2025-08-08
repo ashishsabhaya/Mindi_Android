@@ -96,7 +96,7 @@
                     app:layout_constraintGuide_percent="0.5"
                     app:layout_constraintStart_toStartOf="parent" />
 
-                <com.keylogic.mindi.custom.SeparationView
+                <com.keylogic.mindi.custom.SeparationTCBView
                     android:id="@+id/divider_view"
                     android:layout_width="@dimen/_1sdp"
                     android:layout_height="match_parent"

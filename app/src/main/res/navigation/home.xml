@@ -184,4 +184,12 @@
         android:name="com.keylogic.mindi.ui.DailyRewardFragment"
         android:label="fragment_daily_reward"
         tools:layout="@layout/fragment_daily_reward" />
+    <dialog
+        android:id="@+id/gameOptionFragment"
+        android:name="com.keylogic.mindi.dialogs.GameOptionFragment"
+        android:label="GameOptionFragment" />
+    <dialog
+        android:id="@+id/gameResultFragment"
+        android:name="com.keylogic.mindi.dialogs.GameResultFragment"
+        android:label="GameResultFragment" />
 </navigation>

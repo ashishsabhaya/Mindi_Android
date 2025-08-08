@@ -45,7 +45,7 @@ class StoreAdapter(
     override fun onBindViewHolder(holder: StoreItemViewHolder, position: Int) {
         val currItem = itemList[position]
 
-        val index = 0//position
+        val index = position
         val resourceName = when(tabIndex) {
             VIPStore.CARDS.tabIndex -> {
                 VIPStoreHelper.INSTANCE.getCardBackPreFix() + index

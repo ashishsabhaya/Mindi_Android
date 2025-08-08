@@ -2,6 +2,7 @@
 <resources>
     <declare-styleable name="BackgroundConstraintLayout">
         <attr name="strokeWidth" format="dimension" />
+        <attr name="dBottomMargin" format="dimension" />
         <attr name="cornerRadius" format="dimension" />
         <attr name="customWidth" format="dimension" />
         <attr name="customHeight" format="dimension" />
@@ -36,12 +37,32 @@
         <attr name="isSingleLightColor" format="boolean" />
         <attr name="isSelectedColorIsBlueGradient" format="boolean" />
         <attr name="containerHeight" format="dimension" />
+        <attr name="cornerRadiusTopLeft" format="dimension" />
+        <attr name="cornerRadiusTopRight" format="dimension" />
+        <attr name="cornerRadiusBottomLeft" format="dimension" />
+        <attr name="cornerRadiusBottomRight" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="CustomBorderConstraintLayout">
+        <attr name="bgCornerRadius" format="dimension" />
+        <attr name="bgStrokeWidth" format="dimension" />
+        <attr name="bgFillColor" format="color" />
+        <attr name="bgStrokeColor" format="color" />
+
+        <attr name="cbCornerRadiusTopLeft" format="dimension"/>
+        <attr name="cbCornerRadiusTopRight" format="dimension"/>
+        <attr name="cbCornerRadiusBottomRight" format="dimension"/>
+        <attr name="cbCornerRadiusBottomLeft" format="dimension"/>
     </declare-styleable>
 
     <declare-styleable name="StrokeTextView">
         <attr name="txtStrokeEnabled" format="boolean" />
         <attr name="txtStrokeWidth" format="dimension" />
         <attr name="txtStrokeColor" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="DialogBackgroundCard">
+        <attr name="cardStrokeColor" format="color" />
     </declare-styleable>
 
     <declare-styleable name="RadioConstraintLayout">

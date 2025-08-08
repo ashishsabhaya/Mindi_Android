@@ -13,16 +13,23 @@ class DialogBackgroundCard @JvmOverloads constructor(
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
 ) : ConstraintLayout(context, attrs, defStyleAttr) {
+
     private lateinit var imageView: ImageView
 
     init {
-        // Set layout size to match parent
         layoutParams = LayoutParams(
             LayoutParams.MATCH_PARENT,
             LayoutParams.MATCH_PARENT
         )
 
-        // === CARD VIEW SECTION (MaterialCardView with ImageView) ===
+        // Read custom attribute (strokeColor)
+        val typedArray = context.obtainStyledAttributes(attrs, R.styleable.DialogBackgroundCard)
+        val strokeColorValue = typedArray.getColor(
+            R.styleable.DialogBackgroundCard_cardStrokeColor,
+            ContextCompat.getColor(context, R.color.white) // default white
+        )
+        typedArray.recycle()
+
         val cardView = MaterialCardView(context).apply {
             id = generateViewId()
             layoutParams = LayoutParams(
@@ -34,8 +41,7 @@ class DialogBackgroundCard @JvmOverloads constructor(
                 startToStart = LayoutParams.PARENT_ID
                 endToEnd = LayoutParams.PARENT_ID
             }
-
-            strokeColor = ContextCompat.getColor(context, R.color.white)
+            strokeColor = strokeColorValue
             strokeWidth = resources.getDimensionPixelSize(com.intuit.sdp.R.dimen._1sdp)
         }
 
@@ -55,5 +61,4 @@ class DialogBackgroundCard @JvmOverloads constructor(
     fun setSpotlightBackgroundResource() {
         imageView.setImageResource(R.drawable.dialog_background1)
     }
-
 }

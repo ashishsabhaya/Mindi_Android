@@ -7,7 +7,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import com.keylogic.mindi.R
 
-class SeparationView @JvmOverloads constructor(
+class SeparationTCBView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
@@ -19,9 +19,9 @@ class SeparationView @JvmOverloads constructor(
 
     private fun buildBackgroundDrawable(): GradientDrawable {
         val colors = intArrayOf(
-            ContextCompat.getColor(context, R.color.transparent),
-            ContextCompat.getColor(context, R.color.white),
-            ContextCompat.getColor(context, R.color.transparent)
+            ContextCompat.getColor(context, R.color.separator_tcb_start),
+            ContextCompat.getColor(context, R.color.separator_tcb_center),
+            ContextCompat.getColor(context, R.color.separator_tcb_end)
         )
 
         return GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM, colors).apply {

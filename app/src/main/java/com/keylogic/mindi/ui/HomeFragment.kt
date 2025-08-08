@@ -20,6 +20,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import com.google.gson.Gson
 import com.keylogic.mindi.MainActivity
 import com.keylogic.mindi.adapters.GameModeAdapter
 import com.keylogic.mindi.enums.GameMode
@@ -27,8 +28,11 @@ import com.keylogic.mindi.helper.AdHelper
 import com.keylogic.mindi.helper.CommonHelper
 import com.keylogic.mindi.R
 import com.keylogic.mindi.databinding.FragmentHomeBinding
+import com.keylogic.mindi.dialogs.GameResultFragment
+import com.keylogic.mindi.gamePlay.models.Score
 import com.keylogic.mindi.helper.DailyRewardHelper
 import com.keylogic.mindi.internet.NetworkMonitor
+import com.keylogic.mindi.models.ResultProfile
 import com.keylogic.mindi.ui.viewModel.HomeViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -90,13 +94,16 @@ class HomeFragment : Fragment() {
         }
 
         CommonHelper.INSTANCE.setScaleOnTouch(binding.statisticsCons) {
+
         }
 
         val adapter = GameModeAdapter(GameMode.entries.toList()) { mode ->
-            when (mode) {
-                GameMode.ONLINE -> findNavController().navigate(R.id.action_homeFragment_to_onlineConfigFragment)
-                GameMode.PLAY_WITH_FRIEND -> findNavController().navigate(R.id.action_homeFragment_to_multiplayerConfigFragment)
-                GameMode.OFFLINE -> findNavController().navigate(R.id.action_homeFragment_to_offlineConfigFragment)
+            if (findNavController().currentDestination?.id == R.id.homeFragment) {
+                when (mode) {
+                    GameMode.ONLINE -> findNavController().navigate(R.id.action_homeFragment_to_onlineConfigFragment)
+                    GameMode.PLAY_WITH_FRIEND -> findNavController().navigate(R.id.action_homeFragment_to_multiplayerConfigFragment)
+                    GameMode.OFFLINE -> findNavController().navigate(R.id.action_homeFragment_to_offlineConfigFragment)
+                }
             }
         }
 

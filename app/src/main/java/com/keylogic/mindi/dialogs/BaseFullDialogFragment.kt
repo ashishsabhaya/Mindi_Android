@@ -70,10 +70,8 @@ abstract class BaseFullDialogFragment : DialogFragment() {
             WindowManager.LayoutParams.FLAG_FULLSCREEN
         )
 
-        // Optional: remove background dim if needed
         window.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
 
-        // Enable immersive fullscreen UI
         SystemUiHelper.INSTANCE.fullScreenForDialog(window)
     }
 

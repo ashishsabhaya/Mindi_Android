@@ -28,6 +28,11 @@ class SelectionConstraintLayout @JvmOverloads constructor(
     private var defaultStrokeWidth = 0f.dpToPx(context)
     private var elevationValue = 8f.dpToPx(context) // Example: fixed elevation = 8dp
 
+    private var cornerRadiusTopLeft = 0f.dpToPx(context)
+    private var cornerRadiusTopRight = 0f.dpToPx(context)
+    private var cornerRadiusBottomRight = 0f.dpToPx(context)
+    private var cornerRadiusBottomLeft = 0f.dpToPx(context)
+
     init {
         context.withStyledAttributes(attrs, R.styleable.SelectionConstraintLayout) {
 
@@ -69,6 +74,25 @@ class SelectionConstraintLayout @JvmOverloads constructor(
                 false
             )
 
+            // NEW: Read specific corner radii
+            cornerRadiusTopLeft = getDimension(
+                R.styleable.SelectionConstraintLayout_cornerRadiusTopLeft,
+                cornerRadiusTopLeft
+            )
+            cornerRadiusTopRight = getDimension(
+                R.styleable.SelectionConstraintLayout_cornerRadiusTopRight,
+                cornerRadiusTopRight
+            )
+            cornerRadiusBottomRight = getDimension(
+                R.styleable.SelectionConstraintLayout_cornerRadiusBottomRight,
+                cornerRadiusBottomRight
+            )
+            cornerRadiusBottomLeft = getDimension(
+                R.styleable.SelectionConstraintLayout_cornerRadiusBottomLeft,
+                cornerRadiusBottomLeft
+            )
+
+
             if (hasValue(R.styleable.SelectionConstraintLayout_containerHeight)) {
                 customHeight =
                     getDimension(R.styleable.SelectionConstraintLayout_containerHeight, 0f)
@@ -84,7 +108,7 @@ class SelectionConstraintLayout @JvmOverloads constructor(
         var fgCornerRadius = customHeight * (10f / 53f)
         if (customCornerRadius != 0f)
             fgCornerRadius = customCornerRadius
-        val cornerRadius = fgCornerRadius + 4f
+        val givenCornerRadius = fgCornerRadius + 4f
 
         // Dynamic stroke: 1px for 53px height
         val strokeWidth = if (isStrokeEnabled) {
@@ -151,7 +175,18 @@ class SelectionConstraintLayout @JvmOverloads constructor(
         }
 
         return GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM, colors).apply {
-            this.cornerRadius = cornerRadius
+            if (cornerRadiusTopLeft > 0f || cornerRadiusTopRight > 0f ||
+                cornerRadiusBottomRight > 0f || cornerRadiusBottomLeft > 0f) {
+                cornerRadii = floatArrayOf(
+                    cornerRadiusTopLeft, cornerRadiusTopLeft,
+                    cornerRadiusTopRight, cornerRadiusTopRight,
+                    cornerRadiusBottomRight, cornerRadiusBottomRight,
+                    cornerRadiusBottomLeft, cornerRadiusBottomLeft
+                )
+            } else {
+                this.cornerRadius = givenCornerRadius
+            }
+
             if (strokeWidth > 0f) {
                 setStroke(strokeWidth.toInt(), ContextCompat.getColor(context, R.color.white))
             }

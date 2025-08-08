@@ -10,6 +10,7 @@ import com.keylogic.mindi.enums.DeviceType
 import com.keylogic.mindi.helper.CommonHelper
 import com.keylogic.mindi.gamePlay.helper.DeviceHelper
 import com.keylogic.mindi.gamePlay.helper.DisplayHelper
+import com.keylogic.mindi.helper.AdHelper
 import com.keylogic.mindi.internet.NetworkMonitor
 
 class MainActivity : BaseActivity(), NetworkMonitor.NetworkStateListener {
@@ -21,7 +22,7 @@ class MainActivity : BaseActivity(), NetworkMonitor.NetworkStateListener {
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
 
-        networkMonitor = NetworkMonitor(this, this)
+        networkMonitor = NetworkMonitor(this,this)
 
         val deviceHelper = DeviceHelper(this)
         val sizeCategory = deviceHelper.getDeviceSizeCategory()
@@ -37,6 +38,7 @@ class MainActivity : BaseActivity(), NetworkMonitor.NetworkStateListener {
     override fun onResume() {
         super.onResume()
         networkMonitor.register()
+        AdHelper.INSTANCE.preloadAllAdsInBackground(this)
     }
 
     override fun onPause() {
@@ -76,4 +78,5 @@ class MainActivity : BaseActivity(), NetworkMonitor.NetworkStateListener {
             onNetworkLost()
         }
     }
+
 }

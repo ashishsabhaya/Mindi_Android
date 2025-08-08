@@ -535,7 +535,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent">
 
-                    <com.keylogic.mindi.custom.SeparationView
+                    <com.keylogic.mindi.custom.SeparationTCBView
                         android:layout_width="0dp"
                         android:layout_height="@dimen/_1sdp"
                         android:layout_marginBottom="@dimen/_1sdp"

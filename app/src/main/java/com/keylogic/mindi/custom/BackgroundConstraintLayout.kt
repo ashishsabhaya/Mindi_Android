@@ -17,6 +17,7 @@ class BackgroundConstraintLayout @JvmOverloads constructor(
 
     private var customCornerRadius = 0f.dpToPx(context)
     private var defaultStrokeWidth = 0f.dpToPx(context)
+    private var defaultBottomMargin = 0f.dpToPx(context)
     private var elevationValue = 8f.dpToPx(context) // Example: fixed elevation = 8dp
     private var customWidth: Float? = null
     private var customHeight: Float? = null
@@ -36,6 +37,8 @@ class BackgroundConstraintLayout @JvmOverloads constructor(
 
             defaultStrokeWidth =
                 getDimension(R.styleable.BackgroundConstraintLayout_strokeWidth, defaultStrokeWidth)
+            defaultBottomMargin =
+                getDimension(R.styleable.BackgroundConstraintLayout_dBottomMargin, defaultBottomMargin)
             customCornerRadius = getDimension(
                 R.styleable.BackgroundConstraintLayout_cornerRadius,
                 customCornerRadius
@@ -94,7 +97,9 @@ class BackgroundConstraintLayout @JvmOverloads constructor(
             strokeWidth = 0f
 
         // Background bottom inset (approx. 8%)
-        val bottomMargin = if (isCircular) viewHeight * 0.1f else viewHeight * 0.09f
+        var bottomMargin = if (isCircular) viewHeight * 0.1f else viewHeight * 0.09f
+        if (defaultBottomMargin != 0f)
+            bottomMargin = defaultBottomMargin
 
         setPadding(
             paddingLeft,

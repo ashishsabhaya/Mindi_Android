@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/rp_profile_card"
+            android:layout_width="@dimen/_36sdp"
+            android:layout_height="@dimen/_36sdp"
+            app:cardCornerRadius="@dimen/_36sdp"
+            app:strokeWidth="1dp"
+            app:strokeColor="@color/green_team"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <ImageView
+                android:id="@+id/rp_profile_img"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/avatar_1"/>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.keylogic.mindi.custom.StrokeTextView
+            android:id="@+id/rp_profile_name_txt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:txtStrokeEnabled="false"
+            android:textSize="@dimen/_12ssp"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:text="@string/guest"
+            android:singleLine="true"
+            app:layout_constraintTop_toBottomOf="@+id/rp_profile_card"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rp_profile_name_txt">
+
+            <ImageView
+                android:id="@+id/rp_chip_img"
+                android:layout_width="@dimen/_10sdp"
+                android:layout_height="@dimen/_10sdp"
+                android:src="@drawable/ic_chip" />
+
+            <com.keylogic.mindi.custom.StrokeTextView
+                android:id="@+id/rp_chip_count_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:singleLine="true"
+                android:layout_marginStart="@dimen/_2sdp"
+                android:text="@string/guest"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_8ssp"
+                app:txtStrokeEnabled="false" />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

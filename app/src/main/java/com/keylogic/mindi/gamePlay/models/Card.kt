@@ -18,7 +18,7 @@ class Card(
     }
 
     fun getTag(): String {
-        return "$suit$rank$uniqueIndex"
+        return "${suit.suitName}$rank$uniqueIndex"
     }
 
     fun getCard(): String {

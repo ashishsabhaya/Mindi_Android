@@ -13,6 +13,7 @@ import com.keylogic.mindi.enums.SuitType
 import com.keylogic.mindi.helper.CommonHelper
 import com.keylogic.mindi.gamePlay.helper.DisplayHelper
 import com.keylogic.mindi.R
+import com.keylogic.mindi.gamePlay.helper.GameHelper
 import kotlin.apply
 
 class CardView @JvmOverloads constructor(
@@ -38,8 +39,6 @@ class CardView @JvmOverloads constructor(
         0f,
         0f
     )
-
-
     private fun updateView() {
         setImageResource(getImageResourceByName(card.getCard(), CommonHelper.currCFTheme))
         x = xPos
@@ -52,7 +51,6 @@ class CardView @JvmOverloads constructor(
 
     fun setDisabled(isCardDisabled: Boolean) {
         isDisabled = isCardDisabled
-        isClickable = !isCardDisabled
         if (isTrumpCard())
             setTrumpCard(true)
         else {
@@ -71,17 +69,15 @@ class CardView @JvmOverloads constructor(
     fun setSelectedCard(isSelected: Boolean, withColor: Boolean = true) {
         isCardSelected = isSelected
         if (withColor) {
-            if (isTrumpCard())
-                setTrumpCard(true)
-            else {
+//            if (isTrumpCard())
+//                setTrumpCard(true)
+//            else {
                 val color = ContextCompat.getColor(context, R.color.selected_cards)
                 val colorWithOpacity = Color.argb(if (isSelected) 150 else 0, Color.red(color), Color.green(color), Color.blue(color))
                 setColorFilter(colorWithOpacity, PorterDuff.Mode.SRC_ATOP)
-            }
+//            }
         }
-
         val targetY = if (isSelected) yPos - (DisplayHelper.cardHeight / 4f) else yPos
-
         ObjectAnimator.ofFloat(this, "translationY", targetY).apply {
             setDuration(100)
             start()
@@ -89,14 +85,14 @@ class CardView @JvmOverloads constructor(
     }
 
     private fun isTrumpCard(): Boolean {
-        return !isDefaultCard && card.suit != SuitType.NONE //&& card.suit == GameModel.trump.suit
+        return !isDefaultCard && card.suit != SuitType.NONE && card.suit == GameHelper.trumpCardSuit.suit
     }
 
     fun updateResource(newCard: Card) {
-        card = newCard
+        this.card = newCard
         setImageResource(getImageResourceByName(newCard.getCard(), CommonHelper.currCFTheme))
-        if (isTrumpCard())
-            setTrumpCard(true)
+//        if (isTrumpCard())
+//            setTrumpCard(true)
     }
 
     fun setCustomSize(width: Int, height: Int) {

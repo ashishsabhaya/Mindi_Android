@@ -4,14 +4,17 @@ import android.view.LayoutInflater
 import android.view.View
 import androidx.navigation.fragment.findNavController
 import com.keylogic.mindi.databinding.DialogFragmentExitGameBinding
+import com.keylogic.mindi.helper.AdHelper
 import com.keylogic.mindi.helper.CommonHelper
 
 class ExitGameDialogFragment : BaseDialogFragment() {
     private var _binding: DialogFragmentExitGameBinding? = null
     private val binding get() = _binding!!
+    private var isGameExit = false
 
     override fun getContentView(inflater: LayoutInflater): View {
         _binding = DialogFragmentExitGameBinding.inflate(inflater)
+        isGameExit = requireArguments().getBoolean(KEY_IS_GAME_EXIT)
         setupDialogUI()
         return binding.root
     }
@@ -22,9 +25,21 @@ class ExitGameDialogFragment : BaseDialogFragment() {
         }
 
         CommonHelper.INSTANCE.setScaleOnTouch(binding.negativeBtnCons) {
-            findNavController().popBackStack()
-            requireActivity().finish()
+            if (isGameExit) {
+                AdHelper.INSTANCE.showInterstitialAdWithLoading(requireActivity(), onAdDismiss = {
+                    findNavController().popBackStack()
+                    findNavController().popBackStack()
+                })
+            }
+            else {
+                findNavController().popBackStack()
+                requireActivity().finish()
+            }
         }
+    }
+
+    companion object {
+        const val KEY_IS_GAME_EXIT = "is_game_exit"
     }
 
     override fun onDestroyView() {

@@ -6,7 +6,6 @@ import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.AnimationUtils
 import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -14,10 +13,14 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.keylogic.mindi.R
 import com.keylogic.mindi.adapters.DailyRewardPlanAdapter
 import com.keylogic.mindi.databinding.FragmentDailyRewardBinding
+import com.keylogic.mindi.enums.DeviceType
+import com.keylogic.mindi.gamePlay.animation.ChipAnimation
+import com.keylogic.mindi.gamePlay.helper.DisplayHelper
 import com.keylogic.mindi.helper.AdHelper
 import com.keylogic.mindi.helper.CommonHelper
 import com.keylogic.mindi.helper.DailyRewardHelper
 import com.keylogic.mindi.helper.ProfileHelper
+import com.keylogic.mindi.models.DailyReward
 
 class DailyRewardFragment : Fragment() {
     private var _binding: FragmentDailyRewardBinding? = null
@@ -54,34 +57,52 @@ class DailyRewardFragment : Fragment() {
         binding.rfWatchAdChipCountTxt.text = CommonHelper.INSTANCE.formatChip(currReward.chipCount * 2)
 
         CommonHelper.INSTANCE.setScaleOnTouch(binding.rfCollectBtnCons) {
-            binding.rfCollectBtnCons.isEnabled = false
-            ProfileHelper.totalChips += currReward.chipCount
-            DailyRewardHelper.isDailyRewardCollected = true
-            DailyRewardHelper.INSTANCE.setNextDayReward(requireContext())
-
-            binding.topTitleInclude.chipCountTxt.text = CommonHelper.INSTANCE.getTotalChip()
-            Handler(Looper.getMainLooper()).postDelayed({
-                findNavController().popBackStack()
-            }, 1_000L)
+            rewardCollected(1, currReward)
         }
 
         CommonHelper.INSTANCE.setScaleOnTouch(binding.rfWatchAndCollectBtnCons) {
             binding.rfWatchAndCollectBtnCons.isEnabled = false
             AdHelper.INSTANCE.showRewardedAdWithLoading(requireActivity(), onAdDismiss = { isAdDismiss ->
-                if (isAdDismiss) {
-                    ProfileHelper.totalChips += currReward.chipCount * 2
-                    binding.topTitleInclude.chipCountTxt.text = CommonHelper.INSTANCE.getTotalChip()
-                    DailyRewardHelper.isDailyRewardCollected = true
-                    DailyRewardHelper.INSTANCE.setNextDayReward(requireContext())
-
-                    Handler(Looper.getMainLooper()).postDelayed({
-                        findNavController().popBackStack()
-                    }, 1_000L)
-                }
+                if (isAdDismiss)
+                    rewardCollected(2, currReward)
                 else
                     binding.rfWatchAndCollectBtnCons.isEnabled = true
             })
         }
+    }
+
+    private fun rewardCollected(multiple: Int, currReward: DailyReward) {
+        val context = requireContext()
+        val startX = DisplayHelper.screenWidth / 2f - if (CommonHelper.deviceType == DeviceType.NORMAL) {
+            if (multiple == 1)
+                context.resources.getDimensionPixelSize(com.intuit.sdp.R.dimen._96sdp)
+            else
+                - context.resources.getDimensionPixelSize(com.intuit.sdp.R.dimen._76sdp)
+        }
+        else {
+            if (multiple == 1)
+                context.resources.getDimensionPixelSize(com.intuit.sdp.R.dimen._94sdp)
+            else
+                - context.resources.getDimensionPixelSize(com.intuit.sdp.R.dimen._78sdp)
+        }
+
+        val startY = DisplayHelper.screenHeight - 0f - if (CommonHelper.deviceType == DeviceType.NORMAL)
+            context.resources.getDimensionPixelSize(com.intuit.sdp.R.dimen._30sdp)
+        else
+            context.resources.getDimensionPixelSize(com.intuit.sdp.R.dimen._28sdp)
+
+        val endX = 0f + context.resources.getDimensionPixelSize(com.intuit.sdp.R.dimen._26sdp)
+
+        val endY = 0f + context.resources.getDimensionPixelSize(com.intuit.sdp.R.dimen._18sdp)
+
+        ChipAnimation.INSTANCE.collectDailyRewardChips(binding.rewardAnimRela, startX, startY,
+            endX, endY, onAnimationComplete = {
+                ProfileHelper.totalChips += currReward.chipCount * multiple
+                binding.topTitleInclude.chipCountTxt.text = CommonHelper.INSTANCE.getTotalChip()
+                DailyRewardHelper.isDailyRewardCollected = true
+                DailyRewardHelper.INSTANCE.setNextDayReward(requireContext())
+                findNavController().popBackStack()
+            })
     }
 
     override fun onDestroyView() {

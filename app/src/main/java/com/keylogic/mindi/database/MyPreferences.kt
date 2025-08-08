@@ -79,6 +79,7 @@ class MyPreferences {
             putString(KEY_CURR_REWARD_DAY, DailyRewardHelper.lastSavedRewardDay)
             putBoolean(KEY_IS_REWARD_COLLECTED, DailyRewardHelper.isDailyRewardCollected)
         }
+        saveGameProfileDetails(context)
     }
 
     fun saveGameThemeDetails(context: Context) {

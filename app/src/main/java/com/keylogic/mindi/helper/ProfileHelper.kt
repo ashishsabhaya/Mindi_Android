@@ -18,7 +18,7 @@ class ProfileHelper {
         var gamePlayed = 0
         var defaultProfileId = 0
         var defaultCardsId = 0
-        var defaultTableId = 0
+        var defaultTableId = 100
         var defaultBackgroundId = 0
         var profileId = 0
         var tableId = 0
@@ -36,8 +36,9 @@ class ProfileHelper {
             isBot = false,
             isOnline = false,
             isCreator = false,
-            isRedTeamMember = false,
-            lastTimeStamp = System.currentTimeMillis()
+            lastTimeStamp = System.currentTimeMillis(),
+            isMyTeammate = -1,
+            centerCardIndex = -1
         )
     }
 
@@ -61,6 +62,7 @@ class ProfileHelper {
 
     fun getTableResource(context: Context): Int {
         val name = VIPStoreHelper.INSTANCE.getTablePreFix() + tableId
+        CommonHelper.print("Table id = $tableId")
         val resource = getProfileImageByName(context, name)
         return resource
     }

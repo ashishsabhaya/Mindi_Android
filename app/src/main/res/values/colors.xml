@@ -7,13 +7,14 @@
     <color name="transparent_50">#8001B2DE</color>
     <color name="transparent_75">#BF01B2DE</color>
 
-    <color name="message_bg">#4001B2DE</color>
+    <color name="message_bg">#99000000</color>
     <color name="player_waiting_bg">#02BBE9</color>
 
     <color name="black_transparent_75">#BF000000</color>
     <color name="setting_option_icon_bg">#012738</color>
 
     <color name="chip_store_price_txt">#012738</color>
+    <color name="game_result_stroke">#ABE9F8</color>
 
     <color name="bg_img_fg">#4D000000</color>
 
@@ -24,6 +25,19 @@
     <color name="position_bg_start">#001924</color>
     <color name="position_bg_center">#01B2DE</color>
     <color name="position_bg_end">#001924</color>
+
+    <color name="game_menu_start">#012738</color>
+    <color name="game_menu_center">#E6012F44</color>
+    <color name="game_menu_end">#00013247</color>
+
+    <color name="separator_tcb_start">#00FFFFFF</color>
+    <color name="separator_tcb_center">#FFFFFFFF</color>
+    <color name="separator_tcb_end">#00FFFFFF</color>
+
+    <color name="game_menu_icon">#02BBE9</color>
+
+    <color name="separator_lr_start">#02BBE9</color>
+    <color name="separator_lr_end">#00012F44</color>
 
     <color name="position_fg_single">#012738</color>
     <color name="position_fg_start">#02BBE9</color>
@@ -46,6 +60,9 @@
 
     <color name="red_team">#FF0204</color>
     <color name="green_team">#1DF107</color>
+
+    <color name="red_team_timer">#99FF0204</color>
+    <color name="green_team_timer">#991DF107</color>
 
     <color name="red_selected_start">#FF4E85</color>
     <color name="red_selected_end">#6E092D</color>
@@ -92,9 +109,9 @@
     <color name="rc_bottom_start">#089201</color>
     <color name="rc_bottom_end">#022500</color>
 
-    <color name="single_light_bg_start">#30536600</color>
+    <color name="single_light_bg_start">#00305366</color>
     <color name="single_light_bg_center">#305366</color>
-    <color name="single_light_bg_end">#30536600</color>
+    <color name="single_light_bg_end">#00305366</color>
 
     <color name="instagram_bg_start">#00FF004F</color>
     <color name="instagram_bg_center">#FF004F</color>

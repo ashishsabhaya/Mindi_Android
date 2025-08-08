@@ -42,7 +42,7 @@
             </com.keylogic.mindi.custom.BackgroundConstraintLayout>
 
             <com.keylogic.mindi.custom.IconTextConstraintLayout
-                android:id="@+id/bit_price_cons"
+                android:id="@+id/bet_price_cons"
                 android:layout_width="@dimen/_100sdp"
                 android:layout_height="@dimen/_28sdp"
                 app:cViewHeight="@dimen/_28sdp"
@@ -63,7 +63,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:contentDescription="@string/image_content_description"
-                android:src="@drawable/table_0"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -81,27 +80,6 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <RelativeLayout
-            android:id="@+id/programmatically_xml_relative"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <include
-                android:id="@+id/left_hand_layout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:isTopSide="false"
-                layout="@layout/left_hands_indicator_layout"/>
-
-            <include
-                android:id="@+id/right_hand_layout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:isTopSide="true"
-                layout="@layout/right_hands_indicator_layout"/>
-
-        </RelativeLayout>
 
         <include
             android:id="@+id/include_layouts"

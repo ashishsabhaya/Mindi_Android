@@ -34,10 +34,10 @@ class ChipStoreHelper {
         ))
         chipPlanList.add(ChipPlan(
             planIndex = 3,
-            totalChips = 0L,
-            planPrice = "",
+            totalChips = 2_50_000L,
+            planPrice = "₹ 399",
             isRemoveAds = false,
-            isRestore = true
+            isRestore = false
         ))
     }
 

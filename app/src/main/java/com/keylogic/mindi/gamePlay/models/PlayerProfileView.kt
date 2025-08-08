@@ -1,4 +1,4 @@
-package com.keylogic.mindi.custom
+package com.keylogic.mindi.gamePlay.models
 
 import android.content.Context
 import android.graphics.Color
@@ -6,15 +6,20 @@ import android.util.AttributeSet
 import android.view.Gravity
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.RelativeLayout
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.google.android.material.card.MaterialCardView
 import com.keylogic.mindi.R
+import com.keylogic.mindi.custom.PieTimerView
+import com.keylogic.mindi.custom.SelectionConstraintLayout
+import com.keylogic.mindi.custom.StrokeTextView
 
 class PlayerProfileView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
 ) : ConstraintLayout(context, attrs, defStyleAttr) {
+    var isTimerRunning = false
     private var containerWidth = 0
     private var isRedTeam = true
     private var containerHeight = 0
@@ -29,6 +34,8 @@ class PlayerProfileView @JvmOverloads constructor(
     private lateinit var nameTextView: StrokeTextView
     private lateinit var backgroundLayout: SelectionConstraintLayout
     private lateinit var imageCardView: MaterialCardView
+    private lateinit var pieTimerView: PieTimerView
+    private var counterSec = 15
 
     init {
         initializeAttributes(context, attrs)
@@ -55,6 +62,14 @@ class PlayerProfileView @JvmOverloads constructor(
 
         val imageSectionHeight = containerHeight - backgroundHeight
 
+        val linearLayout1 = RelativeLayout(context).apply {
+            layoutParams = LinearLayout.LayoutParams(imageSectionHeight, imageSectionHeight).apply {
+                gravity = Gravity.CENTER_HORIZONTAL
+                setMargins(cardMarginArr[0], cardMarginArr[1], cardMarginArr[2], cardMarginArr[3])
+            }
+
+        }
+
         // Image Card
         imageCardView = MaterialCardView(context).apply {
             layoutParams = LinearLayout.LayoutParams(imageSectionHeight, imageSectionHeight).apply {
@@ -72,7 +87,18 @@ class PlayerProfileView @JvmOverloads constructor(
             scaleType = ImageView.ScaleType.CENTER_CROP
         }
 
-        imageCardView.addView(imageView)
+        pieTimerView = PieTimerView(context).apply {
+            layoutParams = LayoutParams(
+                LayoutParams.MATCH_PARENT,
+                LayoutParams.MATCH_PARENT
+            )
+            setCornerRadius(imageSectionHeight / 2f)
+            setTotalTime(counterSec)
+        }
+
+        linearLayout1.addView(imageView)
+        linearLayout1.addView(pieTimerView)
+        imageCardView.addView(linearLayout1)
 
         // Background Layout
         backgroundLayout = SelectionConstraintLayout(context).apply {
@@ -105,6 +131,18 @@ class PlayerProfileView @JvmOverloads constructor(
         this.addView(linearLayout)
     }
 
+    fun startTimer() {
+        isTimerRunning = true
+        pieTimerView.visibility = VISIBLE
+        pieTimerView.startTimer()
+    }
+
+    fun stopTimer() {
+        isTimerRunning = false
+        pieTimerView.visibility = GONE
+        pieTimerView.stopTimer()
+    }
+
     // ========= Setter Functions =========
     fun setContainerSize(widthPx: Int, heightPx: Int, isRed: Boolean = true) {
         containerWidth = widthPx
@@ -121,6 +159,7 @@ class PlayerProfileView @JvmOverloads constructor(
             imageCardView.strokeColor = context.getColor(R.color.red_team)
         else
             imageCardView.strokeColor = context.getColor(R.color.green_team)
+        pieTimerView.isUserTeam = !isRedTeam
     }
 
     fun updateDetails(

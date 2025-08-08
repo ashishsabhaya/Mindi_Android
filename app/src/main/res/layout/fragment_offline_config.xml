@@ -18,25 +18,14 @@
         android:paddingHorizontal="@dimen/_10sdp"
         android:paddingVertical="@dimen/_8sdp">
 
-        <com.keylogic.mindi.custom.BackgroundConstraintLayout
-            android:id="@+id/cancel_cons"
-            android:layout_width="@dimen/_34sdp"
-            android:layout_height="@dimen/_34sdp"
-            app:customHeight="@dimen/_34sdp"
-            app:strokeWidth="@dimen/_1sdp"
-            app:cornerRadius="@dimen/_6sdp"
-            app:isPositive="false"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <ImageView
-                android:id="@+id/cancel_img"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="@dimen/_6sdp"
-                android:src="@drawable/ic_cancel"/>
-
-        </com.keylogic.mindi.custom.BackgroundConstraintLayout>
+        <include
+            android:id="@+id/top_title_include"
+            layout="@layout/top_title_layout"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_42sdp"
+            app:layout_constraintEnd_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/deck_type_recycler"

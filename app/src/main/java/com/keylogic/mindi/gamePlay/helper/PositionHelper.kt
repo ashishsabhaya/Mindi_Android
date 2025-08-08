@@ -14,6 +14,28 @@ class PositionHelper {
         val INSTANCE = PositionHelper()
     }
 
+    fun getUserCardXDistance(): Float {
+        return cardWidth * 0.6f
+    }
+
+    fun getUserCardYPosition(): Float {
+        return screenHeight - cardHeight + 0f
+    }
+
+    fun getTrumpCardPosition(totalPlayers: Int): FloatArray {
+        val arr = FloatArray(2)
+
+        val lastPlayerPos = getPlayerPosition(totalPlayers, totalPlayers)
+        val firstPlayerPos = getPlayerPosition(1, totalPlayers)
+        val xPos = lastPlayerPos[0] + (profileWidth - cardWidth) / 2f
+            .coerceAtMost(screenWidth - cardWidth * 1.25f)
+        val yPos = firstPlayerPos[1] + (profileHeight - cardHeight) / 2f
+            .coerceAtMost(screenHeight - cardHeight * 1.25f)
+        arr[0] = xPos
+        arr[1] = yPos
+        return arr
+    }
+
     fun getPlayerPosition(index: Int, totalPlayers: Int): FloatArray {
         val halfSWidth = screenWidth / 2f
         val halfSHeight = screenHeight / 2f
@@ -135,6 +157,14 @@ class PositionHelper {
             }
         }
         return pos
+    }
+
+    fun getPlayerEntetedCardPosition(index: Int, totalPlayers: Int): FloatArray {
+        val pos = getPlayerPosition(index, totalPlayers)
+        val arr = FloatArray(2)
+        arr[0] = pos[0] + (profileWidth - cardWidth) / 2f
+        arr[1] = pos[1] + (profileHeight - cardHeight) / 2f
+        return arr
     }
 
     fun getPlayerCardPosition(index: Int, totalPlayers: Int): FloatArray {

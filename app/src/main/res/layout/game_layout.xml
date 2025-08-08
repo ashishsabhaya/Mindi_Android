@@ -11,7 +11,78 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <ImageView
+            android:id="@+id/mindi_count_img"
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="@dimen/_100sdp"
+            android:visibility="gone"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/programmatically_xml_relative"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/winner_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:alpha="0"
+            android:background="@color/black_transparent_75">
+
+            <ImageView
+                android:id="@+id/winner_title_img"
+                android:layout_width="@dimen/_160sdp"
+                android:layout_height="@dimen/_80sdp"
+                android:src="@drawable/you_are_winner"
+                android:alpha="0"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/winner_message_txt"/>
+
+            <com.keylogic.mindi.custom.StrokeTextView
+                android:id="@+id/winner_message_txt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="@dimen/_18ssp"
+                android:text="@string/guest"
+                app:txtStrokeEnabled="false"
+                android:textColor="@color/white"
+                android:singleLine="true"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/guideline1"/>
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_centerInParent="true"
+                app:layout_constraintGuide_percent="0.5"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <include
+            android:id="@+id/left_hand_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:isTopSide="false"
+            layout="@layout/left_hands_indicator_layout"/>
+
+        <include
+            android:id="@+id/right_hand_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:isTopSide="true"
+            layout="@layout/right_hands_indicator_layout"/>
+
+    </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/animation_relative"

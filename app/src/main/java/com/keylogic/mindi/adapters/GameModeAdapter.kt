@@ -27,6 +27,8 @@ class GameModeAdapter(
     override fun onBindViewHolder(holder: GameModeViewHolder, position: Int) {
         val gameMode = gameModes[position]
         holder.modeImg.setImageResource(gameMode.resource)
+        holder.itemView.scaleX = 1f
+        holder.itemView.scaleY = 1f
 
         CommonHelper.INSTANCE.setScaleOnTouch(holder.itemView, onclick = {
             onItemClick(gameMode)
