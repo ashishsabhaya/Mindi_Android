@@ -1,9 +1,5 @@
 package com.keylogic.mindi.ui
 
-import android.content.BroadcastReceiver
-import android.content.Context
-import android.content.Intent
-import android.net.ConnectivityManager
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -20,19 +16,15 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import com.google.gson.Gson
 import com.keylogic.mindi.MainActivity
+import com.keylogic.mindi.R
 import com.keylogic.mindi.adapters.GameModeAdapter
+import com.keylogic.mindi.databinding.FragmentHomeBinding
+import com.keylogic.mindi.dialogs.ExitGameDialogFragment
 import com.keylogic.mindi.enums.GameMode
 import com.keylogic.mindi.helper.AdHelper
 import com.keylogic.mindi.helper.CommonHelper
-import com.keylogic.mindi.R
-import com.keylogic.mindi.databinding.FragmentHomeBinding
-import com.keylogic.mindi.dialogs.GameResultFragment
-import com.keylogic.mindi.gamePlay.models.Score
 import com.keylogic.mindi.helper.DailyRewardHelper
-import com.keylogic.mindi.internet.NetworkMonitor
-import com.keylogic.mindi.models.ResultProfile
 import com.keylogic.mindi.ui.viewModel.HomeViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -90,11 +82,13 @@ class HomeFragment : Fragment() {
         }
 
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
-            findNavController().navigate(R.id.exitGameDialogFragment)
+            val bundle = Bundle().apply {
+                putBoolean(ExitGameDialogFragment.KEY_IS_GAME_EXIT, false)
+            }
+            findNavController().navigate(R.id.exitGameDialogFragment,bundle)
         }
 
         CommonHelper.INSTANCE.setScaleOnTouch(binding.statisticsCons) {
-
         }
 
         val adapter = GameModeAdapter(GameMode.entries.toList()) { mode ->

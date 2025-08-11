@@ -5,17 +5,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.AnimationUtils
-import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
+import androidx.activity.addCallback
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.google.gson.Gson
 import com.keylogic.mindi.R
+import com.keylogic.mindi.database.MyPreferences
 import com.keylogic.mindi.databinding.FragmentPlayAreaBinding
 import com.keylogic.mindi.databinding.LeftHandsIndicatorLayoutBinding
 import com.keylogic.mindi.databinding.RightHandsIndicatorLayoutBinding
@@ -28,16 +26,23 @@ import com.keylogic.mindi.gamePlay.animation.EnterPlayerCard
 import com.keylogic.mindi.gamePlay.animation.MindiCollect
 import com.keylogic.mindi.gamePlay.animation.OpenTrumpCard
 import com.keylogic.mindi.gamePlay.animation.TeamDeclaration
-import com.keylogic.mindi.gamePlay.helper.*
+import com.keylogic.mindi.gamePlay.helper.CardGenerator
+import com.keylogic.mindi.gamePlay.helper.CenterCardHelper
+import com.keylogic.mindi.gamePlay.helper.CpuCard
+import com.keylogic.mindi.gamePlay.helper.DisplayHelper
+import com.keylogic.mindi.gamePlay.helper.GameHelper
+import com.keylogic.mindi.gamePlay.helper.PlayerCardViewHelper
+import com.keylogic.mindi.gamePlay.helper.PlayerDesignHelper
+import com.keylogic.mindi.gamePlay.helper.PositionHelper
 import com.keylogic.mindi.gamePlay.models.Card
 import com.keylogic.mindi.gamePlay.models.CardHider
 import com.keylogic.mindi.gamePlay.models.CardView
 import com.keylogic.mindi.gamePlay.models.Score
 import com.keylogic.mindi.gamePlay.models.TableConfig
-import com.keylogic.mindi.gamePlay.models.TrumpCard
-import com.keylogic.mindi.helper.*
+import com.keylogic.mindi.helper.BotHelper
+import com.keylogic.mindi.helper.CommonHelper
+import com.keylogic.mindi.helper.ProfileHelper
 import com.keylogic.mindi.interfaces.GameCycleCallback
-import com.keylogic.mindi.models.ResultProfile
 import com.keylogic.mindi.ui.viewModel.CenterCardsViewModel
 import com.keylogic.mindi.ui.viewModel.GameCycleViewModel
 import com.keylogic.mindi.ui.viewModel.PlayAreaConfigViewModel
@@ -46,7 +51,6 @@ import com.keylogic.mindi.ui.viewModel.TableConfigViewModel
 import kotlinx.coroutines.cancelChildren
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import kotlin.collections.set
 import kotlin.math.max
 
 
@@ -75,6 +79,10 @@ class PlayAreaFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentPlayAreaBinding.inflate(inflater, container, false)
+        setupFragmentResultListener()
+
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {}
+
         return binding.root
     }
 
@@ -127,21 +135,6 @@ class PlayAreaFragment : Fragment() {
         generatePlayerList()
         playerDesignHelper.designWaitingPlayer(GameHelper.playerDetailsList)
         centerCardHelper.designCenterCards()
-
-        binding.includeLayouts.rightHandLayout.root.setOnClickListener {
-            AlertDialog.Builder(requireContext())
-                .setTitle("Start New Game?")
-                .setMessage("Are you sure you want to start a new game?")
-                .setPositiveButton("Yes") { dialog, _ ->
-                    restartGame()
-                    dialog.dismiss()
-                }
-                .setNegativeButton("No") { dialog, _ ->
-                    dialog.dismiss()
-                }
-                .show()
-        }
-
         startEntryAnimation()
     }
 
@@ -161,11 +154,11 @@ class PlayAreaFragment : Fragment() {
             designTrumpCardView(card)
         }
         playAreaViewModel.mindiCount.observe(viewLifecycleOwner) { pair ->
-            MindiCollect.INSTANCE.showMindiAnimation(requireContext(),
-                tableConfig.totalPlayers,
-                binding.includeLayouts.mindiCountImg,
-                pair, onAnimationEnd = {
-                    if (pair != null && pair.first != 0) {
+            if (pair != null && pair.first != 0) {
+                MindiCollect.INSTANCE.showMindiAnimation(requireContext(),
+                    tableConfig.totalPlayers,
+                    binding.includeLayouts.mindiCountImg,
+                    pair, onAnimationEnd = {
                         val highestPlayer = GameHelper.getHighestCardPlayer()
                         if (isGameContinue()) {
                             GameHelper.roundComplete(highestPlayer)
@@ -173,8 +166,8 @@ class PlayAreaFragment : Fragment() {
                         }
                         else
                             gameWinnerFound()
-                    }
-                })
+                    })
+            }
         }
         playAreaViewModel.message.observe(viewLifecycleOwner) { msg ->
             binding.includeLayouts.messageTxt.text = msg
@@ -349,7 +342,7 @@ class PlayAreaFragment : Fragment() {
             }
 
             override fun onGameCycleComplete() {
-//                CommonHelper.print("onGameCycleComplete")
+                CommonHelper.print("onGameCycleComplete ------------------------")
                 gameCycleViewModel.stopCountdown()
 
                 val highestPlayer = GameHelper.getHighestCardPlayer()
@@ -550,13 +543,13 @@ class PlayAreaFragment : Fragment() {
     }
 
     fun isGameContinue(): Boolean {
-        val gameStatus = GameHelper.checkWinner(playAreaViewModel.leftScore.value!!, playAreaViewModel.rightScore.value!!)
-        CommonHelper.print("Game Status -----------> $gameStatus")
+        val gameStatus = GameHelper.checkWinner()
+//        CommonHelper.print("Game Status -----------> $gameStatus")
         return gameStatus == -1
     }
 
     fun gameWinnerFound() {
-        val gameStatus = GameHelper.checkWinner(playAreaViewModel.leftScore.value!!, playAreaViewModel.rightScore.value!!)
+        val gameStatus = GameHelper.checkWinner()
         GameHelper.resultScreen(requireContext(), gameStatus, binding.includeLayouts) {
             viewLifecycleOwner.lifecycleScope.launch {
                 delay(5_000L)
@@ -570,39 +563,29 @@ class PlayAreaFragment : Fragment() {
     }
 
     fun showResult(gameStatus: Int) {
-        val bundle = GameHelper.getResultBundle(gameStatus)
+        val bundle = GameHelper.getResultBundle(requireContext(), gameStatus)
         findNavController().navigate(R.id.gameResultFragment,bundle)
     }
 
-    private fun restartGame() {
-        val gameStatus = GameHelper.checkWinner(playAreaViewModel.leftScore.value!!, playAreaViewModel.rightScore.value!!)
-        val lastGame1stPlayer = GameHelper.getPlayerDetails(GameHelper.firstPlayerUID)
-        if (lastGame1stPlayer.isMyTeammate != gameStatus) {
-            val index = GameHelper.playerDetailsList.indexOfFirst { it.uId == lastGame1stPlayer.uId }
-            if (index+1 == GameHelper.playerDetailsList.size)
-                GameHelper.firstPlayerUID = GameHelper.playerDetailsList[0].uId
-            else
-                GameHelper.firstPlayerUID = GameHelper.playerDetailsList[index+1].uId
-        }
-
-        val highestPlayer = GameHelper.getHighestCardPlayer()
-        val totalPlayers = tableConfig.totalPlayers
-        val deckType = tableConfig.deckType
-        val cards = CardGenerator.INSTANCE.generateCard(deckType, totalPlayers)
-        GameHelper.reOrderPlayerList(highestPlayer.uId)
-
-        val score = Score(0,0,0,0,0)
-        GameHelper.greenTeamScore = score
-        GameHelper.redTeamScore = score
-        playAreaViewModel.resetScores()
-
-        for ((index, player) in GameHelper.playerDetailsList.withIndex()) {
-            player.playerGameDetails.apply {
-                assignCards(cards[index])
-                isTrumpCardExist = true
+    private fun setupFragmentResultListener() {
+        requireActivity().supportFragmentManager.setFragmentResultListener(
+            GameResultFragment.KEY_REQUEST,
+            viewLifecycleOwner
+        ) { _, bundle ->
+            val isNewGame = bundle.getBoolean(GameResultFragment.KEY_RESULT_ACTION,false)
+            if (isNewGame) {
+                restartGame()
             }
         }
+    }
 
+    private fun restartGame() {
+        ProfileHelper.totalChips -= tableConfig.betPrice
+        MyPreferences.INSTANCE.saveGameProfileDetails(requireContext())
+        GameHelper.resetGameState()
+        playerCardViewHelper.removeAllCards()
+        playAreaViewModel.resetAll()
+        gameCycleViewModel.stopCountdown()
         reStartEntryAnimation()
     }
 

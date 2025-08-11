@@ -1,9 +1,11 @@
 package com.keylogic.mindi.dialogs
 
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Toast
 import androidx.core.os.bundleOf
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,6 +16,7 @@ import com.keylogic.mindi.adapters.ResultProfileAdapter
 import com.keylogic.mindi.databinding.DialogFragmentGameResultBinding
 import com.keylogic.mindi.gamePlay.models.Score
 import com.keylogic.mindi.helper.CommonHelper
+import com.keylogic.mindi.helper.ProfileHelper
 import com.keylogic.mindi.models.ResultProfile
 
 class GameResultFragment : BaseFullDialogFragment() {
@@ -29,8 +32,6 @@ class GameResultFragment : BaseFullDialogFragment() {
 
     override fun getContentView(inflater: LayoutInflater): View {
         _binding = DialogFragmentGameResultBinding.inflate(inflater)
-        CommonHelper.print("W > ${requireArguments().getString(KEY_WINNER_LIST_JSON)}")
-        CommonHelper.print("L > ${requireArguments().getString(KEY_LOSER_LIST_JSON)}")
         val wListJson: String = requireArguments().getString(KEY_WINNER_LIST_JSON) ?: "[]"
         val lListJson: String = requireArguments().getString(KEY_LOSER_LIST_JSON) ?: "[]"
         val wScoreJson: String = requireArguments().getString(KEY_WINNER_SCORE_JSON) ?: ""
@@ -62,6 +63,11 @@ class GameResultFragment : BaseFullDialogFragment() {
     }
 
     private fun setupUI() {
+        if (winnerList.isEmpty() || loserList.isEmpty())
+            return
+
+        binding.loserScoreLayout.counterCons.updateBorder(requireContext().getColor(R.color.red_team))
+
         binding.topTitleInclude.chipCons.visibility = View.GONE
         binding.topTitleInclude.cancelCons.visibility = View.GONE
         binding.topTitleInclude.titleTxt.text = getString(R.string.game_result)
@@ -89,22 +95,30 @@ class GameResultFragment : BaseFullDialogFragment() {
         binding.loserScoreLayout.countDiamondsTxt.text = loserScore.diamonds.toString()
 
         CommonHelper.INSTANCE.setScaleOnTouch(binding.backToLobbyBtnCons) {
-            findNavController().popBackStack()
-            findNavController().popBackStack()
+            val navOptions = NavOptions.Builder()
+                .setPopUpTo(R.id.home, true)
+                .build()
+            findNavController().navigate(R.id.homeFragment, null, navOptions)
         }
 
         CommonHelper.INSTANCE.setScaleOnTouch(binding.newGameBtnCons) {
-//            // Send a signal to the parent fragment
-//            parentFragmentManager.setFragmentResult(
-//                "game_result_action",
-//                bundleOf("action" to "new_game")
-//            )
-//
-//            // Close the dialog
-            Toast.makeText(requireContext(), "Coming soon...", Toast.LENGTH_SHORT).show()
-            findNavController().popBackStack()
+            if (winnerList[0].betAmound <= ProfileHelper.totalChips) {
+                val result = Bundle().apply {
+                    putBoolean(KEY_RESULT_ACTION, true)
+                }
+                requireActivity().supportFragmentManager.setFragmentResult(
+                    KEY_REQUEST,
+                    result
+                )
+                findNavController().popBackStack()
+            }
+            else {
+                val bundle = Bundle().apply {
+                    putInt(NotEnoughChipDialogFragment.KEY_IS_NOT_ENOUGH, 111)
+                }
+                findNavController().navigate(R.id.notEnoughChipDialogFragment, bundle)
+            }
         }
-
     }
 
     override fun onDestroyView() {
@@ -118,6 +132,7 @@ class GameResultFragment : BaseFullDialogFragment() {
         const val KEY_WINNER_SCORE_JSON = "winner_score_json"
         const val KEY_LOSER_SCORE_JSON = "loser_score_json"
         const val KEY_RESULT_ACTION = "game_result_action"
+        const val KEY_REQUEST = "game_request"
 
     }
 

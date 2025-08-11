@@ -1,11 +1,8 @@
 package com.keylogic.mindi.gamePlay.helper
 
 import com.keylogic.mindi.enums.SuitType
-import com.keylogic.mindi.gamePlay.helper.GameHelper.Companion.allEnteredCardMap
-import com.keylogic.mindi.gamePlay.helper.GameHelper.Companion.enteredCardMap
 import com.keylogic.mindi.gamePlay.models.Card
 import com.keylogic.mindi.gamePlay.models.PlayerDetails
-
 
 class CpuCard {
     companion object {
@@ -26,7 +23,7 @@ class CpuCard {
         val lastPlayer = playersList.last()
 
         fun isRankEntered(rank: Int): Boolean {
-            return enteredCardMap.values.any { it.rank == rank }
+            return GameHelper.enteredCardMap.values.any { it.rank == rank }
         }
 
         fun getHighestRankCardWhenMindiEntered(highestEnteredPlayerCard: Card, isHighestEnteredPlayerIsTeammate: Boolean = false): Card {
@@ -174,11 +171,11 @@ class CpuCard {
                 }
 
                 val minSuitWithCount = currPlayer.playerGameDetails.getMinCardSuitWithCount()
-                val teammates = allEnteredCardMap
+                val teammates = GameHelper.allEnteredCardMap
                     .mapNotNull { it.entries.firstOrNull() }
                     .filter { it.key.isMyTeammate == currPlayer.isMyTeammate }
 
-                val opponentTeammates = allEnteredCardMap
+                val opponentTeammates = GameHelper.allEnteredCardMap
                     .mapNotNull { it.entries.firstOrNull() }
                     .filter { it.key.isMyTeammate != currPlayer.isMyTeammate }
 
@@ -376,7 +373,7 @@ class CpuCard {
             card = currPlayer.playerGameDetails.getMaxCard(currRoundSuit)
             val isCurrentSuitExist = currPlayer.playerGameDetails.isSuitExist(currRoundSuit)
 
-            val enteredHighestCardPlayer = getHighestCardPlayer(enteredCardMap)
+            val enteredHighestCardPlayer = getHighestCardPlayer(GameHelper.enteredCardMap)
             enteredHighestCardPlayer.playerGameDetails.getMinimumCard().suit
 
             val lastPlayerThatDontHasThatSuit = getLastPlayerThatDontHaveThatSuit(currRoundSuit)

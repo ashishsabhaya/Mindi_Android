@@ -61,8 +61,9 @@ class PlayerCardViewHelper(private val layout: GameLayoutBinding) {
         }
     }
 
-    fun updateCardViews() {
-
+    fun removeAllCards() {
+        playerCardViewList.forEach { layout.playAreaRelative.removeView(it) }
+        playerCardViewList.clear()
     }
 
     fun deselectAllCards() {

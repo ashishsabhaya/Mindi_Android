@@ -192,4 +192,12 @@
         android:id="@+id/gameResultFragment"
         android:name="com.keylogic.mindi.dialogs.GameResultFragment"
         android:label="GameResultFragment" />
+    <dialog
+        android:id="@+id/tableInformationFragment"
+        android:name="com.keylogic.mindi.dialogs.TableInformationFragment"
+        android:label="TableInformationFragment" />
+    <dialog
+        android:id="@+id/helpFragment"
+        android:name="com.keylogic.mindi.dialogs.HelpFragment"
+        android:label="HelpFragment" />
 </navigation>

@@ -46,38 +46,31 @@ class CommonHelper {
         duration: Long = 100,
         onclick: () -> Unit
     ) {
-        var count = 0
+        view.isClickable = true
+        view.isFocusable = true
+
+        view.setOnClickListener { onclick() }
+
         view.setOnTouchListener { v, event ->
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> {
-                    count = 0
-                    v.animate().scaleX(scaleDown).scaleY(scaleDown).setDuration(duration).start()
-                    true // Consume all touch events
-                }
-                MotionEvent.ACTION_MOVE -> {
-                    count++
-                    false // Consume all touch events
-                }
-                MotionEvent.ACTION_UP -> {
-                    v.animate().scaleX(1f).scaleY(1f).setDuration(duration)
-                        .withEndAction {
-                            if (count < 10) {
-                                v.performClick()
-                                onclick()
-                            }
-                        }
+                    v.animate()
+                        .scaleX(scaleDown)
+                        .scaleY(scaleDown)
+                        .setDuration(duration)
                         .start()
-                    return@setOnTouchListener true // Consume the touch so performClick isn't called twice
                 }
-//
-//                MotionEvent.ACTION_CANCEL -> {
-//                    v.animate().scaleX(1f).scaleY(1f).setDuration(duration).start()
-//                }
-                else -> {
-                    false
+                MotionEvent.ACTION_UP,
+                MotionEvent.ACTION_CANCEL -> {
+                    v.animate()
+                        .scaleX(1f)
+                        .scaleY(1f)
+                        .setDuration(duration)
+                        .start()
                 }
             }
-//            true // Consume all touch events
+            // return false so click listener can still trigger
+            false
         }
     }
 

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.multiplayer.GameZoneFragment">
+
+    <include
+        android:id="@+id/include"
+        layout="@layout/home_light_bg_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingHorizontal="@dimen/_6sdp"
+            android:paddingVertical="@dimen/_4sdp">
+
+            <com.keylogic.mindi.custom.BackgroundConstraintLayout
+                android:id="@+id/cancel_cons"
+                android:layout_width="@dimen/_34sdp"
+                android:layout_height="@dimen/_34sdp"
+                app:customHeight="@dimen/_34sdp"
+                app:strokeWidth="@dimen/_1sdp"
+                app:cornerRadius="@dimen/_6sdp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="@dimen/_6sdp"
+                    android:src="@drawable/ic_back"
+                    android:contentDescription="@string/image_content_description"/>
+
+            </com.keylogic.mindi.custom.BackgroundConstraintLayout>
+
+            <com.keylogic.mindi.custom.IconTextConstraintLayout
+                android:id="@+id/bet_price_cons"
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="@dimen/_28sdp"
+                app:cViewHeight="@dimen/_28sdp"
+                android:paddingHorizontal="@dimen/_6sdp"
+                app:cIconResource="@drawable/ic_chip"
+                app:cTitleLabelText="@string/bet"
+                app:cLabelText="@string/zero"
+                app:cIconSize="@dimen/_12sdp"
+                app:cIsElevationEnabled="false"
+                app:cLabelTextSize="@dimen/_12ssp"
+                app:cIsViewStrokeEnabled="true"
+                app:cStrokeWidth="@dimen/_1sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <ImageView
+                android:id="@+id/table_img"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/image_content_description"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/table_info_img"
+                android:layout_width="@dimen/_200sdp"
+                android:layout_height="@dimen/_100sdp"
+                android:contentDescription="@string/image_content_description"
+                android:src="@drawable/deck_1_katte"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <include
+            android:id="@+id/include_layouts"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            layout="@layout/game_layout"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

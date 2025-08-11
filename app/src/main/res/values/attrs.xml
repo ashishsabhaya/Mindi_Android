@@ -13,7 +13,7 @@
         <attr name="isBGElevationEnabled" format="boolean" />
         <attr name="isFgColorIsSingleDarkBlue" format="boolean" />
         <attr name="isInstagram" format="boolean" />
-        <attr name="isMessenger" format="boolean" />
+        <attr name="isFacebook" format="boolean" />
         <attr name="isWhatsapp" format="boolean" />
         <attr name="isShare" format="boolean" />
         <attr name="showTopTriangle" format="boolean"/>

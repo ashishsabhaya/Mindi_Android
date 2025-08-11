@@ -27,7 +27,7 @@ class BackgroundConstraintLayout @JvmOverloads constructor(
     private var isElevationEnabled: Boolean = true
     private var isFgColorIsSingleDarkBlue: Boolean = false
     private var isInstagram: Boolean = false
-    private var isMessenger: Boolean = false
+    private var isFacebook: Boolean = false
     private var isSingleLightColor: Boolean = false
     private var isWhatsapp: Boolean = false
     private var isShare: Boolean = false
@@ -58,8 +58,8 @@ class BackgroundConstraintLayout @JvmOverloads constructor(
             )
             isInstagram =
                 getBoolean(R.styleable.BackgroundConstraintLayout_isInstagram, isInstagram)
-            isMessenger =
-                getBoolean(R.styleable.BackgroundConstraintLayout_isMessenger, isMessenger)
+            isFacebook =
+                getBoolean(R.styleable.BackgroundConstraintLayout_isFacebook, isFacebook)
             isWhatsapp = getBoolean(R.styleable.BackgroundConstraintLayout_isWhatsapp, isWhatsapp)
             isShare = getBoolean(R.styleable.BackgroundConstraintLayout_isShare, isShare)
 
@@ -124,11 +124,11 @@ class BackgroundConstraintLayout @JvmOverloads constructor(
                     ContextCompat.getColor(context, R.color.instagram_bg_end)
                 )
             }
-            else if (isMessenger) {
+            else if (isFacebook) {
                 intArrayOf(
-                    ContextCompat.getColor(context, R.color.messenger_bg_start),
-                    ContextCompat.getColor(context, R.color.messenger_bg_center),
-                    ContextCompat.getColor(context, R.color.messenger_bg_end)
+                    ContextCompat.getColor(context, R.color.facebook_bg_start),
+                    ContextCompat.getColor(context, R.color.facebook_bg_center),
+                    ContextCompat.getColor(context, R.color.facebook_bg_end)
                 )
             }
             else if (isWhatsapp) {
@@ -178,11 +178,11 @@ class BackgroundConstraintLayout @JvmOverloads constructor(
                     ContextCompat.getColor(context, R.color.instagram_fg_end)
                 )
             }
-            else if (isMessenger) {
+            else if (isFacebook) {
                 intArrayOf(
-                    ContextCompat.getColor(context, R.color.messenger_fg_start),
-                    ContextCompat.getColor(context, R.color.messenger_fg_center),
-                    ContextCompat.getColor(context, R.color.messenger_fg_end)
+                    ContextCompat.getColor(context, R.color.facebook_fg_start),
+                    ContextCompat.getColor(context, R.color.facebook_fg_center),
+                    ContextCompat.getColor(context, R.color.facebook_fg_end)
                 )
             }
             else if (isWhatsapp) {

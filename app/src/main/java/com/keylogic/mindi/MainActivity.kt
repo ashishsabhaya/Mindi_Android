@@ -5,6 +5,9 @@ import android.net.NetworkCapabilities
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.navigation.findNavController
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.LoadAdError
+import com.google.android.gms.ads.appopen.AppOpenAd
 import com.keylogic.mindi.dialogs.LoadingDialogFragment
 import com.keylogic.mindi.enums.DeviceType
 import com.keylogic.mindi.helper.CommonHelper
@@ -33,12 +36,28 @@ class MainActivity : BaseActivity(), NetworkMonitor.NetworkStateListener {
         }
 
         DisplayHelper.INSTANCE.calculateScreenWH(this)
+
+        AppOpenAd.load(
+            this,
+            "AD_UNIT_ID",
+            AdRequest.Builder().build(),
+            object : AppOpenAd.AppOpenAdLoadCallback() {
+                override fun onAdLoaded(ad: AppOpenAd) {
+                }
+
+                override fun onAdFailedToLoad(loadAdError: LoadAdError) {
+                }
+            },
+        )
+
     }
 
     override fun onResume() {
         super.onResume()
         networkMonitor.register()
         AdHelper.INSTANCE.preloadAllAdsInBackground(this)
+        val app = application as MyApplication
+        app.appOpenAdManager.showAdIfAvailable(this)
     }
 
     override fun onPause() {
@@ -49,7 +68,7 @@ class MainActivity : BaseActivity(), NetworkMonitor.NetworkStateListener {
     override fun onNetworkAvailable() {
         runOnUiThread {
             LoadingDialogFragment.dismiss(this)
-            val navController = findNavController(R.id.con_nav_host_fragment_content_main)
+            val navController = findNavController(R.id.nav_graph_fragment)
             if (navController.currentDestination?.id == R.id.internetErrorDialogFragment) {
                 navController.popBackStack()
             }
@@ -60,7 +79,7 @@ class MainActivity : BaseActivity(), NetworkMonitor.NetworkStateListener {
         if (!shouldShowNetworkDialog) return  //Don't show if flag is false
 
         runOnUiThread {
-            val controller = findNavController(R.id.con_nav_host_fragment_content_main)
+            val controller = findNavController(R.id.nav_graph_fragment)
             if (controller.currentDestination?.id != R.id.internetErrorDialogFragment) {
                 controller.navigate(R.id.internetErrorDialogFragment)
             }

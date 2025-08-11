@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
@@ -15,6 +16,8 @@ import com.keylogic.mindi.helper.VIPStoreHelper
 import com.keylogic.mindi.ui.viewModel.CardBackViewModel
 import com.keylogic.mindi.databinding.FragmentCardsBinding
 import com.keylogic.mindi.dialogs.BuyStoreItemDialogFragment
+import com.keylogic.mindi.ui.viewModel.VipStoreViewModel
+import kotlin.getValue
 
 class CardsFragment : Fragment() {
     private var _binding: FragmentCardsBinding? = null
@@ -22,6 +25,7 @@ class CardsFragment : Fragment() {
     private val viewModel: CardBackViewModel by viewModels()
     private lateinit var cardsAdapter: StoreAdapter
     private val currTab = VIPStore.CARDS
+    private val vipStoreViewModel: VipStoreViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -71,7 +75,7 @@ class CardsFragment : Fragment() {
     }
 
     private fun setupFragmentResultListener() {
-        childFragmentManager.setFragmentResultListener(
+        requireActivity().supportFragmentManager.setFragmentResultListener(
             currTab.tabName,
             viewLifecycleOwner
         ) { _, bundle ->
@@ -79,6 +83,7 @@ class CardsFragment : Fragment() {
             val index = bundle.getInt(BuyStoreItemDialogFragment.KEY_ITEM_INDEX, -1)
             if (isPurchased && index >= 0) {
                 viewModel.updateCardBacks()
+                vipStoreViewModel.refreshChipCount()
             }
         }
     }

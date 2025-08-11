@@ -6,15 +6,21 @@ import android.os.Bundle
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ProcessLifecycleOwner
+import com.keylogic.mindi.ad.AppOpenAdManager
 import com.keylogic.mindi.database.MyPreferences
+import com.keylogic.mindi.helper.CommonHelper
 import com.keylogic.mindi.helper.SystemUiHelper
 
 class MyApplication : Application() {
+    lateinit var appOpenAdManager: AppOpenAdManager
+
     override fun onCreate() {
         super.onCreate()
         ProcessLifecycleOwner.get().lifecycle.addObserver(AppLifecycleObserver(this))
         registerActivityLifecycleCallbacks(ActivityLifecycleCallbacksImpl())
+        appOpenAdManager = AppOpenAdManager(this)
 
+        CommonHelper.print("MyApplication --> Application")
         MyPreferences.INSTANCE.loadGameSettings(this)
 
     }

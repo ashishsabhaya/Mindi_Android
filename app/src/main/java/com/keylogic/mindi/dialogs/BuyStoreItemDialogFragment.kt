@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import androidx.navigation.fragment.findNavController
 import com.keylogic.mindi.R
+import com.keylogic.mindi.database.MyPreferences
 import com.keylogic.mindi.databinding.DialogFragmentBuyStoreItemBinding
 import com.keylogic.mindi.enums.VIPStore
 import com.keylogic.mindi.helper.AdHelper
@@ -63,12 +64,13 @@ class BuyStoreItemDialogFragment : BaseDialogFragment() {
             if (currItem != null) {
                 if (currItem.price <= ProfileHelper.totalChips) {
                     ProfileHelper.totalChips -= currItem.price
+                    MyPreferences.INSTANCE.saveGameProfileDetails(requireContext())
                     buyStoreItem(true)
                 }
                 else {
                     if (findNavController().currentDestination?.id == R.id.buyStoreItemDialogFragment) {
                         val bundle = Bundle().apply {
-                            putInt(NotEnoughChipDialogFragment.KEY_IS_NOT_ENOUGH_FOR_STORE, tabIndex)
+                            putInt(NotEnoughChipDialogFragment.KEY_IS_NOT_ENOUGH, tabIndex)
                         }
                         findNavController().navigate(R.id.notEnoughChipDialogFragment,bundle)
                     }
@@ -93,21 +95,23 @@ class BuyStoreItemDialogFragment : BaseDialogFragment() {
     }
 
     fun dismissDialog() {
-        var tabNameId = ""
+        var tabName = ""
         when (tabIndex) {
             VIPStore.AVATAR.tabIndex -> {
-                tabNameId = VIPStore.AVATAR.tabName
+                tabName = VIPStore.AVATAR.tabName
                 ProfileHelper.profileId = itemIndex
             }
             VIPStore.CARDS.tabIndex -> {
-                tabNameId = VIPStore.CARDS.tabName
+                tabName = VIPStore.CARDS.tabName
                 ProfileHelper.cardBackId = itemIndex
             }
             VIPStore.TABLES.tabIndex -> {
-                tabNameId = VIPStore.TABLES.tabName
+                tabName = VIPStore.TABLES.tabName
+                ProfileHelper.tableId = itemIndex
             }
             VIPStore.BACKGROUNDS.tabIndex -> {
-                tabNameId = VIPStore.BACKGROUNDS.tabName
+                tabName = VIPStore.BACKGROUNDS.tabName
+                ProfileHelper.backgroundId = itemIndex
             }
         }
 
@@ -115,8 +119,13 @@ class BuyStoreItemDialogFragment : BaseDialogFragment() {
             putBoolean(KEY_IS_ITEM_PURCHASED, true)
             putInt(KEY_ITEM_INDEX, itemIndex)
         }
-        requireActivity().supportFragmentManager.setFragmentResult(tabNameId, result)
+
+        requireActivity().supportFragmentManager.setFragmentResult(
+            tabName,
+            result
+        )
         findNavController().popBackStack()
+
     }
 
     override fun onDestroyView() {

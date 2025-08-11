@@ -73,4 +73,19 @@ dependencies {
     implementation(libs.moshi)
     implementation(libs.moshi.kotlin)
 
+//    implementation(libs.bom)
+//    implementation(libs.storage.kt)
+//    implementation(libs.supabase.kt)
+//    implementation(libs.postgrest.kt)
+//    implementation(libs.realtime.kt)
+//    implementation(libs.auth.kt)
+//
+//    implementation(libs.ktor.client.core)
+//    implementation(libs.ktor.client.cio)
+//    implementation(libs.ktor.client.websockets)
+//
+//    implementation(libs.ktor.client.android)
+//    implementation(libs.ktor.utils)
+//    implementation(libs.ktor.client.okhttp)
+
 }

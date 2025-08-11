@@ -11,24 +11,25 @@
 
         <com.keylogic.mindi.custom.BackgroundConstraintLayout
             android:id="@+id/cancel_cons"
-            android:layout_width="@dimen/_34sdp"
-            android:layout_height="@dimen/_34sdp"
+            android:layout_width="@dimen/_28sdp"
+            android:layout_height="@dimen/_28sdp"
+            app:customHeight="@dimen/_28sdp"
             app:cornerRadius="@dimen/_6sdp"
-            app:customHeight="@dimen/_34sdp"
+            android:layout_marginEnd="@dimen/_4sdp"
             app:isPositive="false"
             android:layout_marginTop="@dimen/_4sdp"
             android:layout_marginStart="@dimen/_4sdp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:strokeWidth="@dimen/_1sdp">
+            app:strokeWidth="2dp">
 
             <ImageView
                 android:id="@+id/cancel_img"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:contentDescription="@string/image_content_description"
                 android:padding="@dimen/_6sdp"
-                android:src="@drawable/ic_cancel" />
+                android:src="@drawable/ic_cancel"
+                android:contentDescription="@string/image_content_description" />
 
         </com.keylogic.mindi.custom.BackgroundConstraintLayout>
 
@@ -39,7 +40,6 @@
             android:layout_marginTop="@dimen/_12sdp"
             android:layout_marginBottom="@dimen/_6sdp"
             android:layout_marginStart="@dimen/_12sdp"
-            android:layout_marginEnd="@dimen/_6sdp"
             app:layout_constraintTop_toBottomOf="@id/cancel_cons"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"

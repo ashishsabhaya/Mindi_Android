@@ -57,4 +57,18 @@ class PlayAreaConfigViewModel : ViewModel() {
         _rightScore.value = Score()
         _betPrice.value = 0
     }
+
+    fun resetAll() {
+        updateLeftScore {
+            copy(hands = 0, spades = 0, hearts = 0, clubs = 0, diamonds = 0)
+        }
+        updateRightScore {
+            copy(hands = 0, spades = 0, hearts = 0, clubs = 0, diamonds = 0)
+        }
+        updateMindiCount(Pair(0,0))
+        updateBetPrice(0L)
+        updateTrumpCard(Card())
+        updateMessage("")
+    }
+
 }

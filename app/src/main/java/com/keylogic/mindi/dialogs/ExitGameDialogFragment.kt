@@ -2,10 +2,13 @@ package com.keylogic.mindi.dialogs
 
 import android.view.LayoutInflater
 import android.view.View
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
+import com.keylogic.mindi.R
 import com.keylogic.mindi.databinding.DialogFragmentExitGameBinding
 import com.keylogic.mindi.helper.AdHelper
 import com.keylogic.mindi.helper.CommonHelper
+import kotlin.system.exitProcess
 
 class ExitGameDialogFragment : BaseDialogFragment() {
     private var _binding: DialogFragmentExitGameBinding? = null
@@ -27,13 +30,15 @@ class ExitGameDialogFragment : BaseDialogFragment() {
         CommonHelper.INSTANCE.setScaleOnTouch(binding.negativeBtnCons) {
             if (isGameExit) {
                 AdHelper.INSTANCE.showInterstitialAdWithLoading(requireActivity(), onAdDismiss = {
-                    findNavController().popBackStack()
-                    findNavController().popBackStack()
+                    val navOptions = NavOptions.Builder()
+                        .setPopUpTo(R.id.home, true)
+                        .build()
+                    findNavController().navigate(R.id.homeFragment, null, navOptions)
                 })
             }
             else {
-                findNavController().popBackStack()
-                requireActivity().finish()
+                requireActivity().finishAffinity()
+                exitProcess(0)
             }
         }
     }

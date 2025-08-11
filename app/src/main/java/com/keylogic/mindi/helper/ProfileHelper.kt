@@ -62,7 +62,6 @@ class ProfileHelper {
 
     fun getTableResource(context: Context): Int {
         val name = VIPStoreHelper.INSTANCE.getTablePreFix() + tableId
-        CommonHelper.print("Table id = $tableId")
         val resource = getProfileImageByName(context, name)
         return resource
     }

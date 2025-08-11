@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,6 +17,8 @@ import com.keylogic.mindi.helper.VIPStoreHelper
 import com.keylogic.mindi.ui.viewModel.TableViewModel
 import com.keylogic.mindi.databinding.FragmentTablesBinding
 import com.keylogic.mindi.dialogs.BuyStoreItemDialogFragment
+import com.keylogic.mindi.ui.viewModel.VipStoreViewModel
+import kotlin.getValue
 
 class TablesFragment : Fragment() {
     private var _binding: FragmentTablesBinding? = null
@@ -23,6 +26,7 @@ class TablesFragment : Fragment() {
     private val viewModel: TableViewModel by viewModels()
     private lateinit var tableAdapter: StoreAdapter
     private val currTab = VIPStore.TABLES
+    private val vipStoreViewModel: VipStoreViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -75,7 +79,7 @@ class TablesFragment : Fragment() {
     }
 
     private fun setupFragmentResultListener() {
-        childFragmentManager.setFragmentResultListener(
+        requireActivity().supportFragmentManager.setFragmentResultListener(
             currTab.tabName,
             viewLifecycleOwner
         ) { _, bundle ->
@@ -83,6 +87,7 @@ class TablesFragment : Fragment() {
             val index = bundle.getInt(BuyStoreItemDialogFragment.KEY_ITEM_INDEX, -1)
             if (isPurchased && index >= 0) {
                 viewModel.updateTables()
+                vipStoreViewModel.refreshChipCount()
             }
         }
     }

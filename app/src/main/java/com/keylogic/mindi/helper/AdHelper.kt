@@ -22,6 +22,30 @@ class AdHelper {
 
     private val coroutineScope = CoroutineScope(Dispatchers.IO)
 
+    fun loadBannerAd(adView: AdView) {
+        if (CommonHelper.isAdsFree) {
+            adView.visibility = android.view.View.GONE
+            return
+        }
+
+        coroutineScope.launch {
+            val adRequest = AdRequest.Builder().build()
+
+            withContext(Dispatchers.Main) {
+                adView.adListener = object : AdListener() {
+                    override fun onAdFailedToLoad(error: LoadAdError) {
+                        adView.visibility = android.view.View.GONE
+                    }
+
+                    override fun onAdLoaded() {
+                        adView.visibility = android.view.View.VISIBLE
+                    }
+                }
+                adView.loadAd(adRequest)
+            }
+        }
+    }
+
     fun preloadRewardedAd(context: Activity) {
         if (currRewardedAd != null || CommonHelper.isAdsFree) return
 

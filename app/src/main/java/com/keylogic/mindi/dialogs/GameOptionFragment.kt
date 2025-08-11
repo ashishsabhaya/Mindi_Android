@@ -9,6 +9,7 @@ import com.keylogic.mindi.R
 import com.keylogic.mindi.adapters.GameOptionAdapter
 import com.keylogic.mindi.databinding.DialogFragmentGameOptionBinding
 import com.keylogic.mindi.enums.GameOptions
+import com.keylogic.mindi.helper.AdHelper
 import com.keylogic.mindi.helper.CommonHelper
 
 class GameOptionFragment : BaseFullDialogFragment() {
@@ -27,6 +28,10 @@ class GameOptionFragment : BaseFullDialogFragment() {
             findNavController().popBackStack()
         }
 
+        binding.gameOptionBg.setOnClickListener { findNavController().popBackStack() }
+
+        AdHelper.INSTANCE.loadBannerAd(binding.bannerAdView)
+
         adapter = GameOptionAdapter(
             GameOptions.entries.toList(), onItemClick = { option ->
                 when (option) {
@@ -34,17 +39,25 @@ class GameOptionFragment : BaseFullDialogFragment() {
                     GameOptions.BACKGROUND_MUSIC -> CommonHelper.isMusicEnabled = !CommonHelper.isMusicEnabled
                     GameOptions.VIBRATE -> CommonHelper.isVibrationEnabled = !CommonHelper.isVibrationEnabled
                     GameOptions.TABLE_INFO -> {
-                        println("==> info")
+                        if (findNavController().currentDestination?.id == R.id.gameOptionFragment) {
+                            findNavController().popBackStack()
+                            findNavController().navigate(R.id.tableInformationFragment)
+                        }
                     }
                     GameOptions.HELP -> {
-                        println("==> help")
+                        if (findNavController().currentDestination?.id == R.id.gameOptionFragment) {
+                            findNavController().popBackStack()
+                            findNavController().navigate(R.id.helpFragment)
+                        }
                     }
                     GameOptions.EXIT -> {
-                        findNavController().popBackStack()
-                        val bundle = Bundle().apply {
-                            putBoolean(ExitGameDialogFragment.KEY_IS_GAME_EXIT, true)
+                        if (findNavController().currentDestination?.id == R.id.gameOptionFragment) {
+                            findNavController().popBackStack()
+                            val bundle = Bundle().apply {
+                                putBoolean(ExitGameDialogFragment.KEY_IS_GAME_EXIT, true)
+                            }
+                            findNavController().navigate(R.id.exitGameDialogFragment, bundle)
                         }
-                        findNavController().navigate(R.id.exitGameDialogFragment, bundle)
                     }
                 }
             })

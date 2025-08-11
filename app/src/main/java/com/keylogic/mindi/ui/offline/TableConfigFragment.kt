@@ -11,9 +11,12 @@ import androidx.navigation.fragment.navArgs
 import com.keylogic.mindi.enums.DeckType
 import com.keylogic.mindi.helper.CommonHelper
 import com.keylogic.mindi.R
+import com.keylogic.mindi.database.MyPreferences
 import com.keylogic.mindi.ui.viewModel.TableConfigViewModel
 import com.keylogic.mindi.databinding.FragmentTableConfigBinding
+import com.keylogic.mindi.dialogs.NotEnoughChipDialogFragment
 import com.keylogic.mindi.gamePlay.models.TableConfig
+import com.keylogic.mindi.helper.ProfileHelper
 
 class TableConfigFragment : Fragment() {
     private var _binding: FragmentTableConfigBinding? = null
@@ -77,17 +80,27 @@ class TableConfigFragment : Fragment() {
             val betPrice = viewModel.betPrice.value
 
             if (deckType != null && isHideMode != null && totalPlayers != null && betPrice != null) {
-                val tableConfig = TableConfig(
-                    deckType = deckType,
-                    betPrice = betPrice,
-                    isHideMode = isHideMode,
-                    totalPlayers = totalPlayers,
-                    isRoomFull = true,
-                    isPrivateTable = true
-                )
-                val action = TableConfigFragmentDirections
-                    .actionTableConfigFragmentToPlayAreaFragment(tableConfig = tableConfig)
-                findNavController().navigate(action)
+                if (betPrice <= ProfileHelper.totalChips) {
+                    val tableConfig = TableConfig(
+                        deckType = deckType,
+                        betPrice = betPrice,
+                        isHideMode = isHideMode,
+                        totalPlayers = totalPlayers,
+                        isRoomFull = true,
+                        isPrivateTable = true
+                    )
+                    ProfileHelper.totalChips -= betPrice
+                    MyPreferences.INSTANCE.saveGameProfileDetails(requireContext())
+                    val action = TableConfigFragmentDirections
+                        .actionTableConfigFragmentToPlayAreaFragment(tableConfig = tableConfig)
+                    findNavController().navigate(action)
+                }
+                else {
+                    val bundle = Bundle().apply {
+                        putInt(NotEnoughChipDialogFragment.KEY_IS_NOT_ENOUGH, 11)
+                    }
+                    findNavController().navigate(R.id.notEnoughChipDialogFragment,bundle)
+                }
             } else {
                 CommonHelper.print("Null value = $deckType | $isHideMode | $totalPlayers | $betPrice")
             }

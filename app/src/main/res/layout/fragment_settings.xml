@@ -469,20 +469,20 @@
                     </com.keylogic.mindi.custom.BackgroundConstraintLayout>
 
                     <com.keylogic.mindi.custom.BackgroundConstraintLayout
-                        android:id="@+id/messenger_share"
+                        android:id="@+id/facebook_share"
                         android:layout_width="@dimen/_40sdp"
                         android:layout_height="@dimen/_40sdp"
                         android:layout_marginHorizontal="@dimen/_8sdp"
                         app:isCircular="true"
                         app:customHeight="@dimen/_40sdp"
                         app:isBGElevationEnabled="false"
-                        app:isMessenger="true">
+                        app:isFacebook="true">
 
                         <ImageView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:padding="@dimen/_6sdp"
-                            android:src="@drawable/ic_messenger"
+                            android:src="@drawable/ic_facebook"
                             android:contentDescription="@string/image_content_description"/>
 
                     </com.keylogic.mindi.custom.BackgroundConstraintLayout>

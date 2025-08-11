@@ -12,10 +12,8 @@ class GameCycleViewModel : ViewModel() {
 
     private var gameCycleCallback: GameCycleCallback? = null
     private var countDownTimer: CountDownTimer? = null
-    private var counter = 1
     private var maxPlayers = 1
 
-    // 1. Initialize the callback
     fun initializeCallback(callback: GameCycleCallback) {
         gameCycleCallback = callback
     }
@@ -23,12 +21,11 @@ class GameCycleViewModel : ViewModel() {
     // 2. Start a 5-second countdown
     fun startCountdown() {
         val playerIndex = GameHelper.getCurrTurnIndex()
-//        CommonHelper.print("$counter = $maxPlayers | index > $playerIndex")
         countDownTimer?.cancel()
 
+//        CommonHelper.print("startTimer --> $maxPlayers > ${GameHelper.enteredCardMap.size}")
         if (GameHelper.enteredCardMap.size == maxPlayers) {
             gameCycleCallback?.onGameCycleComplete()
-            counter = 1
             return
         }
         gameCycleCallback?.onPlayerStart(playerIndex)
@@ -38,13 +35,10 @@ class GameCycleViewModel : ViewModel() {
             random = 15
         countDownTimer = object : CountDownTimer(random * 1_000L, 1_000) {
             override fun onTick(millisUntilFinished: Long) {
-//                CommonHelper.print("${millisUntilFinished / 1_000}")
             }
 
             override fun onFinish() {
-//                CommonHelper.print(" $counter ==> $playerIndex")
                 gameCycleCallback?.onPlayerTrigger(playerIndex)
-                counter++
             }
         }.start()
     }

@@ -28,7 +28,6 @@ class SplashFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentSplashBinding.inflate(inflater, container, false)
-        CommonHelper.print("SplashFragment = onCreateView")
 
         ChipStoreHelper.INSTANCE.generateChipStorePlans()
         DailyRewardHelper.INSTANCE.generateDailyRewards()
@@ -36,7 +35,7 @@ class SplashFragment : Fragment() {
         VIPStoreHelper.INSTANCE.updateVIPStoreDetails()
 
         CommonHelper.shouldShowNetworkDialog = false
-//        ProfileHelper.totalChips = 50_500L
+        ProfileHelper.totalChips = 50_500L
 
         return binding.root
     }

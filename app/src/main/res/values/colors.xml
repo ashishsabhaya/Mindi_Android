@@ -16,6 +16,7 @@
     <color name="chip_store_price_txt">#012738</color>
     <color name="game_result_stroke">#ABE9F8</color>
 
+    <color name="blue_txt">#02BBE9</color>
     <color name="bg_img_fg">#4D000000</color>
 
     <color name="border_start">#02B3E0</color>
@@ -117,9 +118,9 @@
     <color name="instagram_bg_center">#FF004F</color>
     <color name="instagram_bg_end">#00FF004F</color>
 
-    <color name="messenger_bg_start">#00012738</color>
-    <color name="messenger_bg_center">#02BBE9</color>
-    <color name="messenger_bg_end">#00012738</color>
+    <color name="facebook_bg_start">#00012738</color>
+    <color name="facebook_bg_center">#02BBE9</color>
+    <color name="facebook_bg_end">#00012738</color>
 
     <color name="whatsapp_bg_start">#000A641E</color>
     <color name="whatsapp_bg_center">#0A641E</color>
@@ -133,9 +134,9 @@
     <color name="instagram_fg_center">#FF0015</color>
     <color name="instagram_fg_end">#DF0290</color>
 
-    <color name="messenger_fg_start">#20A9F9</color>
-    <color name="messenger_fg_center">#0E82CD</color>
-    <color name="messenger_fg_end">#015DA4</color>
+    <color name="facebook_fg_start">#20A9F9</color>
+    <color name="facebook_fg_center">#0E82CD</color>
+    <color name="facebook_fg_end">#015DA4</color>
 
     <color name="whatsapp_fg_start">#3BC56F</color>
     <color name="whatsapp_fg_center">#14B243</color>

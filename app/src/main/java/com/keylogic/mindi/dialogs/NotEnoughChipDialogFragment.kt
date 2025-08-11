@@ -8,6 +8,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
 import com.keylogic.mindi.R
+import com.keylogic.mindi.database.MyPreferences
 import com.keylogic.mindi.databinding.DialogFragmentNotEnoughChipBinding
 import com.keylogic.mindi.helper.AdHelper
 import com.keylogic.mindi.helper.CommonHelper
@@ -27,7 +28,7 @@ class NotEnoughChipDialogFragment : BaseDialogFragment() {
 
     override fun getContentView(inflater: LayoutInflater): View {
         _binding = DialogFragmentNotEnoughChipBinding.inflate(inflater)
-        isNotEnoughChipForStore = requireArguments().getInt(KEY_IS_NOT_ENOUGH_FOR_STORE)
+        isNotEnoughChipForStore = requireArguments().getInt(KEY_IS_NOT_ENOUGH)
         upDownAnim = AnimationUtils.loadAnimation(requireContext(), R.anim.up_down_enough_chip)
         setupDialogUI()
         return binding.root
@@ -48,20 +49,29 @@ class NotEnoughChipDialogFragment : BaseDialogFragment() {
             1 -> message = resources.getString(R.string.not_enough_chips_cards)
             2 -> message = resources.getString(R.string.not_enough_chips_tables)
             3 -> message = resources.getString(R.string.not_enough_chips_background)
+            111 -> message = resources.getString(R.string.not_enough_chip_new_game)
             11 -> message = resources.getString(R.string.not_enough_chip_create_table)
             22 -> message = resources.getString(R.string.not_enough_chip_join_table)
             33 -> message = resources.getString(R.string.not_enough_chip_find_table)
         }
         binding.dialogTitleTxt.text = message
 
-        CommonHelper.INSTANCE.setScaleOnTouch(binding.cancelCons) {
-            findNavController().popBackStack()
-        }
-
         CommonHelper.INSTANCE.setScaleOnTouch(binding.positiveBtnCons) {
             findNavController().popBackStack()
-            if (findNavController().currentDestination?.id == R.id.buyStoreItemDialogFragment) {
-                findNavController().navigate(R.id.chipStoreFragment)
+            when(isNotEnoughChipForStore) {
+                0, 1, 2, 3 -> {
+                    if (findNavController().currentDestination?.id == R.id.buyStoreItemDialogFragment) {
+                        findNavController().navigate(R.id.chipStoreFragment)
+                    }
+                }
+                111 -> {
+                    if (findNavController().currentDestination?.id == R.id.gameResultFragment) {
+                        findNavController().navigate(R.id.chipStoreFragment)
+                    }
+                }
+                11 -> {}
+                22 -> {}
+                33 -> {}
             }
         }
 
@@ -69,8 +79,16 @@ class NotEnoughChipDialogFragment : BaseDialogFragment() {
             AdHelper.INSTANCE.showRewardedAdWithLoading(requireActivity()) { isAdDismiss ->
                 if (isAdDismiss) {
                     ProfileHelper.totalChips += ProfileHelper.freeChipCount
-                    vipStoreViewModel.refreshChipCount()
-                    findNavController().popBackStack()
+                    MyPreferences.INSTANCE.saveGameProfileDetails(requireContext())
+                    when(isNotEnoughChipForStore) {
+                        0, 1, 2, 3 -> {
+                            vipStoreViewModel.refreshChipCount()
+                            findNavController().popBackStack()
+                        }
+                        11 -> {}
+                        22 -> {}
+                        33 -> {}
+                    }
                 }
             }
         }
@@ -92,7 +110,7 @@ class NotEnoughChipDialogFragment : BaseDialogFragment() {
     }
 
     companion object {
-        const val KEY_IS_NOT_ENOUGH_FOR_STORE = "isNotEnoughChipForStore"
+        const val KEY_IS_NOT_ENOUGH = "isNotEnoughChipForStore"
     }
 
 }

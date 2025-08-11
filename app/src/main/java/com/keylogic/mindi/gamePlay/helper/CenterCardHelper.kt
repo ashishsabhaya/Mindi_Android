@@ -41,7 +41,10 @@ class CenterCardHelper(private val totalPlayers: Int, private val layout: GameLa
     }
 
     fun updateCenterCard(index: Int, card: Card) {
-        centerCardViewList[index].z = 1f
+        if (card.suit == SuitType.NONE)
+            centerCardViewList[index].z = 1f
+        else
+            centerCardViewList[index].z += 1f
         centerCardViewList[index].updateResource(card)
     }
 

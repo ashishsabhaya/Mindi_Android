@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,6 +17,8 @@ import com.keylogic.mindi.helper.VIPStoreHelper
 import com.keylogic.mindi.ui.viewModel.BackgroundViewModel
 import com.keylogic.mindi.databinding.FragmentBackgroundsBinding
 import com.keylogic.mindi.dialogs.BuyStoreItemDialogFragment
+import com.keylogic.mindi.ui.viewModel.VipStoreViewModel
+import kotlin.getValue
 
 
 class BackgroundsFragment : Fragment() {
@@ -24,6 +27,7 @@ class BackgroundsFragment : Fragment() {
     private val viewModel: BackgroundViewModel by viewModels()
     private lateinit var backgroundAdapter: StoreAdapter
     private val currTab = VIPStore.BACKGROUNDS
+    private val vipStoreViewModel: VipStoreViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -78,7 +82,7 @@ class BackgroundsFragment : Fragment() {
     }
 
     private fun setupFragmentResultListener() {
-        childFragmentManager.setFragmentResultListener(
+        requireActivity().supportFragmentManager.setFragmentResultListener(
             currTab.tabName,
             viewLifecycleOwner
         ) { _, bundle ->
@@ -86,6 +90,7 @@ class BackgroundsFragment : Fragment() {
             val index = bundle.getInt(BuyStoreItemDialogFragment.KEY_ITEM_INDEX, -1)
             if (isPurchased && index >= 0) {
                 viewModel.updateBackgrounds()
+                vipStoreViewModel.refreshChipCount()
             }
         }
     }

@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Bundle
 import com.google.gson.Gson
 import com.keylogic.mindi.R
+import com.keylogic.mindi.database.MyPreferences
 import com.keylogic.mindi.databinding.GameLayoutBinding
 import com.keylogic.mindi.dialogs.GameResultFragment
 import com.keylogic.mindi.gamePlay.models.PlayerProfileView
@@ -22,6 +23,8 @@ import kotlin.text.set
 
 class GameHelper {
     companion object {
+        val greenTeamIndex = 0
+        val redTeamIndex = 1
         val enterCardSpeed = 250L
         lateinit var tableConfig: TableConfig
         var trumpCardSuit = TrumpCard()
@@ -39,6 +42,42 @@ class GameHelper {
 
         fun getCurrTurnIndex(): Int {
             return getCurrentTurnPlayer().centerCardIndex
+        }
+
+        fun resetGameState() {
+            val gameStatus = checkWinner()
+            val lastGame1stPlayer = getPlayerDetails(firstPlayerUID)
+            CommonHelper.print("reset --> ${lastGame1stPlayer.isMyTeammate} | $gameStatus")
+            if (lastGame1stPlayer.isMyTeammate != gameStatus) {
+                val index = playerDetailsList.indexOfFirst { it.uId == lastGame1stPlayer.uId }
+                currTurnPlayerUID = if (index+1 == playerDetailsList.size)
+                    playerDetailsList[0].uId
+                else
+                    playerDetailsList[index+1].uId
+                firstPlayerUID = currTurnPlayerUID
+            }
+            else
+                currTurnPlayerUID = firstPlayerUID
+
+            val totalPlayers = tableConfig.totalPlayers
+            val deckType = tableConfig.deckType
+            val cards = CardGenerator.INSTANCE.generateCard(deckType, totalPlayers)
+            reOrderPlayerList(currTurnPlayerUID)
+
+            enteredCardMap.clear()
+            allEnteredCardMap.clear()
+            trumpCardSuit = TrumpCard()
+            currRoundSuitType = SuitType.NONE
+            cardHider = CardHider()
+
+            for ((index, player) in playerDetailsList.withIndex()) {
+                player.playerGameDetails.apply {
+                    assignCards(cards[index])
+                    isTrumpCardExist = true
+                }
+                CommonHelper.print("$index > ${player.name}")
+            }
+
         }
 
         fun getCurrentPlayer(): PlayerDetails {
@@ -60,6 +99,7 @@ class GameHelper {
             val index = playerDetailsList.indexOfFirst { it.uId == currTurnPlayerUID }
             if (index+1 < playerDetailsList.size)
                 currTurnPlayerUID = playerDetailsList[index+1].uId
+            CommonHelper.print("Next | ${playerDetailsList.size} ==> ${index+1} > ${playerDetailsList[(index+1).coerceAtMost(playerDetailsList.size-1)].name}")
         }
 
         fun is1stTurn(): Boolean {
@@ -157,9 +197,12 @@ class GameHelper {
             return highestPlayer!!
         }
 
-        fun checkWinner(greenTeam: Score, redTeam: Score): Int {
+        fun checkWinner(): Int {
+            //0 = green
+            //1 = red
+            val greenTeam = greenTeamScore
+            val redTeam = redTeamScore
             var status = -1
-            val isAllCardsEntered = allEnteredCardMap.size == tableConfig.deckType.totalCards
             val totalMindi = tableConfig.deckType.deckCount * 4
             val totalCards = tableConfig.deckType.totalCards
 
@@ -168,22 +211,33 @@ class GameHelper {
             val totalOfUser = greenTeam.spades + greenTeam.hearts + greenTeam.clubs + greenTeam.diamonds
             val totalOfCpu = redTeam.spades + redTeam.hearts + redTeam.clubs + redTeam.diamonds
 
-            if (isUserCoat || isCpuCoat)
-                status = -1
+            if (isCpuCoat || isUserCoat) {
+                status = if (totalOfUser == totalMindi)
+                    greenTeamIndex
+                else if (totalOfCpu == totalMindi)
+                    redTeamIndex
+                else
+                    -1
+            }
             else {
                 if (totalOfUser > totalMindi / 2)
-                    status = 1
+                    status = greenTeamIndex
                 else if (totalOfCpu > totalMindi / 2)
-                    status = 2
+                    status = redTeamIndex
                 else if (totalOfUser == totalMindi / 2 && totalOfCpu == totalOfUser) {
                     if (greenTeam.hands > totalCards / 2)
-                        status = 1
+                        status = greenTeamIndex
                     if (redTeam.hands > totalCards / 2)
-                        status = 2
+                        status = redTeamIndex
                 }
             }
-//            CommonHelper.print("Check Winner --> $status >>>>>>>>>>>>")
+//            CommonHelper.print("Check Winner --> ${(totalOfUser > totalMindi / 2)} | ${(totalOfCpu > totalMindi / 2)} " +
+//                    "| ${(greenTeam.hands > totalCards / 2)} | ${(redTeam.hands > totalCards / 2)}")
             return status
+        }
+
+        fun isMindiCoat(score: Score): Boolean {
+            return score.spades == 0 && score.hearts == 0 && score.clubs == 0 && score.diamonds == 0
         }
 
         fun updateScore(player: PlayerDetails, viewModel: PlayAreaConfigViewModel): Int {
@@ -202,7 +256,8 @@ class GameHelper {
                     }
 
                 }
-            } else {
+            }
+            else {
                 viewModel.updateRightScore {
                     listOfMindi.fold(copy(hands = hands + 1)) { score, card ->
                         when (card.suit) {
@@ -228,10 +283,14 @@ class GameHelper {
             currRoundSuitType = SuitType.NONE
         }
 
-        fun getResultBundle(gameStatus: Int): Bundle {
+        fun getResultBundle(context: Context, gameStatus: Int): Bundle {
+            val isCoat = isMindiCoat(if (gameStatus == greenTeamIndex) greenTeamScore else redTeamScore)
+            val multiplyCounter = if (isCoat) 1 else 1
+
+            val basePrice = tableConfig.betPrice * multiplyCounter
+
             val winnerList = ArrayList<ResultProfile>()
             val loserList = ArrayList<ResultProfile>()
-            CommonHelper.print("size = ${playerDetailsList.size} ..................")
             for (player in playerDetailsList) {
                 val profile = ResultProfile(
                     name = player.name,
@@ -243,10 +302,17 @@ class GameHelper {
                     winnerList.add(profile)
                 else
                     loserList.add(profile)
+                if (ProfileHelper.profileUID == player.uId) {
+                    if (profile.isWinner)
+                        ProfileHelper.totalChips += basePrice + tableConfig.betPrice
+//                    else if (isCoat)
+//                        ProfileHelper.totalChips = (ProfileHelper.totalChips - tableConfig.betPrice).coerceAtLeast(0)
+                    MyPreferences.INSTANCE.saveGameProfileDetails(context)
+                }
             }
 
-            val winnerScore = if (gameStatus == 1) greenTeamScore else redTeamScore
-            val loserScore = if (gameStatus == 1) redTeamScore else greenTeamScore
+            val winnerScore = if (gameStatus == greenTeamIndex) greenTeamScore else redTeamScore
+            val loserScore = if (gameStatus == greenTeamIndex) redTeamScore else greenTeamScore
 
             val gson = Gson()
             val bundle = Bundle().apply {
@@ -260,20 +326,20 @@ class GameHelper {
 
         fun resultScreen(context: Context, gameStatus: Int, includeLayouts: GameLayoutBinding, onAnimationEnd: () -> Unit) {
             val speed = 500L
-            val winnerScore = if (gameStatus == 1) greenTeamScore else redTeamScore
+            val winnerScore = if (gameStatus == greenTeamIndex) greenTeamScore else redTeamScore
             val totalMindi = winnerScore.spades + winnerScore.hearts + winnerScore.clubs + winnerScore.diamonds
             includeLayouts.winnerTitleImg.setImageResource(
-                if (gameStatus == 1) R.drawable.you_are_winner else R.drawable.opponent_winner
+                if (gameStatus == greenTeamIndex) R.drawable.you_are_winner else R.drawable.opponent_winner
             )
 
-            val preFix = if (gameStatus == 1)
+            val preFix = if (gameStatus == greenTeamIndex)
                 context.getString(R.string.your)
             else
                 context.getString(R.string.opponent)
             val message1 = context.getString(R.string.team_acquired_mindis, totalMindi.toString())
             val message2 = context.getString(R.string.total_hands, winnerScore.hands.toString())
 
-            includeLayouts.winnerMessageTxt.text = preFix + message1 + message2
+            includeLayouts.winnerMessageTxt.text = "$preFix$message1 $message2"
 
             fun winnerTxtAnimation() {
                 includeLayouts.winnerTitleImg.scaleX = 0f

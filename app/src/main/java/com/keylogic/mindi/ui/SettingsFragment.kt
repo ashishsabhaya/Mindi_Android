@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.keylogic.mindi.helper.CommonHelper
 import com.keylogic.mindi.R
+import com.keylogic.mindi.Share.AppShare
 import com.keylogic.mindi.databinding.FragmentSettingsBinding
 
 class SettingsFragment : Fragment() {
@@ -56,15 +57,19 @@ class SettingsFragment : Fragment() {
         })
 
         CommonHelper.INSTANCE.setScaleOnTouch(binding.instagramShare, onclick = {
+            AppShare.shareInstagram(requireContext())
         })
 
-        CommonHelper.INSTANCE.setScaleOnTouch(binding.messengerShare, onclick = {
+        CommonHelper.INSTANCE.setScaleOnTouch(binding.facebookShare, onclick = {
+            AppShare.shareFacebook(requireContext())
         })
 
         CommonHelper.INSTANCE.setScaleOnTouch(binding.whatsappShare, onclick = {
+            AppShare.shareWhatsApp(requireContext())
         })
 
         CommonHelper.INSTANCE.setScaleOnTouch(binding.anyShare, onclick = {
+            AppShare.shareGeneric(requireContext())
         })
 
         return binding.root
